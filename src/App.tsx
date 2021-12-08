@@ -1,7 +1,6 @@
 import { Redirect, Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import Home from './pages/Home';
 
 /* Core CSS required for Ionic components to work properly */
 import '@ionic/react/css/core.css';
@@ -26,20 +25,30 @@ import './theme/variables.css';
 import Admin from './pages/Admin/Admin';
 import AdminLogin from './pages/Admin/AdminLogin';
 import { isAdminSigned } from './firebaseAdmin';
+import { isClienteSigned } from './firebaseCliente';
+import { isTiendaSigned } from './firebaseTienda';
+
+import UsuarioLogin from "./pages/Usuario/UsuarioLogin"
 
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/home">
-          <Home />
+        <Route exact path="/admin" render={() => {
+          return isAdminSigned() ? <Admin /> : <AdminLogin />
+        }}>
         </Route>
-        <Route exact path="/admin" render={()=>{
-            return isAdminSigned()?<Admin/>:<AdminLogin/>}}>
+        <Route exact path="/home">
+          <UsuarioLogin />
+        </Route>
+        <Route exact path="/cliente" render={() => {
+          return isClienteSigned() ? < UsuarioLogin/> : <UsuarioLogin />
+        }}>
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />
         </Route>
+
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

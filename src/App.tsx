@@ -22,12 +22,20 @@ import '@ionic/react/css/display.css';
 /* Theme variables */
 import './theme/variables.css';
 
+/* Imports de administracion */
+import Admin from './pages/Admin/Admin';
+import AdminLogin from './pages/Admin/AdminLogin';
+import { isAdminSigned } from './firebaseAdmin';
+
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/home">
           <Home />
+        </Route>
+        <Route exact path="/admin" render={()=>{
+            return isAdminSigned()?<Admin/>:<AdminLogin/>}}>
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />

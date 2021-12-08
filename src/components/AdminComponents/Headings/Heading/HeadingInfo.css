@@ -1,0 +1,12 @@
+.HeadingInfo
+{
+    border: 1px;
+    background-color: rgba(30,30,30,0.1);
+    padding: 10px;
+    transition: 0.1s;
+}
+.HeadingInfo:hover
+{
+    border-radius: 5px;
+    background-color: rgba(30,30,30,0.8);
+}

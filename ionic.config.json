@@ -1,0 +1,7 @@
+{
+  "name": "CS_FP",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}

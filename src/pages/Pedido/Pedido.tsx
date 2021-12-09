@@ -51,9 +51,8 @@ const Pedido: React.FC = () =>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
                             {/* <Address></Address> */}
-                            {/* <Details></Details> */}
-                            <Payment></Payment>
-                            
+                            {/* <Payment></Payment> */}
+                            <Details></Details>
                         </IonCol>
 
                         <IonCol size="12" sizeLg="5" className="ion-padding">

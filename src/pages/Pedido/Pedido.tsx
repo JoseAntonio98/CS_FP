@@ -13,10 +13,12 @@ import {
     IonSegment, 
     IonSegmentButton, 
     IonText, 
-    IonTextarea, 
     IonTitle, 
     IonToolbar } from "@ionic/react"
 import './Pedido.css'
+import Address from "../../components/PedidoComponents/Address/Address";
+import Details from "../../components/PedidoComponents/Details/Details";
+import Payment from "../../components/PedidoComponents/Payment/Payment";
 
 const Pedido: React.FC = () =>
 {
@@ -48,15 +50,10 @@ const Pedido: React.FC = () =>
                 <IonGrid>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
-                            <div className="address">
-                                <p>Elija la dirección de destino:</p>
-                                <div className="map"></div>
-            
-                                <IonItem>
-                                    <IonLabel position="floating">Referencia:</IonLabel>
-                                    <IonTextarea rows={2} cols={10} placeholder="Ingrese algún punto de referencia."></IonTextarea>
-                                </IonItem>
-                            </div>
+                            {/* <Address></Address> */}
+                            {/* <Details></Details> */}
+                            <Payment></Payment>
+                            
                         </IonCol>
 
                         <IonCol size="12" sizeLg="5" className="ion-padding">

@@ -24,6 +24,7 @@ import Tab from "../../components/PedidoComponents/Tab/Tab";
 const Pedido: React.FC = () =>
 {
     const [currentTab, setCurrentTab] = useState<string>("address");
+    const [paymentDisabled, setPaymentDisabled] = useState<boolean>(true);
 
     return (
         <IonPage>
@@ -38,10 +39,10 @@ const Pedido: React.FC = () =>
                     <IonSegmentButton value="address">
                         <IonLabel>Dirección</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="payment">
+                    <IonSegmentButton value="payment" disabled={paymentDisabled}>
                         <IonLabel>Pago</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="details">
+                    <IonSegmentButton value="details" disabled>
                         <IonLabel>Detalles</IonLabel>
                     </IonSegmentButton>
                 </IonSegment>
@@ -51,7 +52,11 @@ const Pedido: React.FC = () =>
                 <IonGrid>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
-                            <Tab currentTab={currentTab}></Tab>
+                            <Tab currentTab={currentTab} 
+                                paymentDisabled={paymentDisabled} 
+                                setPaymentDisabled={setPaymentDisabled}
+                                setCurrentTab={setCurrentTab}
+                            ></Tab>
                         </IonCol>
 
                         <IonCol size="12" sizeLg="5" className="ion-padding">

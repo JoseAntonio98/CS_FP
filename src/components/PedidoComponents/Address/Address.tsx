@@ -3,7 +3,10 @@ import { IonItem, IonLabel, IonTextarea, IonButton } from "@ionic/react";
 
 import './Address.css';
 
-const Address: React.FC = () => {
+const Address: React.FC<{paymentDisabled: boolean, 
+    setPaymentDisabled: any,
+    currentTab: string,
+    setCurrentTab: any}> = ({paymentDisabled, setPaymentDisabled, currentTab, setCurrentTab}) => {
     return (
         <div className="address">
             <p>Elija la dirección de destino:</p>
@@ -14,7 +17,11 @@ const Address: React.FC = () => {
                 <IonTextarea rows={2} cols={10} placeholder="Ingrese algún punto de referencia."></IonTextarea>
             </IonItem>
 
-            <IonButton expand="block" className="mt-3">
+            <IonButton onClick={() => {
+                setPaymentDisabled(false);
+                setCurrentTab("payment");
+            } } 
+                expand="block" className="mt-3">
                 Continuar
             </IonButton>
         </div>

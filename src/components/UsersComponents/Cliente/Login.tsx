@@ -4,9 +4,9 @@ import {IonCol, IonButton, IonIcon, IonGrid, IonRow, IonTitle, IonItem, IonLabel
 import { signInCliente } from '../../../servicios/firebaseCliente';
 import './Login.css';
 
-import Sesion from "../../../Contexto/Sesion"
+// import Sesion from "../../../Contexto/Sesion";
 
-import {personCircle} from 'ionicons/icons'
+import {personCircle} from 'ionicons/icons';
 
 interface ContainerProps { }
 
@@ -14,8 +14,8 @@ const Login: React.FC<ContainerProps> = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
 
-    const uid = useContext(Sesion)
-    console.log(uid)
+    // const uid = useContext(Sesion)
+    // console.log(uid)
 
     async function login() {
         await signInCliente(email, password)

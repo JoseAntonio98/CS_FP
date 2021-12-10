@@ -1,6 +1,6 @@
 //Funciones de autanticacion de firebase
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { setDoc, doc, GeoPoint} from "firebase/firestore"
+import { setDoc, doc} from "firebase/firestore"
 
 //Modulo de autenticacion de firebase
 import { auth } from './firebaseConfig'

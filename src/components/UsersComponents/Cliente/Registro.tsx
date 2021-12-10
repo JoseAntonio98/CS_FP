@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import {IonCol, IonButton, IonContent, IonGrid, IonRow, IonTitle, IonItem, IonLabel, IonInput } from '@ionic/react';
+import {IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput } from '@ionic/react';
 import { createCliente } from '../../../firebaseCliente'
 import { toast } from '../../toast'
 
@@ -25,7 +25,7 @@ const Registro: React.FC<ContainerProps> = () => {
     }
 
     return (
-            <IonContent scrollY={true}>
+            <IonContent scrollY={true} fullscreen>
                 <IonGrid>
                     <IonRow>
                         <IonCol></IonCol>

@@ -6,7 +6,11 @@ import Cash from "./Cash/Cash";
 import Card from "./Card/Card";
 import Input from "./Input/Input";
 
-const Payment: React.FC = () => {
+const Payment: React.FC<{
+    currentTab: string,
+    setCurrentTab: any,
+    detailsDisabled: boolean,
+    setDetailsDisabled: any}> = ({currentTab, setCurrentTab, detailsDisabled, setDetailsDisabled}) => {
     const [paymentMode, setPaymentMode] = useState<string>("card");
 
     return (
@@ -32,7 +36,11 @@ const Payment: React.FC = () => {
                 <Input paymentMode={paymentMode}></Input>
             </IonList>
 
-            <IonButton expand="block" className="mt-3">
+            <IonButton onClick={() => {
+                 setDetailsDisabled(false);
+                 setCurrentTab("details");
+            }} 
+                expand="block" className="mt-3">
                 Continuar
             </IonButton>
         </div>

@@ -25,6 +25,7 @@ const Pedido: React.FC = () =>
 {
     const [currentTab, setCurrentTab] = useState<string>("address");
     const [paymentDisabled, setPaymentDisabled] = useState<boolean>(true);
+    const [detailsDisabled, setDetailsDisabled] = useState<boolean>(true);
 
     return (
         <IonPage>
@@ -42,7 +43,7 @@ const Pedido: React.FC = () =>
                     <IonSegmentButton value="payment" disabled={paymentDisabled}>
                         <IonLabel>Pago</IonLabel>
                     </IonSegmentButton>
-                    <IonSegmentButton value="details" disabled>
+                    <IonSegmentButton value="details" disabled={detailsDisabled}>
                         <IonLabel>Detalles</IonLabel>
                     </IonSegmentButton>
                 </IonSegment>
@@ -53,9 +54,11 @@ const Pedido: React.FC = () =>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
                             <Tab currentTab={currentTab} 
+                                setCurrentTab={setCurrentTab}
                                 paymentDisabled={paymentDisabled} 
                                 setPaymentDisabled={setPaymentDisabled}
-                                setCurrentTab={setCurrentTab}
+                                detailsDisabled={detailsDisabled} 
+                                setDetailsDisabled={setDetailsDisabled}
                             ></Tab>
                         </IonCol>
 

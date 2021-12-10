@@ -7,7 +7,9 @@ const Tab: React.FC<{ currentTab: string,
     paymentDisabled: boolean, 
     setPaymentDisabled: any,
     setCurrentTab: any,
-    }> = ({currentTab, paymentDisabled, setPaymentDisabled, setCurrentTab}) => {
+    detailsDisabled: boolean,
+    setDetailsDisabled: any
+    }> = ({currentTab, paymentDisabled, setPaymentDisabled, setCurrentTab, detailsDisabled, setDetailsDisabled}) => {
     
     if (currentTab === "address") 
     {
@@ -18,7 +20,11 @@ const Tab: React.FC<{ currentTab: string,
             />
     } else if ( currentTab === "payment")
     {
-        return <Payment/>
+        return <Payment detailsDisabled={detailsDisabled} 
+        setDetailsDisabled={setDetailsDisabled}
+        currentTab={currentTab}
+        setCurrentTab={setCurrentTab}
+        />
     } 
         
     return <Details/>

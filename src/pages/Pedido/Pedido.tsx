@@ -7,9 +7,18 @@ import Payment from "../../components/PedidoComponents/Payment/Payment";
 
 const Pedido: React.FC = () =>
 {
-    const [currentTab, setCurrentTab] = useState<string>("address");
-    const [paymentDisabled, setPaymentDisabled] = useState<boolean>(true);
-    const [detailsDisabled, setDetailsDisabled] = useState<boolean>(true);
+    const [currentTab, setCurrentTab] = useState<string>("address"),
+          [paymentMode, setPaymentMode] = useState<string>("cash");
+
+    const [paymentDisabled, setPaymentDisabled] = useState<boolean>(true),
+          [detailsDisabled, setDetailsDisabled] = useState<boolean>(true);
+
+    const [reference, setReference] = useState<string>(""),
+          [address, setAddress] = useState<string>(""),
+          [names, setNames] = useState<string>(""),
+          [card, setCard] = useState<string>(""),
+          [expire, setExpire] = useState<string>(""),
+          [securityCode, setSecurityCode] = useState<string>("");
 
     return (
         <IonPage>
@@ -38,12 +47,21 @@ const Pedido: React.FC = () =>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
                             { currentTab == "address" 
-                                ? <Address setPaymentDisabled={setPaymentDisabled} setCurrentTab={setCurrentTab}></Address>
+                                ? <Address 
+                                    setPaymentDisabled={setPaymentDisabled} setCurrentTab={setCurrentTab}
+                                    setReference={setReference} reference={reference}></Address>
                                 : currentTab === "payment" 
                                     ?
-                                    <Payment setCurrentTab={setCurrentTab} setDetailsDisabled={setDetailsDisabled}></Payment>
+                                    <Payment 
+                                        setCurrentTab={setCurrentTab} setDetailsDisabled={setDetailsDisabled}
+                                        paymentMode={paymentMode} setPaymentMode={setPaymentMode}
+                                        names={names} setNames={setNames}
+                                        card={card} setCard={setCard}
+                                        expire={expire} setExpire={setExpire}
+                                        securityCode={securityCode} setSecurityCode={setSecurityCode}    
+                                    ></Payment>
                                     :
-                                    <Details></Details>
+                                    <Details reference={reference} address={address} names={names} card={card} expire={expire} securityCode={securityCode}></Details>
                             }
                         </IonCol>
 

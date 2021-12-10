@@ -3,7 +3,7 @@ import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, 
 import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
 
-const Details: React.FC = () => {
+const Details: React.FC<{reference: string, address: string, names: string, card: string, expire: string, securityCode: string}> = ({reference, address, names, card, expire, securityCode}) => {
     
     const [showModal, setShowModal] = useState(false);
 
@@ -14,28 +14,28 @@ const Details: React.FC = () => {
                 <IonItem>
                     <IonLabel>
                         <p>Apellidos y Nombres:</p>
-                        <h2>Nombre Paterno Materno</h2>
+                        <h2>{names}</h2>
                     </IonLabel>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel>
                         <p>Número de tarjeta:</p>
-                        <h2>XXX-0000-0000-000</h2>
+                        <h2>{card}</h2>
                     </IonLabel>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel>
                         <p>Dirección de entrega:</p>
-                        <h2>Av. Independencia s/n</h2>
+                        <h2>{address}</h2>
                     </IonLabel>
                 </IonItem>
 
                 <IonItem>
                     <IonLabel>
                         <p>Punto de referencia:</p>
-                        <h2>A 3 cuadras de la UNSA</h2>
+                        <h2>{reference}</h2>
                     </IonLabel>
                 </IonItem>
 
@@ -82,7 +82,18 @@ const Details: React.FC = () => {
                 
             </IonModal>
 
-            <IonButton onClick={() => setShowModal(true)}
+            <IonButton onClick={() => {
+                setShowModal(true);
+                const data = {
+                    reference,
+                    address,
+                    names,
+                    card,
+                    expire,
+                    securityCode
+                }
+                console.log(data);
+            }}
                 expand="block" className="mt-3">
                 Finalizar
             </IonButton>

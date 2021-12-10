@@ -1,12 +1,16 @@
 import React, { useState } from "react";
-import { IonButton, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup } from "@ionic/react";
+import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup } from "@ionic/react";
 
 import './Payment.css';
-import Cash from "./Cash/Cash";
-import Card from "./Card/Card";
 
-const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any}> = ({setCurrentTab, setDetailsDisabled}) => {
-    const [paymentMode, setPaymentMode] = useState<string>("cash");
+const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
+                          paymentMode: string, setPaymentMode: any,
+                          names: string, setNames: any,
+                          card: string, setCard: any,
+                          expire: string, setExpire: any,
+                          securityCode: string, setSecurityCode: any  
+    }> = ({setCurrentTab, setDetailsDisabled, paymentMode, setPaymentMode, names, setNames, card, setCard, expire, setExpire, securityCode, setSecurityCode}) => {
+    
 
     return (
         <div className="payment">
@@ -26,8 +30,31 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any}> = ({setC
                     </IonItem>
                 </IonRadioGroup>
 
-                { paymentMode === "cash" ? <Cash></Cash> : <Card></Card>
-                }
+                <IonList>
+                    <IonItem>
+                        <IonLabel position="floating">Apellidos y Nombres:</IonLabel>
+                        <IonInput type="text" onIonChange={ (e) => setNames(e.detail.value)} value={names}></IonInput>
+                    </IonItem>
+
+                    { paymentMode === "card" ?
+                        <>
+                        <IonItem>
+                            <IonLabel position="floating">Número de tarjeta:</IonLabel>
+                            <IonInput type="text" onIonChange={ (e) => setCard(e.detail.value)} value={card}></IonInput>
+                        </IonItem>
+    
+                        <IonItem>
+                            <IonLabel>Fecha de expiración:</IonLabel>
+                            <IonDatetime display-format="DD.MM.YYYY HH:mm" onIonChange={ (e) => setExpire(e.detail.value)} value={expire}></IonDatetime>
+                        </IonItem>
+    
+                        <IonItem>
+                            <IonLabel position="floating">Código de seguridad:</IonLabel>
+                            <IonInput type="text" onIonChange={ (e) => setSecurityCode(e.detail.value)} value={securityCode}></IonInput>
+                        </IonItem>
+                        </> : <span></span>
+                    }
+                </IonList>
             </IonList>
 
             <IonButton onClick={() => {

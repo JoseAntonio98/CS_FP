@@ -1,9 +1,12 @@
 import React from "react";
-import { IonItem, IonLabel, IonTextarea, IonButton } from "@ionic/react";
+import { IonItem, IonLabel, IonTextarea, IonButton, useIonToast } from "@ionic/react";
 
 import './Address.css';
 
 const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference: string, setReference: any}> = ({setPaymentDisabled, setCurrentTab, reference, setReference}) => {
+    
+    const [present] = useIonToast();
+
     return (
         <div className="address">
             <p>Elija la dirección de destino:</p>
@@ -20,6 +23,12 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
                 if(reference.trim() !== "") {
                     setPaymentDisabled(false);
                     setCurrentTab("payment");
+                } else {
+                    present({
+                        message: "Ingrese los datos",
+                        duration: 2000,
+                        color: "light"
+                    });
                 }
                 
             } } 

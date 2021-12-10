@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup } from "@ionic/react";
+import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, useIonToast } from "@ionic/react";
 
 import './Payment.css';
 
@@ -11,6 +11,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                           securityCode: string, setSecurityCode: any  
     }> = ({setCurrentTab, setDetailsDisabled, paymentMode, setPaymentMode, names, setNames, card, setCard, expire, setExpire, securityCode, setSecurityCode}) => {
     
+    const [present] = useIonToast();
 
     return (
         <div className="payment">
@@ -40,7 +41,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                         <>
                         <IonItem>
                             <IonLabel position="floating">Número de tarjeta:</IonLabel>
-                            <IonInput type="text" onIonChange={ (e) => setCard(e.detail.value)} value={card}></IonInput>
+                            <IonInput type="text" maxlength={15} onIonChange={ (e) => setCard(e.detail.value)} value={card}></IonInput>
                         </IonItem>
     
                         <IonItem>
@@ -50,7 +51,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
     
                         <IonItem>
                             <IonLabel position="floating">Código de seguridad:</IonLabel>
-                            <IonInput type="text" onIonChange={ (e) => setSecurityCode(e.detail.value)} value={securityCode}></IonInput>
+                            <IonInput type="text" maxlength={6} onIonChange={ (e) => setSecurityCode(e.detail.value)} value={securityCode}></IonInput>
                         </IonItem>
                         </> : <span></span>
                     }
@@ -58,10 +59,18 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
             </IonList>
 
             <IonButton onClick={() => {
-                if(paymentMode === "cash" && names.trim() === "") return; 
-                if(paymentMode === "card" && names.trim() === "" && card.trim() === "" && expire === "" && securityCode.trim() === "") return;
-                 setDetailsDisabled(false);
-                 setCurrentTab("details");
+                if((paymentMode === "cash" && names.trim() === "")
+                    || (paymentMode === "card" && names.trim() === "" && card.trim() === "" && expire === "" && securityCode.trim() === "")) 
+                {
+                    present({
+                        message: "Ingrese los datos",
+                        duration: 2000,
+                        color: "light"
+                    });
+                } else {
+                    setDetailsDisabled(false);
+                    setCurrentTab("details");
+                }
             }} 
                 expand="block" className="mt-3">
                 Continuar

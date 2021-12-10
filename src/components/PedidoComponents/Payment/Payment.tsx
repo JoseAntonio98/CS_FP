@@ -1,5 +1,5 @@
 import React from "react";
-import { IonDatetime, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup } from "@ionic/react";
+import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup } from "@ionic/react";
 
 import './Payment.css';
 
@@ -58,6 +58,10 @@ const Payment: React.FC = () => {
 
                 </IonList>
             </IonList>
+
+            <IonButton expand="block" className="mt-3">
+                Continuar
+            </IonButton>
         </div>
     );
 };

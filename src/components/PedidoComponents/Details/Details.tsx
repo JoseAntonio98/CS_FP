@@ -47,7 +47,7 @@ const Details: React.FC = () => {
                 </IonItem>
             </IonList>
 
-            <IonButton fill="clear" className="margin">
+            <IonButton fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
                 <IonLabel>Recoger en tienda</IonLabel>
             </IonButton>
@@ -83,7 +83,7 @@ const Details: React.FC = () => {
             </IonModal>
 
             <IonButton onClick={() => setShowModal(true)}
-                expand="block" className="ion-margin">
+                expand="block" className="mt-3">
                 Finalizar
             </IonButton>
         </div>
@@ -91,21 +91,3 @@ const Details: React.FC = () => {
 };
 
 export default Details;
-
-
-// import React, { useState } from 'react';
-// import { IonModal, IonButton, IonContent } from '@ionic/react';
-
-// const Pedido: React.FC = () => {
-//   const [showModal, setShowModal] = useState(false);
-
-//   return (
-//     <IonContent>
-//       <IonModal isOpen={showModal} cssClass="my-custom-class">
-//         <p>This is modal content</p>
-//         <IonButton onClick={() => setShowModal(false)}>Close Modal</IonButton>
-//       </IonModal>
-//       <IonButton onClick={() => setShowModal(true)}>Show Modal</IonButton>
-//     </IonContent>
-//   );
-// };

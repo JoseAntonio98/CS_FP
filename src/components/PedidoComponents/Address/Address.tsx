@@ -1,5 +1,5 @@
 import React from "react";
-import { IonItem, IonLabel, IonTextarea } from "@ionic/react";
+import { IonItem, IonLabel, IonTextarea, IonButton } from "@ionic/react";
 
 import './Address.css';
 
@@ -13,6 +13,10 @@ const Address: React.FC = () => {
                 <IonLabel position="floating">Referencia:</IonLabel>
                 <IonTextarea rows={2} cols={10} placeholder="Ingrese algún punto de referencia."></IonTextarea>
             </IonItem>
+
+            <IonButton expand="block" className="mt-3">
+                Continuar
+            </IonButton>
         </div>
     );
 };

@@ -91,9 +91,9 @@ const Pedido: React.FC = () =>
                                 </IonItem>
                             </IonCard>
 
-                            <IonButton expand="block" class="ion-margin">
+                            {/* <IonButton expand="block" class="ion-margin">
                                 Continuar
-                            </IonButton>
+                            </IonButton> */}
                         </IonCol>
                     </IonRow>
                 </IonGrid>

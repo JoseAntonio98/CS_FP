@@ -3,11 +3,11 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, Us
 import { setDoc, doc} from "firebase/firestore"
 
 //Modulo de autenticacion de firebase
-import { auth } from './firebaseConfig'
-import { db } from './firebaseConfig'
+import { auth } from '../firebaseConfig'
+import { db } from '../firebaseConfig'
 
 // Toast
-import { toast } from "./components/toast"
+import { toast } from "../components/toast"
 
 var user:User;
 var signed;

@@ -4,7 +4,6 @@ import Details from "../Details/Details";
 import Payment from "../Payment/Payment";
 
 const Tab: React.FC<{ currentTab: string }> = ({currentTab}) => {
-    // const tab: string = "details";
     
     if (currentTab === "address") 
     {

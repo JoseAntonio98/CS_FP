@@ -34,10 +34,7 @@ const Pedido: React.FC = () =>
                     </IonTitle>
                 </IonToolbar>
                 
-                <IonSegment value={currentTab} onIonChange={(ev) => {
-                    setCurrentTab(ev.detail.value as string);
-                    console.log(currentTab);
-                } }>
+                <IonSegment value={currentTab} onIonChange={(ev) => setCurrentTab(ev.detail.value as string) }>
                     <IonSegmentButton value="address">
                         <IonLabel>Dirección</IonLabel>
                     </IonSegmentButton>

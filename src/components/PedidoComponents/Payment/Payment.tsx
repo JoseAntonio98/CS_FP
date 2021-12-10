@@ -1,13 +1,19 @@
-import React from "react";
+import React, { useState } from "react";
 import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup } from "@ionic/react";
 
 import './Payment.css';
+import Cash from "./Cash/Cash";
+import Card from "./Card/Card";
+import Input from "./Input/Input";
 
 const Payment: React.FC = () => {
+    const [paymentMode, setPaymentMode] = useState<string>("card");
+
     return (
         <div className="payment">
             <IonList>
-                <IonRadioGroup name="payment" value="cash">
+                <IonRadioGroup onIonChange={(event) => setPaymentMode(event.detail.value) } 
+                    name="payment" value={paymentMode}>
                     <IonListHeader>
                         <IonLabel>Elija el modo de pago</IonLabel>
                     </IonListHeader>
@@ -23,40 +29,7 @@ const Payment: React.FC = () => {
                     </IonItem>
                 </IonRadioGroup>
 
-                <IonList>
-                    <IonItem>
-                        <IonLabel position="floating">Apellidos y Nombres:</IonLabel>
-                        <IonInput type="text" placeholder="Titular"></IonInput>
-                    </IonItem>
-                </IonList>
-
-                <IonList>
-                    <IonItem>
-                        <IonLabel position="floating">Número de tarjeta:</IonLabel>
-                        <IonInput type="text" placeholder="XXX-0000-0000-000"></IonInput>
-                    </IonItem>
-
-                    <IonItem>
-                        <IonLabel position="floating">Apellidos y Nombres:</IonLabel>
-                        <IonInput type="text" placeholder="Titular"></IonInput>
-                    </IonItem>
-                    
-                    <IonItem>
-                        <IonLabel>Fecha de inicio:</IonLabel>
-                        <IonDatetime display-format="DD.MM.YYYY HH:mm"></IonDatetime>
-                    </IonItem>
-
-                    <IonItem>
-                        <IonLabel>Fecha de expiración:</IonLabel>
-                        <IonDatetime display-format="DD.MM.YYYY HH:mm"></IonDatetime>
-                    </IonItem>
-
-                    <IonItem>
-                        <IonLabel position="floating">Código de seguridad:</IonLabel>
-                        <IonInput type="text" placeholder="6 dígitos de seguridad"></IonInput>
-                    </IonItem>
-
-                </IonList>
+                <Input paymentMode={paymentMode}></Input>
             </IonList>
 
             <IonButton expand="block" className="mt-3">

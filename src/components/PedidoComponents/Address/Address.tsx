@@ -16,8 +16,11 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
             </IonItem>
 
             <IonButton onClick={() => {
-                setPaymentDisabled(false);
-                setCurrentTab("payment");
+                // Agregar validacion de direccion
+                if(reference.trim() !== "") {
+                    setPaymentDisabled(false);
+                    setCurrentTab("payment");
+                }
                 
             } } 
                 expand="block" className="mt-3">

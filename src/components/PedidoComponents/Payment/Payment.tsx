@@ -58,6 +58,8 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
             </IonList>
 
             <IonButton onClick={() => {
+                if(paymentMode === "cash" && names.trim() === "") return; 
+                if(paymentMode === "card" && names.trim() === "" && card.trim() === "" && expire === "" && securityCode.trim() === "") return;
                  setDetailsDisabled(false);
                  setCurrentTab("details");
             }} 

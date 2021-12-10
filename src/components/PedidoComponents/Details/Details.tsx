@@ -12,7 +12,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <p>Detalles del pedido:</p>
             <IonList>
                 <IonItem>
-                    <IonLabel>
+                    <IonLabel className="ion-text-capitalize">
                         <p>Apellidos y Nombres:</p>
                         <h2>{names}</h2>
                     </IonLabel>
@@ -37,7 +37,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                 </IonItem>
 
                 <IonItem>
-                    <IonLabel>
+                    <IonLabel className="ion-text-capitalize">
                         <p>Punto de referencia:</p>
                         <h2>{reference}</h2>
                     </IonLabel>

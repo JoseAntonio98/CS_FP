@@ -1,26 +1,19 @@
 import React, { useState } from "react";
-import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonListHeader, IonRadio, IonRadioGroup } from "@ionic/react";
+import { IonButton, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup } from "@ionic/react";
 
 import './Payment.css';
 import Cash from "./Cash/Cash";
 import Card from "./Card/Card";
-import Input from "./Input/Input";
 
-const Payment: React.FC<{
-    currentTab: string,
-    setCurrentTab: any,
-    detailsDisabled: boolean,
-    setDetailsDisabled: any}> = ({currentTab, setCurrentTab, detailsDisabled, setDetailsDisabled}) => {
-    const [paymentMode, setPaymentMode] = useState<string>("card");
+const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any}> = ({setCurrentTab, setDetailsDisabled}) => {
+    const [paymentMode, setPaymentMode] = useState<string>("cash");
 
     return (
         <div className="payment">
+            <p>Elija el modo de pago:</p>
             <IonList>
                 <IonRadioGroup onIonChange={(event) => setPaymentMode(event.detail.value) } 
                     name="payment" value={paymentMode}>
-                    <IonListHeader>
-                        <IonLabel>Elija el modo de pago</IonLabel>
-                    </IonListHeader>
 
                     <IonItem>
                         <IonLabel>Pago en efectivo</IonLabel>
@@ -33,7 +26,8 @@ const Payment: React.FC<{
                     </IonItem>
                 </IonRadioGroup>
 
-                <Input paymentMode={paymentMode}></Input>
+                { paymentMode === "cash" ? <Cash></Cash> : <Card></Card>
+                }
             </IonList>
 
             <IonButton onClick={() => {

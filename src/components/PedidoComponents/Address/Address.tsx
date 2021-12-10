@@ -3,10 +3,7 @@ import { IonItem, IonLabel, IonTextarea, IonButton } from "@ionic/react";
 
 import './Address.css';
 
-const Address: React.FC<{paymentDisabled: boolean, 
-    setPaymentDisabled: any,
-    currentTab: string,
-    setCurrentTab: any}> = ({paymentDisabled, setPaymentDisabled, currentTab, setCurrentTab}) => {
+const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any}> = ({setPaymentDisabled, setCurrentTab}) => {
     return (
         <div className="address">
             <p>Elija la dirección de destino:</p>

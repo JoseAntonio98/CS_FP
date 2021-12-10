@@ -1,6 +1,6 @@
 import React, {useState} from "react";
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
-import { add, storefrontOutline } from 'ionicons/icons';
+import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
 
 const Details: React.FC = () => {

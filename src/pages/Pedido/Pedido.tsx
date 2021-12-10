@@ -1,25 +1,9 @@
 import React, { useState } from "react";
-import { 
-    IonButton, 
-    IonCard, 
-    IonCol,
-    IonContent, 
-    IonGrid, 
-    IonHeader, 
-    IonItem, 
-    IonLabel, 
-    IonPage, 
-    IonRow, 
-    IonSegment, 
-    IonSegmentButton, 
-    IonText, 
-    IonTitle, 
-    IonToolbar } from "@ionic/react"
+import { IonCard, IonCol,IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonPage, IonRow, IonSegment, IonSegmentButton, IonText, IonTitle, IonToolbar } from "@ionic/react"
 import './Pedido.css'
 import Address from "../../components/PedidoComponents/Address/Address";
 import Details from "../../components/PedidoComponents/Details/Details";
 import Payment from "../../components/PedidoComponents/Payment/Payment";
-import Tab from "../../components/PedidoComponents/Tab/Tab";
 
 const Pedido: React.FC = () =>
 {
@@ -53,13 +37,14 @@ const Pedido: React.FC = () =>
                 <IonGrid>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
-                            <Tab currentTab={currentTab} 
-                                setCurrentTab={setCurrentTab}
-                                paymentDisabled={paymentDisabled} 
-                                setPaymentDisabled={setPaymentDisabled}
-                                detailsDisabled={detailsDisabled} 
-                                setDetailsDisabled={setDetailsDisabled}
-                            ></Tab>
+                            { currentTab == "address" 
+                                ? <Address setPaymentDisabled={setPaymentDisabled} setCurrentTab={setCurrentTab}></Address>
+                                : currentTab === "payment" 
+                                    ?
+                                    <Payment setCurrentTab={setCurrentTab} setDetailsDisabled={setDetailsDisabled}></Payment>
+                                    :
+                                    <Details></Details>
+                            }
                         </IonCol>
 
                         <IonCol size="12" sizeLg="5" className="ion-padding">

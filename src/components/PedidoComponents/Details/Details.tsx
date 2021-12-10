@@ -2,6 +2,7 @@ import React, {useState} from "react";
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
+import { addPedido } from "../../../servicios/firebaseCliente";
 
 const Details: React.FC<{reference: string, address: string, names: string, card: string, expire: string, securityCode: string}> = ({reference, address, names, card, expire, securityCode}) => {
     
@@ -89,15 +90,9 @@ const Details: React.FC<{reference: string, address: string, names: string, card
 
             <IonButton onClick={() => {
                 setShowModal(true);
-                const data = {
-                    reference,
-                    address,
-                    names,
-                    card,
-                    expire,
-                    securityCode
-                }
-                console.log(data);
+                addPedido(reference, address, names, card, expire, securityCode);
+                // const data = { reference, address, names, card, expire, securityCode };
+                // console.log(data);
             }}
                 expand="block" className="mt-3">
                 Finalizar

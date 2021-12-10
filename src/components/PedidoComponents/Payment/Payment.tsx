@@ -41,7 +41,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                         <>
                         <IonItem>
                             <IonLabel position="floating">Número de tarjeta:</IonLabel>
-                            <IonInput type="text" maxlength={15} onIonChange={ (e) => setCard(e.detail.value)} value={card}></IonInput>
+                            <IonInput type="text" maxlength={19} onIonChange={ (e) => setCard(e.detail.value)} value={card}></IonInput>
                         </IonItem>
     
                         <IonItem>

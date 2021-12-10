@@ -18,12 +18,16 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                     </IonLabel>
                 </IonItem>
 
-                <IonItem>
-                    <IonLabel>
-                        <p>Número de tarjeta:</p>
-                        <h2>{card}</h2>
-                    </IonLabel>
-                </IonItem>
+                { card !== "" ?
+                    <IonItem>
+                        <IonLabel>
+                            <p>Número de tarjeta:</p>
+                            <h2>{card}</h2>
+                        </IonLabel>
+                    </IonItem>
+                    : <span></span>
+                }
+                
 
                 <IonItem>
                     <IonLabel>
@@ -43,6 +47,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                     <IonLabel>
                         <p>Tiempo estimado de entrega:</p>
                         <h2>15 minutos</h2>
+                        {/* <h2>{expire}</h2> */}
                     </IonLabel>
                 </IonItem>
             </IonList>

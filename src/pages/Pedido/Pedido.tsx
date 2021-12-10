@@ -70,38 +70,19 @@ const Pedido: React.FC = () =>
 
                             <IonCard>
                                 <IonItem>
-                                    <IonText slot="start">
-                                        <p>x3</p>
-                                    </IonText>
-                                    <IonLabel>Producto 1</IonLabel>
-                                    <p>S/. 25.00</p>
-                                    <p></p>
+                                    
+                                    <IonLabel slot="start">x3 </IonLabel>
+                                    <IonLabel slot="start">Producto 1</IonLabel>
+                                    <IonLabel slot="end">S/. 25.00</IonLabel>
                                 </IonItem>
                             </IonCard>
 
                             <IonCard>
                                 <IonItem>
-                                    <IonText slot="start">
-                                        <p>x3</p>
-                                    </IonText>
-                                    <IonLabel>Producto 1</IonLabel>
-                                    <p>S/. 25.00</p>
-                                    <p></p>
+                                    <IonLabel slot="start">Total:</IonLabel>
+                                    <IonLabel slot="end">S/. 125.00</IonLabel>
                                 </IonItem>
                             </IonCard>
-
-                            <IonCard>
-                                <IonItem>
-                                    <IonLabel>Total:</IonLabel>
-                                    <IonText slot="end">
-                                        <p>S/. 125.00</p>
-                                    </IonText>
-                                </IonItem>
-                            </IonCard>
-
-                            {/* <IonButton expand="block" class="ion-margin">
-                                Continuar
-                            </IonButton> */}
                         </IonCol>
                     </IonRow>
                 </IonGrid>

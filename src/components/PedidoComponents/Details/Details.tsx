@@ -1,5 +1,5 @@
 import React, {useState} from "react";
-import { IonButton, IonIcon, IonItem, IonLabel, IonList, IonModal } from "@ionic/react";
+import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { add, storefrontOutline } from 'ionicons/icons';
 import './Details.css';
 
@@ -53,23 +53,33 @@ const Details: React.FC = () => {
             </IonButton>
 
             <IonModal isOpen={showModal}>
-                <div className="ion-padding">
-                    <h2>Orden en proceso...</h2>
-                    <div className="container">
-                        <div className="inStore"> 
-                            <IonLabel>Recibido por la tienda</IonLabel>
-                        </div>
-                        <div className="coming">
-                            <IonLabel>En camino</IonLabel>
-                        </div>
-                        <div className="delivered">
-                            <IonLabel>Listo</IonLabel>
-                        </div>
-                    </div>
+                <IonPage>
+                    <IonHeader>
+                        <IonToolbar color="primary" className="center">
+                            <IonTitle>Orden en proceso ...</IonTitle>
+                        </IonToolbar>
+                    </IonHeader>
+                    <IonContent>
+                        <div className="ion-padding">
+                            
+                            <div className="container">
+                                <div className="inStore"> 
+                                    <IonLabel>Recibido por la tienda</IonLabel>
+                                </div>
+                                <div className="coming">
+                                    <IonLabel>En camino</IonLabel>
+                                </div>
+                                <div className="delivered">
+                                    <IonLabel>Listo</IonLabel>
+                                </div>
+                            </div>
 
-                    <IonButton onClick={() => setShowModal(false)} 
-                        expand="full" className="ion-margin">Entendido</IonButton>
-                </div>
+                            <IonButton onClick={() => setShowModal(false)} 
+                                expand="full" className="ion-margin">Entendido</IonButton>
+                        </div>
+                    </IonContent>
+                </IonPage>
+                
             </IonModal>
 
             <IonButton onClick={() => setShowModal(true)}

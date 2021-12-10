@@ -19,6 +19,7 @@ import './Pedido.css'
 import Address from "../../components/PedidoComponents/Address/Address";
 import Details from "../../components/PedidoComponents/Details/Details";
 import Payment from "../../components/PedidoComponents/Payment/Payment";
+import Tab from "../../components/PedidoComponents/Tab/Tab";
 
 const Pedido: React.FC = () =>
 {
@@ -33,7 +34,10 @@ const Pedido: React.FC = () =>
                     </IonTitle>
                 </IonToolbar>
                 
-                <IonSegment value={currentTab} onIonChange={(ev) => setCurrentTab(ev.detail.value as string) }>
+                <IonSegment value={currentTab} onIonChange={(ev) => {
+                    setCurrentTab(ev.detail.value as string);
+                    console.log(currentTab);
+                } }>
                     <IonSegmentButton value="address">
                         <IonLabel>Dirección</IonLabel>
                     </IonSegmentButton>
@@ -50,9 +54,7 @@ const Pedido: React.FC = () =>
                 <IonGrid>
                 <IonRow>
                         <IonCol size="12" sizeLg="7">
-                            {/* <Address></Address> */}
-                            {/* <Payment></Payment> */}
-                            <Details></Details>
+                            <Tab currentTab={currentTab}></Tab>
                         </IonCol>
 
                         <IonCol size="12" sizeLg="5" className="ion-padding">

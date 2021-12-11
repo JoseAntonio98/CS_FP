@@ -29,6 +29,7 @@ import { isClienteSigned } from './servicios/firebaseCliente';
 import UsuarioLogin from "./pages/Usuario/UsuarioLogin"
 import Pedido from './pages/Pedido/Pedido';
 import ProductosLista from './pages/Productos/ProductosLista';
+import AdminTienda from './pages/AdminTienda/AdminTienda';
 
 const App: React.FC = () => (
   <IonApp>
@@ -47,7 +48,9 @@ const App: React.FC = () => (
             return <Pedido/>}}>
             {/* return isClienteSigned() ? <Pedido/> : <UsuarioLogin/> }}> */}
         </Route>
-
+        <Route exact path="/adminTienda">
+          <AdminTienda/>
+        </Route>
         <Route exact path="/info">
           <ProductosLista />
         </Route>

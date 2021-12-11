@@ -1,0 +1,13 @@
+.ProductoInfo
+{
+    border: 1px;
+    background-color: rgba(182, 214, 204);
+    padding: 10px;
+    transition: 0.1s;
+}
+.ProductoInfo:hover
+{
+    border-radius: 5px;
+    background-color: rgba(116, 164, 188);
+}
+

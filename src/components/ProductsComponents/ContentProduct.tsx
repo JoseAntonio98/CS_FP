@@ -5,12 +5,15 @@ import ProductoList from './List'
 import './ContentProduct.css'
 import { Link } from 'react-router-dom';
 
+
+
 interface ContainerProps { }
 
 const ContentProduct: React.FC<ContainerProps> = () => {
+  
   return (
+    
     <IonRow>
-
       <IonCol size="3" className='ion-text-center'>
         <Collapsible transitionTime={100} trigger="Ordenar Por">
           <p><Link to="">A-Z</Link></p>
@@ -47,8 +50,9 @@ const ContentProduct: React.FC<ContainerProps> = () => {
       </IonCol >
 
       <IonCol pushXs="" sizeXs="12" sizeLg="3" className="ion-text-center">
+        <IonRow>
+        <IonCol>
         <h5>Mis Pedidos</h5>
-
         <IonCard>
           <IonItem>
             <IonText slot="start">
@@ -83,6 +87,9 @@ const ContentProduct: React.FC<ContainerProps> = () => {
         <IonButton expand="block" fill="solid" >
           Hacer Pedido
         </IonButton>
+
+        </IonCol>
+        </IonRow>
         
       </IonCol>
 

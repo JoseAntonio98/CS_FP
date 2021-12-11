@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, useIonToast } from "@ionic/react";
+import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, IonTitle, useIonToast } from "@ionic/react";
 
 import './Payment.css';
 
@@ -14,8 +14,8 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
     const [present] = useIonToast();
 
     return (
-        <div className="payment">
-            <p>Elija el modo de pago:</p>
+        <div>
+            <IonTitle className="pb-3 px-0">Modo de pago</IonTitle>
             <IonList>
                 <IonRadioGroup onIonChange={(event) => setPaymentMode(event.detail.value) } 
                     name="payment" value={paymentMode}>

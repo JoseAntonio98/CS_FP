@@ -9,7 +9,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
     const [showModal, setShowModal] = useState(false);
 
     return (
-        <div className="details">
+        <div>
             <p>Detalles del pedido:</p>
             <IonList>
                 <IonItem>
@@ -29,7 +29,6 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                     : <span></span>
                 }
                 
-
                 <IonItem>
                     <IonLabel>
                         <p>Dirección de entrega:</p>
@@ -53,7 +52,8 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                 </IonItem>
             </IonList>
 
-            <IonButton fill="clear" className="mt-4">
+            <IonButton onClick={ () => console.log("Working") } 
+                fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
                 <IonLabel>Recoger en tienda</IonLabel>
             </IonButton>
@@ -62,7 +62,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                 <IonPage>
                     <IonHeader>
                         <IonToolbar color="primary" className="center">
-                            <IonTitle>Orden en proceso ...</IonTitle>
+                            <IonTitle>Pedido en camino</IonTitle>
                         </IonToolbar>
                     </IonHeader>
                     <IonContent>
@@ -95,7 +95,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                 // console.log(data);
             }}
                 expand="block" className="mt-3">
-                Finalizar
+                Finalizar Pedido
             </IonButton>
         </div>
     );

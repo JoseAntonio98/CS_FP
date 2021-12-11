@@ -8,7 +8,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
     const [present] = useIonToast();
 
     return (
-        <div className="address">
+        <div>
             <p>Elija la dirección de destino:</p>
             <div className="map"></div>
 

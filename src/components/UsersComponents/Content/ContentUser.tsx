@@ -1,6 +1,6 @@
 import { IonIcon, IonLabel, IonRouterOutlet, IonTabBar, IonTabButton, IonTabs } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
-import { earthOutline, personOutline, pricetagOutline, storefrontOutline } from 'ionicons/icons';
+import { personOutline, storefrontOutline } from 'ionicons/icons';
 import { Redirect, Route } from 'react-router';
 import ClienteLogin from '../Cliente/Login';
 import TiendaLogin from '../Tienda/Login'
@@ -28,11 +28,11 @@ const ContentManager: React.FC<ContainerProps> = () => {
 
             <IonTabBar slot="top">
                 <IonTabButton tab="tab1" href="/cliente/login">
-                    <IonIcon icon={personOutline} color="success"/>
+                    <IonIcon icon={personOutline} color="primary"/>
                     <IonLabel color="dark">Cliente</IonLabel>
                 </IonTabButton>
                 <IonTabButton tab="tab2" href="/tienda/login">
-                    <IonIcon icon={storefrontOutline} color="success"/>
+                    <IonIcon icon={storefrontOutline} color="primary"/>
                     <IonLabel color="dark">Tienda</IonLabel>
                 </IonTabButton>
             </IonTabBar>

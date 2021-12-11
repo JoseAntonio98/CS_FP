@@ -1,16 +1,18 @@
 //Funciones de autanticacion de firebase
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { setDoc, doc, GeoPoint} from "firebase/firestore"
+import { createUserWithEmailAndPassword, getAuth, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { setDoc, doc, GeoPoint, getFirestore} from "firebase/firestore"
 
 //Modulo de autenticacion de firebase
-import { auth } from './firebaseConfig'
-import { db } from './firebaseConfig'
+import { app } from '../firebaseConfig'
 
 // Toast
-import { toast } from "./components/toast"
+import { toast } from "../components/toast"
 
-var user:User;
+var user : User;
 var signed;
+
+const db = getFirestore(app);
+const auth = getAuth()
 
 //Autenticacion de administradores
 auth.onAuthStateChanged((userCredentials)=>{
@@ -19,9 +21,9 @@ auth.onAuthStateChanged((userCredentials)=>{
     } else {
         signed = false;
     }
-}); 
+});
 
-export async function createCliente(nombre: string, celular: string, email:string, password:string)
+export function createCliente(nombre: string, celular: string, email:string, password:string)
 {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials)=>{
@@ -49,9 +51,10 @@ export async function signInCliente(email:string, password:string)
     .then((userCredentials)=>{
         user = userCredentials.user;
         console.log('Ingreso correctamente');
-        console.log(user);
+        console.log(user)
         signed = true;
-        toast("Ingreso Exitoso")
+        toast("Ingreso Exitoso");
+        
     }).catch((error)=>{
         const errorCode = error.code;
         const errorMessage = error.message;
@@ -75,8 +78,21 @@ export function getUser()
 }
 export function isClienteSigned()
 {
+    console.log(auth.currentUser?.uid)
     console.log(auth.currentUser!=null)
-    return auth.currentUser;
+    return auth.currentUser==null ? false : true;
+
 }
 
-
+// Agregar datos del pedido
+export async function addPedido(reference: string, address: string, names: string, card: string, expire: string, securityCode: string)
+{
+    await setDoc(doc(db, "pedidos", new Date().getTime().toString()),{
+        referencia: reference,
+        direccion: address,
+        nombres: names,
+        tarjeta: card,
+        expiracion: expire,
+        codigo_seguridad: securityCode
+    });    
+}

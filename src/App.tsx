@@ -25,10 +25,11 @@ import './theme/variables.css';
 import Admin from './pages/Admin/Admin';
 import AdminLogin from './pages/Admin/AdminLogin';
 import { isAdminSigned } from './firebaseAdmin';
-import { isClienteSigned } from './firebaseCliente';
-import { isTiendaSigned } from './firebaseTienda';
+import { isClienteSigned } from './servicios/firebaseCliente';
+import { isTiendaSigned } from './servicios/firebaseTienda';
 
 import UsuarioLogin from "./pages/Usuario/UsuarioLogin"
+import Pedido from './pages/Pedido/Pedido';
 
 const App: React.FC = () => (
   <IonApp>
@@ -44,6 +45,10 @@ const App: React.FC = () => (
         <Route exact path="/cliente" render={() => {
           return isClienteSigned() ? < UsuarioLogin/> : <UsuarioLogin />
         }}>
+        </Route>
+        <Route exact path="/pedido" render={ ()=> {
+            return <Pedido/>}}>
+            {/* return isClienteSigned() ? <Pedido/> : <UsuarioLogin/> }}> */}
         </Route>
         <Route exact path="/">
           <Redirect to="/home" />

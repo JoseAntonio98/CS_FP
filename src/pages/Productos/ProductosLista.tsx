@@ -1,7 +1,7 @@
-import { IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
-import Content from '../../components/UsersComponents/Content/ContentUser'
+import { IonContent, IonPage, IonHeader, IonTitle, IonToolbar } from '@ionic/react'
+import Content from '../../components/ProductsComponents/ContentProduct'
 
-const UsuarioLogin: React.FC = () => {
+const ProductosLista: React.FC = () => {
     return (
         <IonPage>
             <IonHeader>
@@ -11,11 +11,11 @@ const UsuarioLogin: React.FC = () => {
                     </IonTitle>
                 </IonToolbar>
             </IonHeader>
-            <IonContent>
+            <IonContent scrollY={false}>
                 <Content />
             </IonContent>
         </IonPage>
     );
 }
 
-export default UsuarioLogin;
+export default ProductosLista;

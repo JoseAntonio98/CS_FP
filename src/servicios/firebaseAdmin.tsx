@@ -3,7 +3,7 @@ import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, Us
 import { addDoc, collection } from "firebase/firestore";
 import 'firebase/firestore'
 //Modulo de autenticacion de firebase
-import { auth, db } from './firebaseConfig'
+import { auth, db } from '../firebaseConfig'
 
 var user:User;
 var signed;

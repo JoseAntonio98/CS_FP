@@ -2,7 +2,7 @@ import { IonButton, IonCol, IonContent, IonFab, IonFabButton, IonGrid, IonIcon, 
 import { collection, getDocs } from 'firebase/firestore';
 import { add } from 'ionicons/icons'
 import { useEffect, useState } from 'react';
-import { createCategory } from '../../../firebaseAdmin';
+import { createCategory } from '../../../servicios/firebaseAdmin';
 import { db } from '../../../firebaseConfig';
 import { toast } from '../../toast';
 import CategoryInfo from './Category/CategoryInfo';

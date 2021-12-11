@@ -24,7 +24,7 @@ import './theme/variables.css';
 /* Imports de administracion */
 import Admin from './pages/Admin/Admin';
 import AdminLogin from './pages/Admin/AdminLogin';
-import { isAdminSigned } from './firebaseAdmin';
+import { isAdminSigned } from './servicios/firebaseAdmin';
 import { isClienteSigned } from './servicios/firebaseCliente';
 import { isTiendaSigned } from './servicios/firebaseTienda';
 

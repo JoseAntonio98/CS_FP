@@ -1,10 +1,26 @@
 import { IonButton, IonCol, IonGrid, IonIcon, IonLabel, IonRow } from '@ionic/react';
+import { deleteDoc, doc } from 'firebase/firestore';
 import {closeCircleOutline, storefrontOutline, trashOutline} from 'ionicons/icons'
+import { db } from '../../../../firebaseConfig';
+import { toast } from '../../../toast';
 import './StoreInfo.css';
 
-interface ContainerProps { }
+interface ContainerProps { 
+    docId:string
+    email:string
+    nombre:string
+    rubro:string
+    ruc:string
+    uid:string
+}
 
-const StoreInfo: React.FC<ContainerProps> = () => {
+const StoreInfo: React.FC<ContainerProps> = (props) => {
+    async function deleteStore()
+    {
+        await deleteDoc(doc(db, "tiendas", props.docId));
+        toast("Se ha eliminado la tienda")
+    }
+
   return (
     <div className="StoreInfo">
         <IonIcon icon={storefrontOutline}/>
@@ -12,17 +28,17 @@ const StoreInfo: React.FC<ContainerProps> = () => {
             <IonRow>
                 <IonCol size="10">
                     <div>
-                        <strong>StoreName</strong>
+                        <strong>{props.nombre}</strong>
                     </div>
                     <div>
-                        <IonLabel>StoreRUC</IonLabel>
+                        <IonLabel>{props.ruc}</IonLabel>
                     </div>
                     <div>
-                        <IonLabel>StoreMail</IonLabel>
+                        <IonLabel>{props.email}</IonLabel>
                     </div>
                 </IonCol>
                 <IonCol size="2">
-                    <IonButton color="danger">
+                    <IonButton color="danger" onClick={deleteStore}>
                         <IonIcon icon={trashOutline}/>
                     </IonButton>
                     <IonButton color="light">

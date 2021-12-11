@@ -1,30 +1,43 @@
-import { IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
+import { IonCol, IonContent, IonGrid, IonRow, IonTitle } from '@ionic/react';
+import { collection, getDocs } from 'firebase/firestore';
+import { useEffect, useState } from 'react';
+import { db } from '../../../firebaseConfig';
 import UserInfo from './User/UserInfo';
 import './UserList.css';
 
 interface ContainerProps { }
 
 const UserList: React.FC<ContainerProps> = () => {
-  return (
+    //Store list
+    const [arrayUsuarios, SetArrayUsuarios] = useState([{}])
+    const usuariosCollectionRef = collection(db, 'clientes')
+    useEffect(()=>{
+        async function obtenerUsuarios()
+        {
+            const data = await getDocs(usuariosCollectionRef);
+            SetArrayUsuarios(data.docs.map((doc)=>({ ...doc.data(), id: doc.id })));
+            console.log()
+        }
+        obtenerUsuarios()
+    },[])
+
+    return (
     <div className="UserList">
     <IonContent scrollY={true} fullscreen>
-        <IonTitle>Usuarios</IonTitle>
+        <IonTitle>Clientes</IonTitle>
         <IonGrid>
-            <IonRow>
-                <IonCol>
-                    <UserInfo/>
-                </IonCol>
-            </IonRow>
-            <IonRow>
-                <IonCol>
-                    <UserInfo/>
-                </IonCol>
-            </IonRow>
-            <IonRow>
-                <IonCol>
-                    <UserInfo/>
-                </IonCol>
-            </IonRow>
+                { 
+                    arrayUsuarios?
+                    arrayUsuarios.map((item:any, index:Number)=>{
+                        return (
+                        <IonRow  key={index.toString()}>
+                            <IonCol>
+                                <UserInfo docId={item.id} email={item.email}  nombre={item.nombre}/>
+                            </IonCol>
+                        </IonRow>
+                        )
+                    }):null
+                }
         </IonGrid>
     </IonContent>
     </div>

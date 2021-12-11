@@ -1,8 +1,9 @@
 //Funciones de autanticacion de firebase
 import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-
+import { addDoc, collection } from "firebase/firestore";
+import 'firebase/firestore'
 //Modulo de autenticacion de firebase
-import { auth } from './firebaseConfig'
+import { auth, db } from './firebaseConfig'
 
 var user:User;
 var signed;
@@ -58,5 +59,17 @@ export function isAdminSigned()
     console.log(auth.currentUser!=null)
     return auth.currentUser;
 }
-
-
+export async function createCategory(categoryName:string, categoryDesc:string)
+{
+    await addDoc(collection(db, "categorias"), {
+        categoria: categoryName,
+        descripcion: categoryDesc
+    });
+}
+export async function createHeading(headingName:string, headingDesc:string)
+{
+    await addDoc(collection(db, "rubros"), {
+        rubro: headingName,
+        descripcion: headingDesc
+    });
+}

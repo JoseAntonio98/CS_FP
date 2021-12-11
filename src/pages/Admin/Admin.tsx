@@ -1,7 +1,6 @@
-import { IonButton, IonCol, IonContent, IonGrid, IonHeader, IonIcon, IonItem, IonLabel, IonPage, IonRouterLink, IonRow, IonTitle, IonToolbar} from '@ionic/react'
+import { IonButton, IonContent, IonHeader, IonLabel, IonPage, IonTitle, IonToolbar} from '@ionic/react'
 import './Admin.css'
 import ContentManager from '../../components/AdminComponents/ContentManager/ContentManager'
-import { person} from 'ionicons/icons'
 const Admin: React.FC = () =>
 {
     return (

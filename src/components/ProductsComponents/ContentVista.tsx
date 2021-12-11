@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapsible from "react-collapsible";
-import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText } from '@ionic/react';
+import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
 import ProductoList from './List'
 import './ContentProduct.css'
 import ProductDatos from './Product/ProductDatos';
@@ -35,14 +35,13 @@ const ContentProduct: React.FC<ContainerProps> = () => {
             <IonCol>
             <h5>Mis Pedidos</h5>
                 <IonCard>
-                <IonItem>
-                    <IonText slot="start">
-                    <p>x3</p>
-                    </IonText>
-                    <IonLabel>Producto 1</IonLabel>
-                    <p>S/. 25.00</p>
-                    <p></p>
-                </IonItem>
+                  <IonItem>
+                      <IonBadge slot="start">x3</IonBadge>
+                      <IonLabel> 
+                          Producto 1
+                      </IonLabel>
+                      <IonLabel slot="end">S/. 75.00</IonLabel>
+                  </IonItem>
                 </IonCard>
 
                 <IonButton expand="block" fill="solid" >

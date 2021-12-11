@@ -107,9 +107,8 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={() => {
                 setDeliveryMode("delivery");
                 setShowModal(true);
-                // addPedido(reference, address, names, card, expire, securityCode);
-                // const data = { reference, address, names, card, expire, securityCode };
-                // console.log(data);
+                // Firebase upload
+                addPedido(reference, address, names, card, expire, securityCode);
             }}
                 expand="block" className="mt-3">
                 Finalizar Pedido

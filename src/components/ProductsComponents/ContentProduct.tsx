@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapsible from "react-collapsible";
-import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText } from '@ionic/react';
+import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
 import ProductoList from './List'
 import './ContentProduct.css'
 import { Link } from 'react-router-dom';
@@ -55,32 +55,25 @@ const ContentProduct: React.FC<ContainerProps> = () => {
         <h5>Mis Pedidos</h5>
         <IonCard>
           <IonItem>
-            <IonText slot="start">
-              <p>x3</p>
-            </IonText>
-            <IonLabel>Producto 1</IonLabel>
-            <p>S/. 25.00</p>
-            <p></p>
+              <IonBadge slot="start">x3</IonBadge>
+              <IonLabel> 
+                  Producto 1
+              </IonLabel>
+              <IonLabel slot="end">S/. 75.00</IonLabel>
+          </IonItem>
+          <IonItem>
+              <IonBadge slot="start">x1</IonBadge>
+              <IonLabel> 
+                  Producto 2
+              </IonLabel>
+              <IonLabel slot="end">S/. 30.00</IonLabel>
           </IonItem>
         </IonCard>
 
         <IonCard>
           <IonItem>
-            <IonText slot="start">
-              <p>x3</p>
-            </IonText>
-            <IonLabel>Producto 1</IonLabel>
-            <p>S/. 25.00</p>
-            <p></p>
-          </IonItem>
-        </IonCard>
-
-        <IonCard>
-          <IonItem>
-            <IonLabel>Total:</IonLabel>
-            <IonText slot="end">
-              <p>S/. 125.00</p>
-            </IonText>
+              <IonLabel slot="start"><b>Total</b></IonLabel>
+              <IonLabel slot="end">S/. 105.00</IonLabel>
           </IonItem>
         </IonCard>
 

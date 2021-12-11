@@ -25,7 +25,7 @@ const Pedido: React.FC = () =>
             <IonHeader>
                 <IonToolbar color="primary">
                     <IonTitle>
-                        Pedidos
+                        Datos del Pedido
                     </IonTitle>
                 </IonToolbar>
                 
@@ -66,7 +66,7 @@ const Pedido: React.FC = () =>
                         </IonCol>
 
                         <IonCol size="12" sizeLg="5">
-                            <IonTitle className="px-0 py-2">Mis Pedidos</IonTitle>
+                            <IonTitle className="px-2 py-2">Mis Pedidos</IonTitle>
 
                             <IonCard>
                                 <IonItem>
@@ -87,7 +87,7 @@ const Pedido: React.FC = () =>
 
                             <IonCard>
                                 <IonItem>
-                                    <IonLabel slot="start">Total:</IonLabel>
+                                    <IonLabel slot="start"><b>Total</b></IonLabel>
                                     <IonLabel slot="end">S/. 105.00</IonLabel>
                                 </IonItem>
                             </IonCard>

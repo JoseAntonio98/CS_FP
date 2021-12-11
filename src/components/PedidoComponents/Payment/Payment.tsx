@@ -34,7 +34,9 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                 <IonList>
                     <IonItem>
                         <IonLabel position="floating">Apellidos y Nombres:</IonLabel>
-                        <IonInput type="text" onIonChange={ (e) => setNames(e.detail.value)} value={names}></IonInput>
+                        <IonInput onIonChange={ (e) => setNames(e.detail.value)} 
+                            value={names}
+                            type="text"></IonInput>
                     </IonItem>
 
                     { paymentMode === "card" ?
@@ -63,7 +65,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                     || (paymentMode === "card" && names.trim() === "" && card.trim() === "" && expire === "" && securityCode.trim() === "")) 
                 {
                     present({
-                        message: "Ingrese los datos",
+                        message: "Ingrese todos los datos",
                         duration: 2000,
                         color: "light"
                     });

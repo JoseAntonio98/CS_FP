@@ -25,7 +25,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
                     setCurrentTab("payment");
                 } else {
                     present({
-                        message: "Ingrese los datos",
+                        message: "Ingrese todos los datos",
                         duration: 2000,
                         color: "light"
                     });

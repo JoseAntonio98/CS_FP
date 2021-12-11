@@ -1,8 +1,10 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import {IonCol, IonButton, IonContent, IonGrid, IonRow, IonTitle, IonItem, IonLabel, IonInput } from '@ionic/react';
+import {IonCol, IonIcon, IonButton, IonGrid, IonRow, IonItem, IonLabel, IonInput } from '@ionic/react';
 import { signInTienda } from '../../../servicios/firebaseTienda'
 import './Login.css';
+
+import { business } from 'ionicons/icons'
 
 interface ContainerProps { }
 
@@ -20,6 +22,14 @@ const Login: React.FC<ContainerProps> = () => {
                 <IonRow>
                     <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-top'>
                         <h1>Ingresar como Tienda</h1>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-top'>
+                        <IonIcon
+                        style={{ fontSize: "70px", color: "#0040ff" }}
+                        icon={business}
+                        />
                     </IonCol>
                 </IonRow>
                 <IonRow>
@@ -43,7 +53,7 @@ const Login: React.FC<ContainerProps> = () => {
                         <IonButton expand="block" fill="outline" onClick={login} >
                             Ingresar
                         </IonButton>
-                        <p><Link to="/cliente/login">soy cliente</Link></p>
+                        <p><Link to="/">soy cliente</Link></p>
                         <p> ¿Eres nuevo aquí? <Link to="/tienda/registro">Registrate</Link> </p>
                     </IonCol>
                 </IonRow>

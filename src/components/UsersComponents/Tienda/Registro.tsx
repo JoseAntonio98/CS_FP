@@ -89,7 +89,7 @@ const Registro: React.FC<ContainerProps> = () => {
                         <IonButton expand="block" fill="outline" onClick={Registro} >
                             Registrar
                         </IonButton>
-                        <p><Link to="/cliente/login">soy cliente</Link></p>
+                        <p><Link to="/">soy cliente</Link></p>
                         <p> ¿Ya tienes una cuenta? <Link to="/tienda/login">Ingresa aquí</Link> </p>
                     </IonCol>
                 </IonRow>

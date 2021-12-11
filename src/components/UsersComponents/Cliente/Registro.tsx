@@ -3,7 +3,7 @@ import LocalizacionBoton from '../../LocalizacionBoton'
 import Mapa from '../../Mapa'
 import { Link } from 'react-router-dom';
 import {IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput } from '@ionic/react';
-import { createCliente, getUser } from '../../../servicios/firebaseCliente';
+import { createCliente} from '../../../servicios/firebaseCliente';
 import { toast } from '../../toast';
 // import Sesion from "../../../Contexto/Sesion";
 

@@ -41,10 +41,10 @@ export function createCliente(nombre: string, celular: string, email:string, pas
 
         toast('Registro Exitoso')
 
-        user = userCredentials.user;
+        //user = userCredentials.user;
     }).catch((error)=>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error.code);
+        console.log(error.message);
     });
 }
 export async function signInCliente(email:string, password:string)
@@ -79,7 +79,9 @@ export async function signInCliente(email:string, password:string)
 export function signOutCliente()
 {
     signOut(auth)
-    .then(()=>{signed = false})
+    .then(()=>{
+        console.log('Cierre de Sesión Exitoso')
+    })
     .catch(()=>{});
 }
 
@@ -92,7 +94,9 @@ export function isClienteSigned()
 {
     console.log(auth.currentUser?.uid)
     //     console.log('auth ', auth)
+    console.log('usuer current ', auth.currentUser)
     return auth.currentUser == null
+    
 
 }
 

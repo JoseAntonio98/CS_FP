@@ -11,7 +11,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
 
     return (
         <div>
-             <IonTitle className="pb-3 px-0">Datos de entrega</IonTitle>
+            <h6>Datos de entrega:</h6>
             <IonItem>
                 <IonLabel position="fixed" >Dirección:</IonLabel>
                 <LocalizacionBoton setCoord={setCoord}/>
@@ -39,7 +39,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
                     present({
                         message: "Ingrese todos los datos",
                         duration: 2000,
-                        color: "light"
+                        color: "dark"
                     });
                 }
                 

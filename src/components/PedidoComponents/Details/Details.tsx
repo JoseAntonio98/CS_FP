@@ -13,7 +13,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
 
     return (
         <div>
-            <p>Detalles del pedido:</p>
+            <h6>Detalles del pedido:</h6>
             <IonList>
                 <IonItem>
                     <IonLabel>

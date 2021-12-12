@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, IonTitle, useIonToast } from "@ionic/react";
+import { IonButton, IonDatetime, IonInput, IonItem, IonLabel, IonList, IonRadio, IonRadioGroup, useIonToast } from "@ionic/react";
 
 import './Payment.css';
 
@@ -16,7 +16,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
 
     return (
         <div>
-            <IonTitle className="pb-3 px-0">Modo de pago</IonTitle>
+            <h6>Modo de pago:</h6>
             <IonList>
                 <IonRadioGroup onIonChange={(event) => setPaymentMode(event.detail.value) } 
                     name="payment" value={paymentMode}>
@@ -68,7 +68,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                     present({
                         message: "Ingrese todos los datos",
                         duration: 2000,
-                        color: "light"
+                        color: "dark"
                     });
                 } else {
                     setDetailsDisabled(false);

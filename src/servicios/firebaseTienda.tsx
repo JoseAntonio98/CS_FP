@@ -38,7 +38,7 @@ export async function signInTienda(email:string, password:string)
         {
             const q = query(collection(db, "tiendas"), where("email", "==", email));
             const querySnapshot = await getDocs(q);
-            exist = querySnapshot.docs.length!=0
+            exist = querySnapshot.docs.length!==0
         }
         return exist;
     }

@@ -1,25 +1,11 @@
 //Funciones de autanticacion de firebase
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { setDoc, doc} from "firebase/firestore"
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { query, getDocs, where, collection, setDoc, doc} from "firebase/firestore"
 
 //Modulo de autenticacion de firebase
-import { auth } from '../firebaseConfig'
-import { db } from '../firebaseConfig'
-
-// Toast
+import { auth, db } from '../firebaseConfig'
 import { toast } from "../components/toast"
-
-var user:User;
-var signed;
-
-//Autenticacion de administradores
-auth.onAuthStateChanged((userCredentials)=>{
-    if (userCredentials) {
-        signed = true;
-    } else {
-        signed = false;
-    }
-}); 
+import { useState, useEffect } from 'react'
 
 export async function createTienda(nombre: string, ruc: string, email:string, password:string, rubro : string)
 {
@@ -37,7 +23,6 @@ export async function createTienda(nombre: string, ruc: string, email:string, pa
 
         toast('Registro Exitoso')
 
-        user = userCredentials.user;
     }).catch((error)=>{
         console.log(error.code);
         console.log(error.message);
@@ -45,7 +30,35 @@ export async function createTienda(nombre: string, ruc: string, email:string, pa
 }
 export async function signInTienda(email:string, password:string)
 {
-    signInWithEmailAndPassword(auth, email, password)
+    toast('Ingresando..')
+
+    async function getClientes() 
+    {
+        let exist = false;
+        {
+            const q = query(collection(db, "tiendas"), where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+            exist = querySnapshot.docs.length!=0
+        }
+        return exist;
+    }
+    getClientes()
+        .then((exist:boolean) => {
+            if (exist) {
+                signInWithEmailAndPassword(auth, email, password)
+                .then ((userCredentials) => {
+                    toast('Ingreso Correcto')
+                })
+                .catch ((error) => {
+                    toast('Credentials invalidas')
+                })
+            }
+            else{
+                toast('No se existe una cuenta con estas credenciales')
+            }
+        })
+
+    /*signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials)=>{
         user = userCredentials.user;
         console.log('Ingreso correctamente');
@@ -59,21 +72,25 @@ export async function signInTienda(email:string, password:string)
         console.log(errorCode);
         console.log(errorMessage);
         toast('Error de autenticacion de cliente')
-    });
+    });*/
 }
 
-export function signOutTienda()
+export function logOutCliente()
 {
-    signOut(auth)
-    .then(()=>{
-        console.log('Desloguin exitososo')
-    })
-    .catch(()=>{});
+    return signOut(auth)
 }
-export function getUser()
+
+export function useTienda()
 {
-    return user;
+    const [currentUser, setCurrentUser] = useState <User | null>()
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
+        return unsub;
+    }, []);
+    
+    return currentUser;
 }
+
 export function isTiendaSigned()
 {
     console.log(auth.currentUser!=null)

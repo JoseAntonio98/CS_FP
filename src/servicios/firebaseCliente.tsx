@@ -1,31 +1,13 @@
 //Funciones de autanticacion de firebase
-import { setPersistence, createUserWithEmailAndPassword, browserSessionPersistence, getAuth, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { setDoc, doc, GeoPoint, getFirestore} from "firebase/firestore"
+import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { query, collection, where, getDocs, setDoc, doc, GeoPoint, getFirestore} from "firebase/firestore"
 
 //Modulo de autenticacion de firebase
-import { app } from '../firebaseConfig'
-
-// Toast
+import { auth, db } from '../firebaseConfig'
 import { toast } from "../components/toast"
+import { useState, useEffect } from 'react'
 
-var user : User;
-var signed;
-
-const db = getFirestore(app);
-const auth = getAuth()
-
-auth.setPersistence(browserSessionPersistence)
-
-//Autenticacion de administradores
-auth.onAuthStateChanged((userCredentials)=>{
-    if (userCredentials) {
-        signed = true;
-    } else {
-        signed = false;
-    }
-});
-
-export function createCliente(nombre: string, celular: string, email:string, password:string)
+export function createCliente(nombre: string, celular: string, email:string, password:string, coord:number[])
 {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials)=>{
@@ -36,12 +18,12 @@ export function createCliente(nombre: string, celular: string, email:string, pas
             nombre : nombre,
             celular: celular,
             password : password,
-            direccion: new GeoPoint (12,1)
+            disponible : true,
+            direccion: new GeoPoint (coord[0],coord[1])
         });
 
         toast('Registro Exitoso')
 
-        //user = userCredentials.user;
     }).catch((error)=>{
         console.log(error.code);
         console.log(error.message);
@@ -49,7 +31,35 @@ export function createCliente(nombre: string, celular: string, email:string, pas
 }
 export async function signInCliente(email:string, password:string)
 {
-    setPersistence(auth, browserSessionPersistence)
+    toast('Ingresando..')
+
+    async function getClientes() 
+    {
+        let exist = false;
+        {
+            const q = query(collection(db, "clientes"), where("email", "==", email));
+            const querySnapshot = await getDocs(q);
+            exist = querySnapshot.docs.length!=0
+        }
+        return exist;
+    }
+    getClientes()
+        .then((exist:boolean) => {
+            if (exist) {
+                signInWithEmailAndPassword(auth, email, password)
+                .then ((userCredentials) => {
+                    toast('Ingreso Correcto')
+                })
+                .catch ((error) => {
+                    toast('Credentials invalidas')
+                })
+            }
+            else{
+                toast('No se existe una cuenta con estas credenciales')
+            }
+        })
+
+    /*setPersistence(auth, browserSessionPersistence)
     .then(async () => {
         return signInWithEmailAndPassword(auth, email, password)
         .then((userCredentials)=>{
@@ -73,21 +83,23 @@ export async function signInCliente(email:string, password:string)
     .catch((error) => {
         console.log(error.message)
         console.log(error.message)        
-    })
+    })*/
 }
 
-export function signOutCliente()
+export function logOutCliente()
 {
-    signOut(auth)
-    .then(()=>{
-        console.log('Cierre de Sesión Exitoso')
-    })
-    .catch(()=>{});
+    return signOut(auth)
 }
 
-export function getUser()
+export function useCliente()
 {
-    return auth.currentUser;
+    const [currentUser, setCurrentUser] = useState <User | null>()
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
+        return unsub;
+    }, []);
+    
+    return currentUser;
 }
 
 export function isClienteSigned()

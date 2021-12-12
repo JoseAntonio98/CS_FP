@@ -81,12 +81,14 @@ const Registro: React.FC<ContainerProps> = () => {
                             <IonItem>
                                 <IonLabel position="fixed" >Dirección</IonLabel>
                                 <LocalizacionBoton setCoord={setCoord}/>
-                                {
-                                    coord[0] != 0?
-                                    <Mapa coordX={coord[0]} coordY={coord[1]} />
-                                    : null
-                                }
                             </IonItem>
+                            {
+                                coord[0] != 0?
+                                <IonRow>
+                                    <Mapa coordX={coord[0]} coordY={coord[1]} />
+                                </IonRow>
+                                : null
+                            }
                         </IonCol>
                     </IonRow>
                     <IonRow>

@@ -4,7 +4,8 @@ import {closeCircleOutline, personOutline, trashOutline} from 'ionicons/icons'
 import { db } from '../../../../firebaseConfig';
 import { toast } from '../../../toast';
 import './UserInfo.css';
-interface ContainerProps { 
+interface ContainerProps 
+{ 
     docId:string
     email:string
     nombre:string
@@ -13,11 +14,12 @@ interface ContainerProps {
 const UserInfo: React.FC<ContainerProps> = (props) => {
     async function deleteClient()
     {
+        console.log("Clickeaste sobre el boton de eliminado")
         await deleteDoc(doc(db, "clientes", props.docId));
-        toast("Se ha eliminado la tienda")
+        toast("Se ha eliminado el cliente")
     }
 
-  return (
+    return (
     <div className="UserInfo">
         <IonIcon icon={personOutline}/>
         <IonGrid>
@@ -37,8 +39,8 @@ const UserInfo: React.FC<ContainerProps> = (props) => {
                     </div>
                 </IonCol>
                 <IonCol size="2">
-                    <IonButton color="danger">
-                        <IonIcon icon={trashOutline} onClick={deleteClient}/>
+                    <IonButton color="danger"  onClick={deleteClient}>
+                        <IonIcon icon={trashOutline}/>
                     </IonButton>
                     <IonButton color="light">
                         <IonIcon icon={closeCircleOutline}/>

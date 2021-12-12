@@ -1,8 +1,24 @@
 import { IonButton, IonContent, IonHeader, IonLabel, IonPage, IonTitle, IonToolbar} from '@ionic/react'
 import './Admin.css'
 import ContentManager from '../../components/AdminComponents/ContentManager/ContentManager'
+import AdminLogin from '../../components/AdminComponents/Login/AdminLogin';
+import { useEffect, useState } from 'react';
+import { logOutAdmin, useAdminAuth } from '../../servicios/firebaseAdmin';
+import { toast } from '../../components/toast';
+
 const Admin: React.FC = () =>
 {
+    const currentAdmin = useAdminAuth()
+
+    function signOutManager()
+    {
+        logOutAdmin().then(() => {
+            toast("Se ha cerrado sesion")
+        })
+        .catch(() =>{
+            toast("Error en el cierre de sesion")
+        })
+    }
     return (
         <IonPage>
             <IonHeader>
@@ -10,13 +26,17 @@ const Admin: React.FC = () =>
                     <IonTitle>
                         Administracion
                     </IonTitle>
-                    <IonButton slot="end" shape="round" color="success">
-                        <IonLabel>admin</IonLabel>
-                    </IonButton>
+                    {
+                        currentAdmin ?
+                        <IonButton slot="end" shape="round" color="success" onClick={signOutManager}>
+                            <IonLabel>{ currentAdmin?.email}</IonLabel>
+                        </IonButton>
+                        :<></>
+                    }
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                <ContentManager/>
+                { currentAdmin?<ContentManager/>:<AdminLogin/>}
             </IonContent>
         </IonPage>    
     );

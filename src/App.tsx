@@ -23,8 +23,6 @@ import './theme/variables.css';
 
 /* Imports de administracion */
 import Admin from './pages/Admin/Admin';
-import AdminLogin from './pages/Admin/AdminLogin';
-import { isAdminSigned } from './servicios/firebaseAdmin';
 import { isClienteSigned } from './servicios/firebaseCliente';
 import { isTiendaSigned } from './servicios/firebaseTienda';
 
@@ -35,9 +33,8 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-        <Route exact path="/admin" render={() => {
-          return true? <Admin /> : <AdminLogin />
-        }}>
+        <Route exact path="/admin">
+            <Admin/>
         </Route>
         <Route exact path="/home">
           <UsuarioLogin />

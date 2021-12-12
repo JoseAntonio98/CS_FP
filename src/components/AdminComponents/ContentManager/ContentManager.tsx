@@ -13,7 +13,6 @@ interface ContainerProps {
 }
 
 const ContentManager: React.FC<ContainerProps> = () => {
-
     return (
     <IonReactRouter>
         <IonTabs>

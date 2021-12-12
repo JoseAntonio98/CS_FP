@@ -1,63 +1,46 @@
 //Funciones de autanticacion de firebase
-import { createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 import { addDoc, collection } from "firebase/firestore";
 import 'firebase/firestore'
+
 //Modulo de autenticacion de firebase
 import { auth, db } from '../firebaseConfig'
+import { useEffect, useState } from "react";
+import { toast } from "../components/toast";
 
-var user:User;
-var signed;
 
-//Autenticacion de administradores
-auth.onAuthStateChanged((userCredentials)=>{
-    if (userCredentials) {
-        signed = true;
-    } else {
-        signed = false;
-    }
-}); 
 
 function createAdmin(email:string, password:string)
 {
     createUserWithEmailAndPassword(auth, email, password)
     .then((userCredentials)=>{
-        user = userCredentials.user;
+        toast("Se ha creado el administrador con: "+email);
     }).catch((error)=>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        toast("Se podido crear el administrador ");
     });
 }
 export function signInAdmin(email:string, password:string)
 {
+    toast("Ingresando..")
     signInWithEmailAndPassword(auth, email, password)
     .then((userCredentials)=>{
-        user = userCredentials.user;
         console.log('Ingreso correctamente');
-        console.log(user);
-        signed = true;
     }).catch((error)=>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log('Error de autenticacion de administrador');
-        console.log(errorCode);
-        console.log(errorMessage);
+        console.log(error);
     });
 }
-export function signOutAdmin()
+export function logOutAdmin()
 {
-    signOut(auth)
-    .then(()=>{signed = false})
-    .catch(()=>{});
+    return signOut(auth);
 }
-export function getUser()
+export function useAdminAuth()
 {
-    return user;
-}
-export function isAdminSigned()
-{
-    console.log(auth.currentUser!=null)
-    return auth.currentUser;
+    const [currentUser, setCurrentUser] = useState<User | null>()
+    useEffect(() => {
+        const unsub = onAuthStateChanged(auth, user => setCurrentUser(user));
+        return unsub;
+    },[]);
+    return currentUser;
 }
 export async function createCategory(categoryName:string, categoryDesc:string)
 {

@@ -6,6 +6,7 @@ import { setDataCliente, logOutCliente, useCliente } from '../../servicios/fireb
 import { Link } from "react-router-dom";
 import { toast } from "../../components/toast";
 import Sesion from "../../Contexto/Sesion"
+import Carrito, { CarritoProvider } from "../../Contexto/Carrito"
 import { useState, useEffect } from "react";
 
 const UsuarioLogin: React.FC = () => 
@@ -18,6 +19,8 @@ const UsuarioLogin: React.FC = () =>
         correo : '',
         dir : ''   
     })
+
+    const [pedidos, SetPedidos] = useState({})
 
     const history = useHistory()
     const currentCliente = useCliente()
@@ -37,7 +40,7 @@ const UsuarioLogin: React.FC = () =>
     useEffect ( function() {
         if (currentCliente) {
             setDataCliente(currentCliente.uid, setUsuario)   
-            console.log('bucle?')
+            //console.log('bucle?')
         }
     }, [currentCliente]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
 
@@ -63,7 +66,9 @@ const UsuarioLogin: React.FC = () =>
                     currentCliente?
                     <>
                         <Sesion.Provider value={usuario}>
-                            <Productos />
+                            <CarritoProvider>
+                                <Productos />
+                            </CarritoProvider>
                         </Sesion.Provider>
                     </>
                     : <Login/>

@@ -1,23 +1,28 @@
 import React, { useContext } from 'react';
 import Collapsible from "react-collapsible";
 import Sesion from "../../../Contexto/Sesion"
-import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
+import Carrito from "../../../Contexto/Carrito"
+import { IonCol, IonList, IonItemOptions, IonItemOption, IonItemSliding, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
 import ProductoList from './ProductoLista'
 import './ContentProduct.css'
 import { Link } from 'react-router-dom';
 
-interface ContainerProps { 
-  
+interface ContainerProps {
+
 }
 
 const ContentProduct = () => {
-  
+
   const sesion = useContext(Sesion)
+  const carrito = useContext(Carrito)
+
+  //console.log('carrito', carrito.)
+  //carrito.state.pedidos
 
   return (
-    
+
     <IonRow>
-      <IonCol size="3" className='ion-text-center'>
+      <IonCol sizeLg="3" sizeXs='12' className='ion-text-center'>
         <Collapsible transitionTime={100} trigger="Ordenar Por">
           <p><Link to="">A-Z</Link></p>
           <p>Z-A</p>
@@ -43,8 +48,8 @@ const ContentProduct = () => {
 
         <IonRow>
           <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-bottom'>
-              <IonButton expand="block" fill="outline" > Buscar
-              </IonButton>
+            <IonButton expand="block" fill="outline" > Buscar
+            </IonButton>
           </IonCol>
         </IonRow>
 
@@ -53,40 +58,59 @@ const ContentProduct = () => {
       </IonCol >
 
       <IonCol pushXs="" sizeXs="12" sizeLg="3" className="ion-text-center">
+
         <IonRow>
-        <IonCol>
-        <h5>Mis Pedidos</h5>
-        <IonCard>
-          <IonItem>
-              <IonBadge slot="start">x3</IonBadge>
-              <IonLabel> 
-                  Producto 1
-              </IonLabel>
-              <IonLabel slot="end">S/. 75.00</IonLabel>
-          </IonItem>
-          <IonItem>
-              <IonBadge slot="start">x1</IonBadge>
-              <IonLabel> 
-                  Producto 2
-              </IonLabel>
-              <IonLabel slot="end">S/. 30.00</IonLabel>
-          </IonItem>
-        </IonCard>
+          <IonCol>
+            <h5>Mis Pedidos</h5>
+            <IonList>
 
-        <IonCard>
-          <IonItem>
-              <IonLabel slot="start"><b>Total</b></IonLabel>
-              <IonLabel slot="end">S/. 105.00</IonLabel>
-          </IonItem>
-        </IonCard>
+              <IonItemSliding>
 
-        <IonButton expand="block" fill="solid" >
-          Hacer Pedido
-        </IonButton>
+                <IonItem>
+                  <IonBadge slot="start">x3</IonBadge>
+                  <IonText>{sesion.correo}</IonText>
+                  <IonBadge slot="end">S/.75.00</IonBadge>
+                </IonItem>
 
-        </IonCol>
+                <IonItemOptions side="end">
+                  <IonItemOption onClick={() => alert('seguro?')}>Borrar</IonItemOption>
+                </IonItemOptions>
+
+              </IonItemSliding>
+              
+            </IonList>
+
+            <IonItemSliding>
+
+                <IonItem>
+                  <IonBadge slot="start">x3</IonBadge>
+                  <IonText>Segundo Elemento</IonText>
+                  <IonBadge slot="end">S/.75.00</IonBadge>
+                </IonItem>
+
+                <IonItemOptions side="end">
+                  <IonItemOption onClick={() => alert('seguro?')}>Borrar</IonItemOption>
+                </IonItemOptions>
+
+              </IonItemSliding>
+
+              <IonItemSliding>
+
+                <IonItem>
+                  
+                  <IonText slot="start" ><b>Total</b></IonText>
+                  <IonText slot="end">S/.75.00</IonText>
+                </IonItem>
+
+              </IonItemSliding>
+
+              <IonButton expand="block" fill="solid" >
+                Hacer Pedido
+              </IonButton>
+
+          </IonCol>
         </IonRow>
-        
+
       </IonCol>
 
     </IonRow>

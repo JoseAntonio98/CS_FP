@@ -1,9 +1,18 @@
-import React from "react";
+import React, { useState } from "react";
 
-[]
+export const Carrito = React.createContext({});
 
-const Carrito = React.createContext({
-    1 : {}
-})
+export const CarritoProvider = ({children}:any) => {
+    const [pedidos, setPedidos] = React.useState('initial');
 
-export default Carrito
+    let state = {
+        pedios:pedidos,
+        setPedidos:setPedidos
+    };
+
+    return <Carrito.Provider value={state}>
+        {children}
+    </Carrito.Provider>
+};
+
+export default Carrito;

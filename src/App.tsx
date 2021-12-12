@@ -23,9 +23,9 @@ import './theme/variables.css';
 
 /* Imports de administracion */
 import Admin from './pages/Admin/Admin';
-import { isClienteSigned } from './servicios/firebaseCliente';
+//import { isClienteSigned } from './servicios/firebaseCliente';
 
-import UsuarioLogin from "./pages/Usuario/UsuarioLogin"
+import UsuarioInicio from "./pages/Usuario/Inicio"
 import Pedido from './pages/Pedido/Pedido';
 import ProductosLista from './pages/Productos/ProductosLista';
 import AdminTienda from './pages/AdminTienda/AdminTienda';
@@ -39,7 +39,7 @@ const App: React.FC = () => (
         </Route>
 
         <Route exact path="/">
-          <UsuarioLogin/>
+          <UsuarioInicio/>
         </Route>
 
         <Route exact path="/pedido" render={ ()=> {

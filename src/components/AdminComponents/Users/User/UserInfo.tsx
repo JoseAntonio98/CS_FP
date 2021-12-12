@@ -26,10 +26,10 @@ const UserInfo: React.FC<ContainerProps> = (props) => {
             <IonRow>
                 <IonCol size="10">
                     <div>
-                        <strong>{props.email}</strong>
+                        <strong>{props.nombre}</strong>
                     </div>
                     <div>
-                        <IonLabel>UserLastname</IonLabel>
+                        <IonLabel>apellido</IonLabel>
                     </div>
                     <div>
                         <IonLabel>{props.email}</IonLabel>

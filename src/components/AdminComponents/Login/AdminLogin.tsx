@@ -1,11 +1,11 @@
-import { IonButton, IonContent, IonHeader, IonInput, IonItem, IonLabel, IonPage, IonTitle, IonToolbar } from '@ionic/react';
+import { IonButton, IonInput, IonItem, IonLabel } from '@ionic/react';
 import { useState } from 'react';
 import { signInAdmin } from '../../../servicios/firebaseAdmin';
 import './AdminLogin.css'
 
 const AdminLogin:React.FC = () =>
 {
-    //User login info
+    //Admin login info
     const [username, setUserName] = useState('')
     const [password, setPassword] = useState('')
 

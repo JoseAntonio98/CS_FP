@@ -8,7 +8,7 @@ import './UserList.css';
 interface ContainerProps { }
 
 const UserList: React.FC<ContainerProps> = () => {
-    //Store list
+    //users list
     const [arrayUsuarios, SetArrayUsuarios] = useState([{}])
     const usuariosCollectionRef = collection(db, 'clientes')
     useEffect(()=>{

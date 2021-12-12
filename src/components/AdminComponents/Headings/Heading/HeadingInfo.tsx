@@ -1,4 +1,4 @@
-import { IonButton, IonCol, IonGrid, IonIcon, IonLabel, IonRow, IonTitle } from "@ionic/react";
+import { IonButton, IonCol, IonGrid, IonIcon, IonLabel, IonRow } from "@ionic/react";
 import { deleteDoc, doc } from "firebase/firestore";
 import { earthOutline, trashOutline } from "ionicons/icons";
 import { db } from "../../../../firebaseConfig";

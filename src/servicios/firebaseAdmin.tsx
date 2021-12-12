@@ -23,10 +23,10 @@ export function signInAdmin(email:string, password:string)
 {
     toast("Ingresando..")
     signInWithEmailAndPassword(auth, email, password)
-    .then((userCredentials)=>{
-        console.log('Ingreso correctamente');
-    }).catch((error)=>{
-        console.log(error);
+    .then((userCredentials) => {
+        toast("Ingreso correctamente")
+    }).catch((error) => {
+        toast("Credenciales invalidas")
     });
 }
 export function logOutAdmin()

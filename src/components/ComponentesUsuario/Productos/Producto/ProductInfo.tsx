@@ -25,7 +25,7 @@ const ProductInfo : React.FC<ContainerProps> = (props) => {
                     <IonLabel>Nombre Sede</IonLabel>
                 </div>
             </IonCol>
-            <IonCol size="3">
+            <IonCol offsetLg="1" sizeLg="2">
                 <IonImg src={`{props.image}`} />
             </IonCol>
         </IonRow>  

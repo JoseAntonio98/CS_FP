@@ -2,7 +2,7 @@ import { IonContent, IonPage, IonHeader, IonTitle, IonToolbar, IonButton } from 
 import Content from '../../components/ProductsComponents/Tienda'
 import { Link } from "react-router-dom";
 
-import { signOutCliente } from '../../servicios/firebaseCliente'
+//import { signOutCliente } from '../../servicios/firebaseCliente'
 
 const AdminTienda: React.FC = () => {
     return (
@@ -12,7 +12,7 @@ const AdminTienda: React.FC = () => {
                     <IonTitle>
                         <Link to="/" >Aplicación</Link>
                     </IonTitle>
-                    <IonButton slot='end' color="success" href="/" onClick={signOutCliente}>Salir</IonButton>
+                    <IonButton slot='end' color="success" href="/">Salir</IonButton>
                 </IonToolbar>
             </IonHeader>
             <IonContent scrollY={false}>

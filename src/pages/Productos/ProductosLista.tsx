@@ -1,5 +1,5 @@
 import { IonContent, IonPage, IonHeader, IonTitle, IonToolbar, IonButton } from '@ionic/react'
-import Content from '../../components/UsersComponents/Productos/ContentProduct'
+import Content from '../../components/ComponentesUsuario/Productos/ContentProduct'
 import { Link } from "react-router-dom";
 
 import { signOutCliente } from '../../servicios/firebaseCliente'

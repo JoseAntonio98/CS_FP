@@ -27,7 +27,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
 
             <IonButton onClick={() => {
                 // Agregar validacion de direccion
-                if(reference.trim() !== "") {
+                if(reference.trim() !== "" && address.trim() !== "") {
                     setPaymentDisabled(false);
                     setCurrentTab("payment");
                 } else {

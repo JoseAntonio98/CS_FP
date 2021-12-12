@@ -57,7 +57,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={ () => {
                     setDeliveryMode("pick");
                     setShowModal(true);
-                    // addPedido(reference, address, names, card, expire, securityCode);
+                    addPedido(reference, address, names, card, expire, securityCode, timeDelivery, "recojo personal");
                 }} 
                 fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
@@ -112,7 +112,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={() => {
                 setDeliveryMode("delivery");
                 setShowModal(true);
-                // addPedido(reference, address, names, card, expire, securityCode);
+                addPedido(reference, address, names, card, expire, securityCode, timeDelivery, "entrega");
             }}
                 expand="block" className="mt-3">
                 Finalizar Pedido

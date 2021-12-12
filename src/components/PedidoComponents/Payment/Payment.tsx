@@ -63,7 +63,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
 
             <IonButton onClick={() => {
                 if((paymentMode === "cash" && names.trim() === "")
-                    || (paymentMode === "card" && names.trim() === "" && card.trim() === "" && expire === "" && securityCode.trim() === "")) 
+                    || (paymentMode === "card" && (names.trim() === "" || card.trim() === "" || expire === "" || securityCode.trim() === ""))) 
                 {
                     present({
                         message: "Ingrese todos los datos",

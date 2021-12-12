@@ -2,7 +2,7 @@ import React, { useContext, useState } from "react";
 import LocalizacionBoton from '../../LocalizacionBoton'
 import Mapa from '../../Mapa'
 import { Link } from 'react-router-dom';
-import {IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput } from '@ionic/react';
+import {IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput, IonText } from '@ionic/react';
 import { createCliente} from '../../../servicios/firebaseCliente';
 import { toast } from '../../toast';
 // import Sesion from "../../../Contexto/Sesion";
@@ -16,13 +16,14 @@ const Registro: React.FC<ContainerProps> = () => {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [cpassword, setCPassword] = useState('');
+    const [coord, setCoord] = useState([0,0])
 
     async function registro () {
         if(password !== cpassword){
             toast('contraseñas diferentes')
         }
         else {
-            createCliente(nombre, celular, email, password)
+            createCliente(nombre, celular, email, password, coord)
         }
         
     }
@@ -78,9 +79,13 @@ const Registro: React.FC<ContainerProps> = () => {
                     <IonRow>
                         <IonCol offsetLg="4" sizeLg="4" >
                             <IonItem>
-                                <IonLabel position="stacked">Dirección</IonLabel>
-                                <LocalizacionBoton/>
-                                <Mapa coordX={-16.34} coordY={-71.55}/>
+                                <IonLabel position="fixed" >Dirección</IonLabel>
+                                <LocalizacionBoton setCoord={setCoord}/>
+                                {
+                                    coord[0] != 0?
+                                    <Mapa coordX={coord[0]} coordY={coord[1]} />
+                                    : null
+                                }
                             </IonItem>
                         </IonCol>
                     </IonRow>
@@ -90,7 +95,7 @@ const Registro: React.FC<ContainerProps> = () => {
                                 Registrar
                             </IonButton>
                             <p><Link to="/tienda/login">Ingresar como tienda</Link></p>
-                            <p> ¿Ya tienes una cuenta? <Link to="/cliente/login">Ingresa aquí</Link> </p>
+                            <p> ¿Ya tienes una cuenta? <Link to="/">Ingresa aquí</Link> </p>
                         </IonCol>
                     </IonRow>
                 </IonGrid>

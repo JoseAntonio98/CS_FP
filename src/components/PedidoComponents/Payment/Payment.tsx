@@ -9,8 +9,8 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                           card: string, setCard: any,
                           expire: string, setExpire: any,
                           securityCode: string, setSecurityCode: any, 
-                          setTimeDelivery: any 
-    }> = ({setCurrentTab, setDetailsDisabled, paymentMode, setPaymentMode, names, setNames, card, setCard, expire, setExpire, securityCode, setSecurityCode, setTimeDelivery}) => {
+                          timeDelivery: number, setTimeDelivery: any 
+    }> = ({setCurrentTab, setDetailsDisabled, paymentMode, setPaymentMode, names, setNames, card, setCard, expire, setExpire, securityCode, setSecurityCode, timeDelivery, setTimeDelivery}) => {
     
     const [present] = useIonToast();
 
@@ -73,7 +73,10 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                 } else {
                     setDetailsDisabled(false);
                     setCurrentTab("details");
-                    setTimeDelivery(Math.floor(Math.random() * 50) + 10);
+                    if(timeDelivery === 0) {
+                        setTimeDelivery(Math.floor(Math.random() * 50) + 10);
+                    } 
+
                 }
             }} 
                 expand="block" className="mt-3">

@@ -19,7 +19,7 @@ const Pedido: React.FC = () =>
           [card, setCard] = useState<string>(""),
           [expire, setExpire] = useState<string>(""),
           [securityCode, setSecurityCode] = useState<string>(""),
-          [timeDelivery, setTimeDelivery] = useState(10);
+          [timeDelivery, setTimeDelivery] = useState(0);
 
     return (
         <IonPage>
@@ -61,7 +61,7 @@ const Pedido: React.FC = () =>
                                         card={card} setCard={setCard}
                                         expire={expire} setExpire={setExpire}
                                         securityCode={securityCode} setSecurityCode={setSecurityCode}
-                                        setTimeDelivery={setTimeDelivery}    
+                                        timeDelivery={timeDelivery} setTimeDelivery={setTimeDelivery}    
                                     ></Payment>
                                     :
                                     <Details reference={reference} address={address} names={names} card={card} expire={expire} securityCode={securityCode} timeDelivery={timeDelivery}></Details>

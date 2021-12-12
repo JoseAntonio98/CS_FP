@@ -1,4 +1,5 @@
 import React, {useState} from "react";
+import { useHistory } from "react-router-dom";
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
@@ -6,6 +7,7 @@ import { addPedido } from "../../../servicios/firebaseCliente";
 
 const Details: React.FC<{reference: string, address: string, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, address, names, card, expire, securityCode, timeDelivery}) => {
     
+    const history = useHistory();
     const [showModal, setShowModal] = useState(false);
     const [deliveryMode, setDeliveryMode] = useState("delivery");
 
@@ -55,6 +57,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={ () => {
                     setDeliveryMode("pick");
                     setShowModal(true);
+                    // addPedido(reference, address, names, card, expire, securityCode);
                 }} 
                 fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
@@ -95,7 +98,10 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                                     </div>
                             }
                             
-                            <IonButton onClick={() => setShowModal(false)} 
+                            <IonButton onClick={() => {
+                                setShowModal(false);
+                                history.replace("/info");
+                            }} 
                                 expand="full" className="ion-margin">Entendido</IonButton>
                         </div>
                     </IonContent>
@@ -106,8 +112,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={() => {
                 setDeliveryMode("delivery");
                 setShowModal(true);
-                // Firebase upload
-                addPedido(reference, address, names, card, expire, securityCode);
+                // addPedido(reference, address, names, card, expire, securityCode);
             }}
                 expand="block" className="mt-3">
                 Finalizar Pedido

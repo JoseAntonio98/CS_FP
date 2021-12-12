@@ -1,13 +1,24 @@
 import { useHistory } from "react-router";
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
-import Login from '../../components/ComponentesUsuario/Content/ContentUser'
+import Login from '../../components/ComponentesUsuario/Identificación/ContentUser'
 import Productos from '../../components/ComponentesUsuario/Productos/ContentProduct'
-import { logOutCliente, useCliente } from '../../servicios/firebaseCliente';
+import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
 import { Link } from "react-router-dom";
 import { toast } from "../../components/toast";
+import Sesion from "../../Contexto/Sesion"
+import { useState, useEffect } from "react";
 
 const UsuarioLogin: React.FC = () => 
 {
+
+    const [usuario, setUsuario] = useState({
+        uid : '',
+        disponible : '',
+        nombre : '',
+        correo : '',
+        dir : ''   
+    })
+
     const history = useHistory()
     const currentCliente = useCliente()
 
@@ -22,7 +33,14 @@ const UsuarioLogin: React.FC = () =>
                 toast('Error en el cierre de sesión')
             })
     }
-    
+
+    useEffect ( function() {
+        if (currentCliente) {
+            setDataCliente(currentCliente.uid, setUsuario)   
+            console.log('bucle?')
+        }
+    }, [currentCliente]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
+
     return (
         <IonPage>
             <IonHeader>
@@ -35,14 +53,19 @@ const UsuarioLogin: React.FC = () =>
                         <IonButton slot='end' shape="round" color="success" onClick={signOutCliente}>
                             { currentCliente.email }
                         </IonButton>
+                        
                         : null
                     }
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {
+                {   
                     currentCliente?
-                    <Productos/>
+                    <>
+                        <Sesion.Provider value={usuario}>
+                            <Productos />
+                        </Sesion.Provider>
+                    </>
                     : <Login/>
                 }
             </IonContent>

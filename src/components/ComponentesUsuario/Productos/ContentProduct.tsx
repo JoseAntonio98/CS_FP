@@ -1,16 +1,19 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Collapsible from "react-collapsible";
+import Sesion from "../../../Contexto/Sesion"
 import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
 import ProductoList from './ProductoLista'
 import './ContentProduct.css'
 import { Link } from 'react-router-dom';
 
-
-
-interface ContainerProps { }
-
-const ContentProduct: React.FC<ContainerProps> = () => {
+interface ContainerProps { 
   
+}
+
+const ContentProduct = () => {
+  
+  const sesion = useContext(Sesion)
+
   return (
     
     <IonRow>

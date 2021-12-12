@@ -108,10 +108,10 @@ export function isClienteSigned() {
 }
 
 // Agregar datos del pedido
-export async function addPedido(reference: string, address: string, names: string, card: string, expire: string, securityCode: string, timeDelivery: number, type: string) {
+export async function addPedido(reference: string, coord: any, names: string, card: string, expire: string, securityCode: string, timeDelivery: number, type: string) {
     await setDoc(doc(db, "pedidos", new Date().getTime().toString()), {
         referencia: reference,
-        direccion: address,
+        direccion: coord,
         nombres: names,
         tarjeta: card,
         expiracion: expire,

@@ -1,23 +1,28 @@
 import React from "react";
-import { IonItem, IonLabel, IonTextarea, IonButton, useIonToast, IonTitle } from "@ionic/react";
+import { IonItem, IonLabel, IonTextarea, IonButton, useIonToast, IonTitle, IonRow } from "@ionic/react";
 
 import './Address.css';
+import LocalizacionBoton from "../../LocalizacionBoton";
+import Mapa from "../../Mapa";
 
-const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference: string, setReference: any, address: string, setAddress: any}> = ({setPaymentDisabled, setCurrentTab, reference, setReference, address, setAddress}) => {
+const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference: string, setReference: any, coord: any, setCoord: any}> = ({setPaymentDisabled, setCurrentTab, reference, setReference, coord, setCoord}) => {
     
     const [present] = useIonToast();
 
     return (
         <div>
-            {/* <div className="map"></div> */}
-            {/* <Mapa coordX={-16.3342431} coordY={-71.6079893}></Mapa> */}
-            <IonTitle className="pb-3 px-0">Dirección de entrega</IonTitle>
+             <IonTitle className="pb-3 px-0">Datos de entrega</IonTitle>
             <IonItem>
-                <IonLabel position="floating">Dirección:</IonLabel>
-                <IonTextarea onIonChange={ (e) => setAddress(e.detail.value)} value={address}
-                    rows={2} cols={10} placeholder="Ingrese la dirección de entrega.">
-                </IonTextarea>
+                <IonLabel position="fixed" >Dirección:</IonLabel>
+                <LocalizacionBoton setCoord={setCoord}/>
             </IonItem>
+            {
+                coord[0] != 0?
+                <IonRow className="map">
+                    <Mapa coordX={coord[0]} coordY={coord[1]} />
+                </IonRow>
+                : null
+            }
 
             <IonItem>
                 <IonLabel position="floating">Referencia:</IonLabel>
@@ -27,7 +32,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
 
             <IonButton onClick={() => {
                 // Agregar validacion de direccion
-                if(reference.trim() !== "" && address.trim() !== "") {
+                if(reference.trim() !== "" && coord[0] != 0) {
                     setPaymentDisabled(false);
                     setCurrentTab("payment");
                 } else {

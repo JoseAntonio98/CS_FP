@@ -34,7 +34,7 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
 
                 <IonList>
                     <IonItem>
-                        <IonLabel position="floating">Apellidos y Nombres:</IonLabel>
+                        <IonLabel position="floating">Nombres y Apellidos:</IonLabel>
                         <IonInput onIonChange={ (e) => setNames(e.detail.value)} 
                             value={names}
                             type="text"></IonInput>

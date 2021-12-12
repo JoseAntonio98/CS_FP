@@ -14,7 +14,7 @@ const Pedido: React.FC = () =>
           [detailsDisabled, setDetailsDisabled] = useState<boolean>(true);
 
     const [reference, setReference] = useState<string>(""),
-          [address, setAddress] = useState<string>(""),
+          [coord, setCoord] = useState([0,0]),
           [names, setNames] = useState<string>(""),
           [card, setCard] = useState<string>(""),
           [expire, setExpire] = useState<string>(""),
@@ -51,7 +51,7 @@ const Pedido: React.FC = () =>
                                 ? <Address 
                                     setPaymentDisabled={setPaymentDisabled} setCurrentTab={setCurrentTab}
                                     setReference={setReference} reference={reference}
-                                    setAddress={setAddress} address={address}></Address>
+                                    setCoord={setCoord} coord={coord}></Address>
                                 : currentTab === "payment" 
                                     ?
                                     <Payment 
@@ -64,7 +64,7 @@ const Pedido: React.FC = () =>
                                         timeDelivery={timeDelivery} setTimeDelivery={setTimeDelivery}    
                                     ></Payment>
                                     :
-                                    <Details reference={reference} address={address} names={names} card={card} expire={expire} securityCode={securityCode} timeDelivery={timeDelivery}></Details>
+                                    <Details reference={reference} coord={coord} names={names} card={card} expire={expire} securityCode={securityCode} timeDelivery={timeDelivery}></Details>
                             }
                         </IonCol>
 

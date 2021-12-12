@@ -5,7 +5,7 @@ import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
 import { addPedido } from "../../../servicios/firebaseCliente";
 
-const Details: React.FC<{reference: string, address: string, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, address, names, card, expire, securityCode, timeDelivery}) => {
+const Details: React.FC<{reference: string, coord: any, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, coord, names, card, expire, securityCode, timeDelivery}) => {
     
     const history = useHistory();
     const [showModal, setShowModal] = useState(false);
@@ -17,7 +17,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonList>
                 <IonItem>
                     <IonLabel>
-                        <p>Apellidos y Nombres</p>
+                        <p>Nombres y Apellidos</p>
                         <h2 className="ion-text-capitalize">{names}</h2>
                     </IonLabel>
                 </IonItem>
@@ -35,7 +35,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                 <IonItem>
                     <IonLabel>
                         <p>Dirección de entrega</p>
-                        <h2>{address}</h2>
+                        <h2>{coord}</h2>
                     </IonLabel>
                 </IonItem>
 
@@ -57,7 +57,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={ () => {
                     setDeliveryMode("pick");
                     setShowModal(true);
-                    addPedido(reference, address, names, card, expire, securityCode, timeDelivery, "recojo personal");
+                    addPedido(reference, coord, names, card, expire, securityCode, timeDelivery, "recojo personal");
                 }} 
                 fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
@@ -112,7 +112,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
             <IonButton onClick={() => {
                 setDeliveryMode("delivery");
                 setShowModal(true);
-                addPedido(reference, address, names, card, expire, securityCode, timeDelivery, "entrega");
+                addPedido(reference, coord, names, card, expire, securityCode, timeDelivery, "entrega");
             }}
                 expand="block" className="mt-3">
                 Finalizar Pedido

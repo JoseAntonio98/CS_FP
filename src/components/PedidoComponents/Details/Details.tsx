@@ -4,7 +4,7 @@ import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
 import { addPedido } from "../../../servicios/firebaseCliente";
 
-const Details: React.FC<{reference: string, address: string, names: string, card: string, expire: string, securityCode: string}> = ({reference, address, names, card, expire, securityCode}) => {
+const Details: React.FC<{reference: string, address: string, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, address, names, card, expire, securityCode, timeDelivery}) => {
     
     const [showModal, setShowModal] = useState(false);
     const [deliveryMode, setDeliveryMode] = useState("delivery");
@@ -47,8 +47,7 @@ const Details: React.FC<{reference: string, address: string, names: string, card
                 <IonItem>
                     <IonLabel>
                         <p>Tiempo estimado de entrega</p>
-                        <h2>15 minutos</h2>
-                        {/* <h2>{expire}</h2> */}
+                        <h2>{ timeDelivery } minutos</h2>
                     </IonLabel>
                 </IonItem>
             </IonList>

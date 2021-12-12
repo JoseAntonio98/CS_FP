@@ -1,6 +1,6 @@
 import React from "react";
 import { IonContent, IonPage, IonHeader, IonTitle, IonToolbar } from '@ionic/react'
-import ContentVista from '../../components/ProductsComponents/ContentVista'
+import ContentVista from '../../components/UsersComponents/Productos/Producto/ContentVista'
 
 
 interface ContainerProps {

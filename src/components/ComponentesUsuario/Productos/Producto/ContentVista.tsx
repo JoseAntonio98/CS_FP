@@ -1,10 +1,10 @@
 import React from 'react';
 import Collapsible from "react-collapsible";
 import { IonCol, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
-import ProductoList from './List'
+import ProductoList from '../ProductoLista'
 import './ContentProduct.css'
-import ProductDatos from './Product/ProductDatos';
-import Mapa from '../../components/Mapa'
+import ProductDatos from '../ProductDatos';
+import Mapa from '../../../Mapa'
 
 interface ContainerProps { }
 

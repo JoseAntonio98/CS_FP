@@ -1,6 +1,6 @@
 import { IonCol, IonLoading, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
-import ProductInfo from '../ProductsComponents/Product/ProductInfo'
-import { db } from '../../firebaseConfig'
+import ProductInfo from './Producto/ProductInfo'
+import { db } from '../../../firebaseConfig'
 import { useState, useEffect } from 'react';
 import { collection, getDoc, getDocs, onSnapshot, query, } from "firebase/firestore";
 

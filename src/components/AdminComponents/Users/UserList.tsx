@@ -8,7 +8,7 @@ import './UserList.css';
 interface ContainerProps { }
 
 const UserList: React.FC<ContainerProps> = () => {
-    //users list
+    //User list
     const [arrayUsuarios, SetArrayUsuarios] = useState([{}])
     const usuariosCollectionRef = collection(db, 'clientes')
     useEffect(()=>{
@@ -32,7 +32,10 @@ const UserList: React.FC<ContainerProps> = () => {
                         return (
                         <IonRow  key={index.toString()}>
                             <IonCol>
-                                <UserInfo docId={item.id} email={item.email}  nombre={item.nombre}/>
+                                <UserInfo docId={item.id} email={item.email}
+                                    nombre={item.nombre} password={item.password}
+                                    disponible={item.disponible}
+                                />
                             </IonCol>
                         </IonRow>
                         )

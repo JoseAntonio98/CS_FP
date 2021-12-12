@@ -31,7 +31,7 @@ const StoreList: React.FC<ContainerProps> = () => {
                         return (
                         <IonRow  key={index.toString()}>
                             <IonCol>
-                                <StoreInfo docId={item.id} email={item.email}  nombre={item.nombre} rubro={item.rubro} ruc={item.ruc} uid={item.uid}/>
+                                <StoreInfo disponible={ item.disponible } docId={item.id} email={item.email}  nombre={item.nombre} rubro={item.rubro} ruc={item.ruc} uid={item.uid}/>
                             </IonCol>
                         </IonRow>
                         )

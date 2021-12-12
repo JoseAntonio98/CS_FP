@@ -24,10 +24,11 @@ import './theme/variables.css';
 /* Imports de administracion */
 import Admin from './pages/Admin/Admin';
 import { isClienteSigned } from './servicios/firebaseCliente';
-import { isTiendaSigned } from './servicios/firebaseTienda';
 
 import UsuarioLogin from "./pages/Usuario/UsuarioLogin"
 import Pedido from './pages/Pedido/Pedido';
+import ProductosLista from './pages/Productos/ProductosLista';
+import AdminTienda from './pages/AdminTienda/AdminTienda';
 
 const App: React.FC = () => (
   <IonApp>
@@ -36,19 +37,20 @@ const App: React.FC = () => (
         <Route exact path="/admin">
             <Admin/>
         </Route>
-        <Route exact path="/home">
-          <UsuarioLogin />
+
+        <Route exact path="/">
+          <UsuarioLogin/>
         </Route>
-        <Route exact path="/cliente" render={() => {
-          return isClienteSigned() ? < UsuarioLogin/> : <UsuarioLogin />
-        }}>
-        </Route>
+
         <Route exact path="/pedido" render={ ()=> {
             return <Pedido/>}}>
             {/* return isClienteSigned() ? <Pedido/> : <UsuarioLogin/> }}> */}
         </Route>
-        <Route exact path="/">
-          <Redirect to="/home" />
+        <Route exact path="/adminTienda">
+          <AdminTienda/>
+        </Route>
+        <Route exact path="/info">
+          <ProductosLista />
         </Route>
 
       </IonRouterOutlet>

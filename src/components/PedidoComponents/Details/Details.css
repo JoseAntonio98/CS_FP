@@ -1,7 +1,3 @@
-.details {
-    padding: 1rem;
-}
-
 .center {
     text-align: center;
 }
@@ -10,14 +6,24 @@
     display: grid;
     grid-template-columns: repeat(3, 1fr);
     gap: 1rem;
-    margin-bottom: 3.5rem;
+    margin-bottom: 5rem;
     padding-top: 5rem;
+}
+
+.pick {
+    grid-template-columns: repeat(2, 1fr);
 }
 
 .inStore, .coming, .delivered {
     border-radius: .85rem;
     border: 1px dashed var(--ion-color-primary);
+    display: flex;
+    justify-content: center;
+    align-items: center;
     padding-top: 1rem;
     padding-bottom: 1rem;
-    text-align: center;
+}
+
+.inStore {
+    background-color: var(--ion-color-primary);
 }

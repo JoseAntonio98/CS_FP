@@ -39,8 +39,8 @@ export async function createTienda(nombre: string, ruc: string, email:string, pa
 
         user = userCredentials.user;
     }).catch((error)=>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
+        console.log(error.code);
+        console.log(error.message);
     });
 }
 export async function signInTienda(email:string, password:string)
@@ -50,7 +50,6 @@ export async function signInTienda(email:string, password:string)
         user = userCredentials.user;
         console.log('Ingreso correctamente');
         console.log(user);
-        signed = true;
         toast("Ingreso Exitoso")
     }).catch((error)=>{
         const errorCode = error.code;
@@ -66,7 +65,9 @@ export async function signInTienda(email:string, password:string)
 export function signOutTienda()
 {
     signOut(auth)
-    .then(()=>{signed = false})
+    .then(()=>{
+        console.log('Desloguin exitososo')
+    })
     .catch(()=>{});
 }
 export function getUser()

@@ -5,11 +5,11 @@ interface ContainerProps {
   coordY : number
 }
 
-const Mapa: React.FC<ContainerProps> = (ContainerProps) => {
+const Mapa: React.FC<ContainerProps> = (coordenadas) => {
   return (
     <div>
-      <p>{ContainerProps.coordX}</p>
-      <p>{ContainerProps.coordY}</p>
+      <p>{coordenadas.coordX}</p>
+      <p>{coordenadas.coordY}</p>
     </div>
     
   )

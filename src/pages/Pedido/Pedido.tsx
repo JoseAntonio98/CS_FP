@@ -18,7 +18,8 @@ const Pedido: React.FC = () =>
           [names, setNames] = useState<string>(""),
           [card, setCard] = useState<string>(""),
           [expire, setExpire] = useState<string>(""),
-          [securityCode, setSecurityCode] = useState<string>("");
+          [securityCode, setSecurityCode] = useState<string>(""),
+          [timeDelivery, setTimeDelivery] = useState(0);
 
     return (
         <IonPage>
@@ -49,7 +50,8 @@ const Pedido: React.FC = () =>
                             { currentTab == "address" 
                                 ? <Address 
                                     setPaymentDisabled={setPaymentDisabled} setCurrentTab={setCurrentTab}
-                                    setReference={setReference} reference={reference}></Address>
+                                    setReference={setReference} reference={reference}
+                                    setAddress={setAddress} address={address}></Address>
                                 : currentTab === "payment" 
                                     ?
                                     <Payment 
@@ -58,10 +60,11 @@ const Pedido: React.FC = () =>
                                         names={names} setNames={setNames}
                                         card={card} setCard={setCard}
                                         expire={expire} setExpire={setExpire}
-                                        securityCode={securityCode} setSecurityCode={setSecurityCode}    
+                                        securityCode={securityCode} setSecurityCode={setSecurityCode}
+                                        timeDelivery={timeDelivery} setTimeDelivery={setTimeDelivery}    
                                     ></Payment>
                                     :
-                                    <Details reference={reference} address={address} names={names} card={card} expire={expire} securityCode={securityCode}></Details>
+                                    <Details reference={reference} address={address} names={names} card={card} expire={expire} securityCode={securityCode} timeDelivery={timeDelivery}></Details>
                             }
                         </IonCol>
 

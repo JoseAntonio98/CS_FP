@@ -85,7 +85,7 @@ const Pedido: React.FC = () =>
                                                 <IonLabel> 
                                                     {product.nombre}
                                                 </IonLabel>
-                                                <IonLabel slot="end">S/. {product.precio}</IonLabel>
+                                                <IonLabel slot="end">S/. {product.precio}.00</IonLabel>
                                             </IonItem>
                                         );
                                     })
@@ -95,7 +95,7 @@ const Pedido: React.FC = () =>
                             <IonCard>
                                 <IonItem>
                                     <IonLabel slot="start"><b>Total</b></IonLabel>
-                                    <IonLabel slot="end">S/. {total}</IonLabel>
+                                    <IonLabel slot="end">S/. {total}.00</IonLabel>
                                 </IonItem>
                             </IonCard>
                         </IonCol>

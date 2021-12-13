@@ -1,5 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { collection, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
+import { db } from '../../../firebaseConfig';
 import { IonSelect, IonContent, IonSelectOption, IonCol, IonButton, IonGrid, IonRow, IonItem, IonLabel, IonInput } from '@ionic/react';
 import { createTienda } from '../../../servicios/firebaseTienda'
 import { toast } from '../../toast'
@@ -15,15 +17,26 @@ const Registro: React.FC<ContainerProps> = () => {
     const [password, setpassword] = useState('');
     const [cpassword, setcpassword] = useState('');
 
+    const [arrayRubros, setArrayRubros] = useState([{}])
+
     async function Registro () {
         if(password !== cpassword){
             toast('contraseñas diferentes')
         }
         else {
             await createTienda(nombre, ruc, email, password, rubro)
-        }
-        
+        } 
     }
+
+    const rubrosCollectionRef = collection(db, 'rubros')
+    useEffect(()=>{
+        async function obtenerRubros()
+        {
+            const data = await getDocs(rubrosCollectionRef);
+            setArrayRubros(data.docs.map((doc)=>({ ...doc.data(), id: doc.id })));
+        }
+        obtenerRubros()
+    },[])
 
     return (
         <IonContent scrollY={true} fullscreen>
@@ -78,8 +91,12 @@ const Registro: React.FC<ContainerProps> = () => {
                         <IonItem>
                             <IonLabel position="floating">Rubro</IonLabel>
                             <IonSelect interface="popover" onIonChange={(e:any) => setRubro(e.detail.value)}>
-                                <IonSelectOption value="Comida">Comida</IonSelectOption>
-                                <IonSelectOption value="Medicamentos">Medicamentos</IonSelectOption>
+                                {
+                                    arrayRubros?
+                                    arrayRubros.map((item:any, index:Number) => {
+                                        return <IonSelectOption value={item.rubro}>{item.rubro}</IonSelectOption>
+                                    }) : <>No hay nada</>
+                                }
                             </IonSelect>
                         </IonItem>
                     </IonCol>

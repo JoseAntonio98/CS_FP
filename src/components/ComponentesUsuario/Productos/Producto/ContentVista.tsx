@@ -20,7 +20,7 @@ const ContentProduct: React.FC<ContainerProps> = () => {
           </IonCol>
         </IonRow>
 
-        <Mapa coordX={-12} coordY={-15}/>
+        {/*<Mapa tipo='search' o_lat={coord[0]} o_lon={coord[1]} d_lat={0} d_lon={0} />*/}
 
       </IonCol >
 

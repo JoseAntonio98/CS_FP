@@ -7,6 +7,7 @@ import { query, collection, where, getDocs, setDoc, doc, GeoPoint } from "fireba
 import { auth, db } from '../firebaseConfig'
 import { toast } from "../components/toast"
 import { useState, useEffect } from 'react'
+import { coordenada } from '../interfaces/interfaces';
 
 export function createCliente(nombre: string, celular: string, email: string, password: string, coord: number[]) {
     createUserWithEmailAndPassword(auth, email, password)
@@ -101,17 +102,13 @@ export async function setDataCliente(uid: string, setUsuario: any) {
     await getDocs(q)
         .then((doc) => {
             const data = doc.docs[0].data()
-            setUsuario(
-                {
-                    uid: data.uid,
-                    disponible: data.disponible,
-                    nombre: data.nombre,
-                    correo: data.email,
-                    dir_lat: data.direccion._lat,
-                    dir_lon: data.direccion._long
-                }
+            setUsuario( 
+                data.uid,
+                data.nombre, 
+                data.email,
+                data.disponible,
+                data.direccion
             )
-            return true;
         })
         .catch((e) => {
             console.log(e.message)

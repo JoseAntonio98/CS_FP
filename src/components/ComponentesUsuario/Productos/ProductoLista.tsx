@@ -9,7 +9,9 @@ interface ContainerProps
 }
 
 const ProductoList: React.FC<ContainerProps> = (props) => {
+
     const [showModal, setShowModal] = useState(false);
+    const [showModal2, setShowModal2] = useState(false);
 
     const [productoNombre, setProductoNombre] = useState('')
     const [productoDesc, setProductoDesc] = useState('')
@@ -29,40 +31,72 @@ const ProductoList: React.FC<ContainerProps> = (props) => {
 
     return (
         <IonRow>
-            <IonFab vertical="bottom" horizontal="start">
-                <IonModal isOpen={showModal}>
-                    <IonRow>
-                        <IonCol>
-                            <IonItem className="ion-margin ion-text-center">
-                                <IonText>{productoNombre}</IonText>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol>
-                            <IonItem className="ion-margin">
-                                <IonText>{productoDesc}</IonText>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol>
-                            <IonItem className="ion-margin">
-                                <IonLabel position="floating">Cantidad</IonLabel>
-                                <IonInput type='number' onIonChange={(e:any)=>setCantidad(e.target.value)}/>
-                            </IonItem>
-                        </IonCol>
-                    </IonRow>
-                    <IonRow>
-                        <IonCol>
-                            <IonButton expand='block' fill="solid" onClick={() => setShowModal(false)}>Cancelar</IonButton>
-                        </IonCol>
-                        <IonCol>
-                            <IonButton expand='block' >Registrar</IonButton>
-                        </IonCol>
-                    </IonRow>
-                </IonModal>
-            </IonFab>
+            <IonModal isOpen={showModal}>
+                <IonRow>
+                    <IonCol>
+                        <IonItem className="ion-margin ion-text-center">
+                            <IonText>{productoNombre}</IonText>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonItem className="ion-margin">
+                            <IonText>{productoDesc}</IonText>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonItem className="ion-margin">
+                            <IonLabel position="floating">Cantidad</IonLabel>
+                            <IonInput type='number' onIonChange={(e:any)=>setCantidad(e.target.value)}/>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonButton expand='block' fill="solid" onClick={() => setShowModal(false)}>Cancelar</IonButton>
+                    </IonCol>
+                    <IonCol>
+                        <IonButton expand='block' >Registrar</IonButton>
+                    </IonCol>
+                </IonRow>
+            </IonModal>
+
+            <IonModal isOpen={showModal2}>
+                <IonRow>
+                    <IonCol>
+                        <IonItem className="ion-margin ion-text-center">
+                            <IonText>{productoNombre}</IonText>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonItem className="ion-margin">
+                            <IonText>{productoDesc}</IonText>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonItem className="ion-margin">
+                            <IonLabel position="floating">Cantidad</IonLabel>
+                            <IonInput type='number' onIonChange={(e:any)=>setCantidad(e.target.value)}/>
+                        </IonItem>
+                    </IonCol>
+                </IonRow>
+                <IonRow>
+                    <IonCol>
+                        <IonButton expand='block' fill="solid" onClick={() => setShowModal(false)}>Cancelar</IonButton>
+                    </IonCol>
+                    <IonCol>
+                        <IonButton expand='block' >Registrar</IonButton>
+                    </IonCol>
+                </IonRow>
+            </IonModal>
+
             <IonCol>
                 <IonContent scrollY={true} fullscreen>
                     <IonTitle>Tiendas Cercanas</IonTitle>

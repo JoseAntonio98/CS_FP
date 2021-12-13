@@ -1,4 +1,4 @@
-import { Redirect, Route } from 'react-router-dom';
+import { Route } from 'react-router-dom';
 import { IonApp, IonRouterOutlet } from '@ionic/react';
 import { IonReactRouter } from '@ionic/react-router';
 
@@ -22,9 +22,8 @@ import '@ionic/react/css/display.css';
 import './theme/variables.css';
 
 /* Imports de administracion */
+import { SesionProvider } from "./Contexto/Sesion/Provider"
 import Admin from './pages/Admin/Admin';
-//import { isClienteSigned } from './servicios/firebaseCliente';
-
 import UsuarioInicio from "./pages/Usuario/Inicio"
 import Pedido from './pages/Pedido/Pedido';
 import AdminTienda from './pages/AdminTienda/AdminTienda';
@@ -33,14 +32,14 @@ const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
       <IonRouterOutlet>
-      <Route exact path="/admin">
+        <Route exact path="/admin">
             <Admin/>
         </Route>
-
+        <SesionProvider>
         <Route exact path="/">
           <UsuarioInicio/>
         </Route>
-
+        </SesionProvider>
         <Route exact path="/pedido" render={ ()=> {
             return <Pedido/>}}>
             {/* return isClienteSigned() ? <Pedido/> : <UsuarioLogin/> }}> */}
@@ -48,7 +47,6 @@ const App: React.FC = () => (
         <Route exact path="/adminTienda">
           <AdminTienda/>
         </Route>
-
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

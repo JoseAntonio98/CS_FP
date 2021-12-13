@@ -1,11 +1,16 @@
-import React, { useContext } from 'react';
+import { IonApp, IonLoading, IonRouterOutlet , IonCol, IonList, IonItemOptions, IonItemOption, IonItemSliding, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
+import { collection, getDoc, getDocs, onSnapshot, query, where} from "firebase/firestore";
+import React, { useContext, useState, useEffect } from 'react';
+import { IonReactRouter } from '@ionic/react-router';
+import { Route, Link } from 'react-router-dom'
+import { db } from '../../../firebaseConfig'
 import Collapsible from "react-collapsible";
 import Sesion from "../../../Contexto/Sesion"
 import Carrito from "../../../Contexto/Carrito"
-import { IonCol, IonList, IonItemOptions, IonItemOption, IonItemSliding, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
 import ProductoList from './ProductoLista'
+import PedidoInfo from './Pedido/PedidoInfo';
+import Pedido from '../../../pages/Pedido/Pedido' //para el ṕago
 import './ContentProduct.css'
-import { Link } from 'react-router-dom';
 
 interface ContainerProps {
 
@@ -19,9 +24,51 @@ const ContentProduct = () => {
   //console.log('carrito', carrito.)
   //carrito.state.pedidos
 
+  const [busqueda, setBusqueda] = useState('')
+  const [arrayProductos, setArrayProductos] = useState([{}]);
+  const [loading, setLoading] = useState<boolean>(true);
+
+  const productosCollectionRef = collection(db, 'Producto')
+
+  async function obtenerProductos()
+  {
+      const data = await getDocs(productosCollectionRef);
+      setArrayProductos(data.docs.map((doc) => (
+          {...doc.data(), 
+              id: doc.id}
+      )))
+      setLoading(false)
+
+  }
+  /*
+  async function obtenerProductos_2()
+  {
+    const q = query(collection(db, "clientes"), where("nombre", "==", busqueda));
+    const querySnapshot = await getDocs(q);
+  }*/
+
+  useEffect(() => {
+      obtenerProductos()
+  }, [loading])
+
+  if (loading) {
+      return <IonLoading
+      isOpen={loading}
+      onDidDismiss={() => setLoading(false)}
+      message={'Obteniendo Tiendas Cercanas'}
+    />
+  }
+
   return (
 
     <IonRow>
+
+      <IonReactRouter>
+         <IonRouterOutlet>
+            <Route path="/pedido" component={Pedido} exact={true} />
+        </IonRouterOutlet>
+      </IonReactRouter>
+
       <IonCol sizeLg="3" sizeXs='12' className='ion-text-center'>
         <Collapsible transitionTime={100} trigger="Ordenar Por">
           <p><Link to="">A-Z</Link></p>
@@ -41,7 +88,7 @@ const ContentProduct = () => {
           <IonCol className='ion-text-center'>
             <IonItem className="">
               <IonLabel position="floating">Buscar Productos</IonLabel>
-              <IonInput></IonInput>
+              <IonInput onIonChange={(e:any) => setBusqueda(e.target.value)}></IonInput>
             </IonItem>
           </IonCol>
         </IonRow>
@@ -53,7 +100,7 @@ const ContentProduct = () => {
           </IonCol>
         </IonRow>
 
-        <ProductoList />
+        <ProductoList arrayProductos={arrayProductos}/>
 
       </IonCol >
 
@@ -62,51 +109,7 @@ const ContentProduct = () => {
         <IonRow>
           <IonCol>
             <h5>Mis Pedidos</h5>
-            <IonList>
-
-              <IonItemSliding>
-
-                <IonItem>
-                  <IonBadge slot="start">x3</IonBadge>
-                  <IonText>{sesion.correo}</IonText>
-                  <IonBadge slot="end">S/.75.00</IonBadge>
-                </IonItem>
-
-                <IonItemOptions side="end">
-                  <IonItemOption onClick={() => alert('seguro?')}>Borrar</IonItemOption>
-                </IonItemOptions>
-
-              </IonItemSliding>
-              
-            </IonList>
-
-            <IonItemSliding>
-
-                <IonItem>
-                  <IonBadge slot="start">x3</IonBadge>
-                  <IonText>Segundo Elemento</IonText>
-                  <IonBadge slot="end">S/.75.00</IonBadge>
-                </IonItem>
-
-                <IonItemOptions side="end">
-                  <IonItemOption onClick={() => alert('seguro?')}>Borrar</IonItemOption>
-                </IonItemOptions>
-
-              </IonItemSliding>
-
-              <IonItemSliding>
-
-                <IonItem>
-                  
-                  <IonText slot="start" ><b>Total</b></IonText>
-                  <IonText slot="end">S/.75.00</IonText>
-                </IonItem>
-
-              </IonItemSliding>
-
-              <IonButton expand="block" fill="solid" >
-                Hacer Pedido
-              </IonButton>
+            <PedidoInfo />
 
           </IonCol>
         </IonRow>

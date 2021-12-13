@@ -4,6 +4,7 @@ import './ProductInfo.css'
 interface ContainerProps
 {
     productoNombre : string
+    productoDesc : string
     docId : string
     productoSede : string
     image : string
@@ -19,7 +20,7 @@ const ProductInfo : React.FC<ContainerProps> = (props) => {
                     <strong>{props.productoNombre}</strong>
                 </div>
                 <div>
-                    <IonLabel>{props.docId}</IonLabel>
+                    <IonLabel>{props.productoDesc}</IonLabel>
                 </div>
                 <div>
                     <IonLabel>Nombre Sede</IonLabel>

@@ -1,5 +1,5 @@
 import { IonCol, IonLoading, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
-import ProductInfo from '../ComponentesUsuario/Productos/Producto/ProductInfo'
+import SedeInfo from '../ProductsComponents/Product/SedeEdit'
 import { db } from '../../firebaseConfig'
 import { useState, useEffect } from 'react';
 import { collection, getDoc, getDocs, onSnapshot, query, } from "firebase/firestore";
@@ -10,23 +10,23 @@ interface ContainerProps
 
 const SedeList: React.FC<ContainerProps> = () => {
 
-    const [arrayProductos, setArrayProductos] = useState([{}]);
+    const [arraySedes, setArraySedes] = useState([{}]);
     const [loading, setLoading] = useState<boolean>(true);
 
 
-    const productosCollectionRef = collection(db, 'Producto')
+    const sedesCollectionRef = collection(db, 'Sede')
     useEffect(() => {
-        async function obtenerProductos()
+        async function obtenerSedes()
         {
-            const data = await getDocs(productosCollectionRef);
-            setArrayProductos(data.docs.map((doc) => (
+            const data = await getDocs(sedesCollectionRef);
+            setArraySedes(data.docs.map((doc) => (
                 {...doc.data(), 
                     id: doc.id}
             )))
             setLoading(false)
 
         }
-        obtenerProductos()
+        obtenerSedes()
     }, [loading])
 
     if (loading) {
@@ -44,12 +44,12 @@ const SedeList: React.FC<ContainerProps> = () => {
                     <IonTitle>Sedes</IonTitle>
                     <IonGrid>
                         {
-                            arrayProductos.length > 0 ?
-                            arrayProductos.map((item:any, index:Number) => {
+                            arraySedes.length > 0 ?
+                            arraySedes.map((item:any, index:Number) => {
                                 return (
                                     <IonRow key={index.toString()}>
                                         <IonCol>
-                                            <ProductInfo  productoNombre={item.nombre} docId={item.id} productoSede='' image=""/>
+                                            <SedeInfo  sedeNombre={item.nombre}   image=""/>
                                         </IonCol>
                                     </IonRow>
                                 )

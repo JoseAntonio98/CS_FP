@@ -2,14 +2,11 @@ import React, { useContext, useState } from "react";
 import LocalizacionBoton from '../../LocalizacionBoton'
 import Mapa from '../../Mapa'
 import { Link } from 'react-router-dom';
-import {IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput, IonText } from '@ionic/react';
+import { IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput, IonText } from '@ionic/react';
 import { createCliente} from '../../../servicios/firebaseCliente';
 import { toast } from '../../toast';
-// import Sesion from "../../../Contexto/Sesion";
 
-interface ContainerProps {  }
-
-const Registro: React.FC<ContainerProps> = () => {
+const Registro: React.FC = () => {
 
     const [nombre, setNombre] = useState('')
     const [celular, setCelular] = useState('')
@@ -85,7 +82,7 @@ const Registro: React.FC<ContainerProps> = () => {
                             {
                                 coord[0] != 0?
                                 <IonRow>
-                                    <Mapa coordX={coord[0]} coordY={coord[1]} />
+                                    <Mapa tipo='search' o_lat={coord[0]} o_lon={coord[1]} d_lat={0} d_lon={0} />
                                 </IonRow>
                                 : null
                             }

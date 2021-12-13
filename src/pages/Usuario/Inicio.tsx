@@ -17,7 +17,8 @@ const UsuarioLogin: React.FC = () =>
         disponible : '',
         nombre : '',
         correo : '',
-        dir : ''   
+        dir_lat : Number,
+        dir_lon : Number  
     })
 
     const [pedidos, SetPedidos] = useState({})

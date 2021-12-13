@@ -5,6 +5,7 @@ const Sesion = React.createContext({
     disponible : '',
     nombre : '',
     correo : '',
-    dir : ''
+    dir_lat : Number,
+    dir_lon : Number
 })
 export default Sesion

@@ -1,33 +1,25 @@
-import { useHistory } from "react-router";
-import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
-import Login from '../../components/ComponentesUsuario/Identificación/ContentUser'
-import Productos from '../../components/ComponentesUsuario/Productos/ContentProduct'
-import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
 import { Link } from "react-router-dom";
 import { toast } from "../../components/toast";
-import Sesion from "../../Contexto/Sesion"
-import Carrito, { CarritoProvider } from "../../Contexto/Carrito"
-import { useState, useEffect } from "react";
+import { useHistory } from "react-router";
+import { useState, useEffect, useContext } from "react";
+import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
+import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 
-const UsuarioLogin: React.FC = () => 
-{
+import { SesionProvider } from "../../Contexto/Sesion/Provider"
+import { CarritoProvider } from "../../Contexto/Carrito/Provider"
 
-    const [usuario, setUsuario] = useState({
-        uid : '',
-        disponible : '',
-        nombre : '',
-        correo : '',
-        dir_lat : Number,
-        dir_lon : Number  
-    })
+import Login from '../../components/ComponentesUsuario/Identificación/ContentUser'
+import Productos from '../../components/ComponentesUsuario/Productos/ContentProduct'
+import { SesionContext } from "../../Contexto/Sesion/Context";
 
-    const [pedidos, SetPedidos] = useState({})
-
+const UsuarioLogin: React.FC = () => {
     const history = useHistory()
     const currentCliente = useCliente()
 
-    function signOutCliente()
-    {
+    const { sesion, setData } = useContext(SesionContext)
+    console.log('a', sesion)
+
+    function signOutCliente() {
         logOutCliente()
             .then(() => {
                 toast('Se ha cerrado sesión')
@@ -40,8 +32,8 @@ const UsuarioLogin: React.FC = () =>
 
     useEffect ( function() {
         if (currentCliente) {
-            setDataCliente(currentCliente.uid, setUsuario)   
-            //console.log('bucle?')
+            setDataCliente(currentCliente.uid, setData)   
+            console.log('b', currentCliente.uid)
         }
     }, [currentCliente]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
 
@@ -53,26 +45,26 @@ const UsuarioLogin: React.FC = () =>
                         <Link to="/" >Aplicación</Link>
                     </IonTitle>
                     {
-                        currentCliente?
-                        <IonButton slot='end' shape="round" color="success" onClick={signOutCliente}>
-                            { currentCliente.email }
-                        </IonButton>
-                        
-                        : null
+                        currentCliente ?
+                            <IonButton slot='end' shape="round" color="success" onClick={signOutCliente}>
+                                {sesion.nombre}<b>_Salir</b>
+                            </IonButton>
+
+                            : null
                     }
                 </IonToolbar>
             </IonHeader>
             <IonContent>
-                {   
-                    currentCliente?
-                    <>
-                        <Sesion.Provider value={usuario}>
-                            <CarritoProvider>
-                                <Productos />
-                            </CarritoProvider>
-                        </Sesion.Provider>
-                    </>
-                    : <Login/>
+                {
+                    currentCliente ?
+                        <>
+                            <SesionProvider>
+                                <CarritoProvider>
+                                    <Productos />
+                                </CarritoProvider>
+                            </SesionProvider>
+                        </>
+                        : <Login />
                 }
             </IonContent>
         </IonPage >

@@ -57,22 +57,6 @@ export async function signInTienda(email:string, password:string)
                 toast('No se existe una cuenta con estas credenciales')
             }
         })
-
-    /*signInWithEmailAndPassword(auth, email, password)
-    .then((userCredentials)=>{
-        user = userCredentials.user;
-        console.log('Ingreso correctamente');
-        console.log(user);
-        toast("Ingreso Exitoso")
-    }).catch((error)=>{
-        const errorCode = error.code;
-        const errorMessage = error.message;
-
-        console.log('Error de autenticacion de cliente');
-        console.log(errorCode);
-        console.log(errorMessage);
-        toast('Error de autenticacion de cliente')
-    });*/
 }
 
 export function logOutCliente()

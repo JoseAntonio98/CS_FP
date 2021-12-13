@@ -56,32 +56,6 @@ export async function signInCliente(email: string, password: string) {
                 toast('No se existe una cuenta con estas credenciales')
             }
         })
-
-    /*setPersistence(auth, browserSessionPersistence)
-    .then(async () => {
-        return signInWithEmailAndPassword(auth, email, password)
-        .then((userCredentials)=>{
-            const user = userCredentials.user;
-            console.log('Ingreso correctamente');
-            console.log('auth', auth)
-            console.log('user', user)
-            signed = true;
-            toast("Ingreso Exitoso");
-            
-        }).catch((error)=>{
-            const errorCode = error.code;
-            const errorMessage = error.message;
-    
-            console.log('Error de autenticacion de cliente');
-            console.log(errorCode);
-            console.log(errorMessage);
-            toast('Error de autenticacion de cliente')
-        });
-    })
-    .catch((error) => {
-        console.log(error.message)
-        console.log(error.message)        
-    })*/
 }
 
 export function logOutCliente() {
@@ -132,7 +106,8 @@ export async function setDataCliente(uid: string, setUsuario: any) {
                     disponible: data.disponible,
                     nombre: data.nombre,
                     correo: data.email,
-                    dir: data.direccion,
+                    dir_lat: data.direccion._lat,
+                    dir_lon: data.direccion._long
                 }
             )
             return true;

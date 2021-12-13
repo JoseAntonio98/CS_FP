@@ -1,9 +1,10 @@
-import React, {useState} from "react";
+import React, {useContext, useState} from "react";
 import { useHistory } from "react-router-dom";
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
 import { addPedido, useCliente } from "../../../servicios/firebaseCliente";
+import { CarritoContext } from "../../../Contexto/Carrito/Context";
 
 const Details: React.FC<{reference: string, coord: any, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, coord, names, card, expire, securityCode, timeDelivery}) => {
     
@@ -12,6 +13,10 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
     const [deliveryMode, setDeliveryMode] = useState("delivery");
 
     const currentClient = useCliente();
+
+    const { carrito } = useContext(CarritoContext);
+    const total = carrito.total;
+    const pedidos = carrito.pedidos;
 
     return (
         <div>
@@ -59,7 +64,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
             <IonButton onClick={ () => {
                     setDeliveryMode("pick");
                     setShowModal(true);
-                    addPedido(currentClient?.uid as string, reference, coord, names, card, expire, securityCode, timeDelivery, "recojo personal");
+                    addPedido(currentClient?.uid as string, reference, coord, names, card, expire, securityCode, timeDelivery, "recojo personal", pedidos, total);
                 }} 
                 fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
@@ -102,7 +107,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
                             
                             <IonButton onClick={() => {
                                 setShowModal(false);
-                                history.replace("/info");
+                                history.replace("/");
                             }} 
                                 expand="full" className="ion-margin">Entendido</IonButton>
                         </div>
@@ -114,7 +119,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
             <IonButton onClick={() => {
                 setDeliveryMode("delivery");
                 setShowModal(true);
-                addPedido(currentClient?.uid as string, reference, coord, names, card, expire, securityCode, timeDelivery, "entrega");
+                addPedido(currentClient?.uid as string, reference, coord, names, card, expire, securityCode, timeDelivery, "entrega", pedidos, total);
             }}
                 expand="block" className="mt-3">
                 Finalizar Pedido

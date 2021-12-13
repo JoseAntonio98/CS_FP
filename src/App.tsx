@@ -27,6 +27,7 @@ import Admin from './pages/Admin/Admin';
 import UsuarioInicio from "./pages/Usuario/Inicio"
 import Pedido from './pages/Pedido/Pedido';
 import AdminTienda from './pages/AdminTienda/AdminTienda';
+import { CarritoProvider } from './Contexto/Carrito/Provider';
 
 const App: React.FC = () => (
   <IonApp>
@@ -36,14 +37,18 @@ const App: React.FC = () => (
             <Admin/>
         </Route>
         <SesionProvider>
-        <Route exact path="/">
-          <UsuarioInicio/>
-        </Route>
+          <CarritoProvider>
+            <Route exact path="/">
+              <UsuarioInicio/>
+            </Route>
+            <Route exact path="/pedido">
+              <Pedido/>
+            </Route>
+          </CarritoProvider>
         </SesionProvider>
-        <Route exact path="/pedido" render={ ()=> {
+        {/* <Route exact path="/pedido" render={ ()=> {
             return <Pedido/>}}>
-            {/* return isClienteSigned() ? <Pedido/> : <UsuarioLogin/> }}> */}
-        </Route>
+        </Route> */}
         <Route exact path="/adminTienda">
           <AdminTienda/>
         </Route>

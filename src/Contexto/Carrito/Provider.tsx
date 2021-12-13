@@ -7,13 +7,13 @@ const INITIAL_STATE : carrito = {
     usuarioid : '00',
     pedidos: [
         {
-            productid : '00',
-            cantidad : 23,
+            productid : '001',
+            cantidad : 1,
             nombre : 'Gaseosa',
-            precio : 0
+            precio : 2.5
         }
     ],
-    total : 0
+    total : 2.5
 }
 
 export const CarritoProvider = ( {children} : ProviderProps) => {

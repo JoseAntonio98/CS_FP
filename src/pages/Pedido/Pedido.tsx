@@ -1,12 +1,17 @@
-import React, { useState } from "react";
+import React, { useContext, useState } from "react";
 import { IonBadge, IonCard, IonCol,IonContent, IonGrid, IonHeader, IonItem, IonLabel, IonPage, IonRow, IonSegment, IonSegmentButton, IonText, IonTitle, IonToolbar } from "@ionic/react"
 import './Pedido.css'
 import Address from "../../components/PedidoComponents/Address/Address";
 import Details from "../../components/PedidoComponents/Details/Details";
 import Payment from "../../components/PedidoComponents/Payment/Payment";
+import { CarritoContext } from "../../Contexto/Carrito/Context";
 
 const Pedido: React.FC = () =>
 {
+    const { carrito } = useContext(CarritoContext);
+    const total = carrito.total;
+    const pedidos = carrito.pedidos;
+
     const [currentTab, setCurrentTab] = useState<string>("address"),
           [paymentMode, setPaymentMode] = useState<string>("cash");
 
@@ -72,26 +77,25 @@ const Pedido: React.FC = () =>
                             <IonTitle className="px-2 py-2">Mis Pedidos</IonTitle>
 
                             <IonCard>
-                                <IonItem>
-                                    <IonBadge slot="start">x3</IonBadge>
-                                    <IonLabel> 
-                                        Producto 1
-                                    </IonLabel>
-                                    <IonLabel slot="end">S/. 75.00</IonLabel>
-                                </IonItem>
-                                <IonItem>
-                                    <IonBadge slot="start">x1</IonBadge>
-                                    <IonLabel> 
-                                        Producto 2
-                                    </IonLabel>
-                                    <IonLabel slot="end">S/. 30.00</IonLabel>
-                                </IonItem>
+                                {
+                                    pedidos.map( product => {
+                                        return (
+                                            <IonItem key={product.productid}>
+                                                <IonBadge slot="start">x{product.cantidad}</IonBadge>
+                                                <IonLabel> 
+                                                    {product.nombre}
+                                                </IonLabel>
+                                                <IonLabel slot="end">S/. {product.precio}</IonLabel>
+                                            </IonItem>
+                                        );
+                                    })
+                                }
                             </IonCard>
 
                             <IonCard>
                                 <IonItem>
                                     <IonLabel slot="start"><b>Total</b></IonLabel>
-                                    <IonLabel slot="end">S/. 105.00</IonLabel>
+                                    <IonLabel slot="end">S/. {total}</IonLabel>
                                 </IonItem>
                             </IonCard>
                         </IonCol>

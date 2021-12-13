@@ -1,16 +1,12 @@
 import React, { useState } from "react";
 
-export const Carrito = React.createContext({});
+export const Carrito = React.createContext([]);
 
 export const CarritoProvider = ({children}:any) => {
-    const [pedidos, setPedidos] = React.useState('initial');
+    const [pedidos, setPedidos] = useState([]);
 
-    let state = {
-        pedios:pedidos,
-        setPedidos:setPedidos
-    };
-
-    return <Carrito.Provider value={state}>
+    //return <Carrito.Provider value={{ pedidos, setPedidos }}>
+    return <Carrito.Provider value={pedidos} >
         {children}
     </Carrito.Provider>
 };

@@ -10,6 +10,7 @@ interface ContainerProps
 }
 
 const ProductEdit : React.FC<ContainerProps> = (props) => {
+    const [present] = useIonAlert();
     return (
     <div className="ProductoInfo">
         <IonGrid>
@@ -28,8 +29,21 @@ const ProductEdit : React.FC<ContainerProps> = (props) => {
             <IonCol size="3">
                 <IonImg src={`{props.image}`} />
             </IonCol>
-            <IonCol size="1">
-            <IonButton>Eliminar</IonButton>
+            <IonCol size="2">
+            <IonButton
+          expand="block"
+          onClick={() =>
+            present({
+              cssClass: 'my-css',
+              header: 'Alerta',
+              message: '¿Desea eliminar?',
+              buttons: ['Cancel', { text: 'Ok', handler: (d) => console.log('ok pressed') }],
+              onDidDismiss: (e) => console.log('did dismiss'),
+            })
+          }
+        >
+          Eliminar
+        </IonButton>
             <IonButton>Editar</IonButton>
             </IonCol>
             
@@ -41,3 +55,4 @@ const ProductEdit : React.FC<ContainerProps> = (props) => {
 }
 
 export default ProductEdit
+

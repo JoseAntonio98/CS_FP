@@ -19,7 +19,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
             {
                 coord[0] != 0?
                 <IonRow className="map">
-                    <Mapa coordX={coord[0]} coordY={coord[1]} />
+                    <Mapa tipo='search' o_lat={coord[0]} o_lon={coord[1]} d_lat={0} d_lon={0}/>
                 </IonRow>
                 : null
             }

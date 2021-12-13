@@ -3,13 +3,15 @@ import { useHistory } from "react-router-dom";
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
-import { addPedido } from "../../../servicios/firebaseCliente";
+import { addPedido, useCliente } from "../../../servicios/firebaseCliente";
 
 const Details: React.FC<{reference: string, coord: any, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, coord, names, card, expire, securityCode, timeDelivery}) => {
     
     const history = useHistory();
     const [showModal, setShowModal] = useState(false);
     const [deliveryMode, setDeliveryMode] = useState("delivery");
+
+    const currentClient = useCliente();
 
     return (
         <div>
@@ -57,7 +59,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
             <IonButton onClick={ () => {
                     setDeliveryMode("pick");
                     setShowModal(true);
-                    addPedido(reference, coord, names, card, expire, securityCode, timeDelivery, "recojo personal");
+                    addPedido(currentClient?.uid as string, reference, coord, names, card, expire, securityCode, timeDelivery, "recojo personal");
                 }} 
                 fill="clear" className="mt-4">
                 <IonIcon slot="end" icon={storefrontOutline}/>
@@ -112,7 +114,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
             <IonButton onClick={() => {
                 setDeliveryMode("delivery");
                 setShowModal(true);
-                addPedido(reference, coord, names, card, expire, securityCode, timeDelivery, "entrega");
+                addPedido(currentClient?.uid as string, reference, coord, names, card, expire, securityCode, timeDelivery, "entrega");
             }}
                 expand="block" className="mt-3">
                 Finalizar Pedido

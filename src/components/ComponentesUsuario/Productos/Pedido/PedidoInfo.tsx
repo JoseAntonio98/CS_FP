@@ -1,60 +1,68 @@
-import { useContext } from "react";
-import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonBadge, IonText, IonRow, IonCol, IonLabel, IonButton } from "@ionic/react";
-import Sesion from "../../../../Contexto/Sesion"
-import Carrito from "../../../../Contexto/Carrito";
-
-interface ContainerProps {
-
-}
+import { useState, useContext } from "react";
+import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonBadge, IonText, IonRow, IonCol, IonLabel, IonButton, IonIcon } from "@ionic/react";
+import { SesionContext } from "../../../../Contexto/Sesion/Context"
+import { CarritoContext } from "../../../../Contexto/Carrito/Context";
+import { searchCircle } from 'ionicons/icons'
 
 const PedidoInfo: React.FC = () => {
 
-    const sesion = useContext(Sesion)
-    const carrito = useContext(Carrito)
+    const { sesion } = useContext(SesionContext)
+    const { carrito, deletePedido } = useContext(CarritoContext)
+    const { pedidos } = carrito
+
+    //const [id, setId] = useState('')
+    //const [prc, setPrc] = useState(0)
+
+    function borrarProducto(id:string, prc:number) {
+        deletePedido(id, prc)
+    }
 
     return (
         <IonList>
+            {
+                pedidos.length > 0?
+                pedidos.map((pedido) => {
+                    return ( <>
+                    <IonItemSliding key={pedido.productid}>
 
-            <IonItemSliding>
+                        <IonItem>
+                            <IonBadge slot="start">X {pedido.cantidad}</IonBadge>
+                            <IonText>{pedido.nombre}</IonText>
+                            <IonBadge slot="end">S/.{pedido.precio}.00</IonBadge>
+                        </IonItem>
 
-                <IonItem>
-                    <IonBadge slot="start">x3</IonBadge>
-                    <IonText>{sesion.dir_lon}</IonText>
-                    <IonBadge slot="end">S/.75.00</IonBadge>
-                </IonItem>
+                        <IonItemOptions side="end">
+                            <IonItemOption onClick={() => borrarProducto(pedido.productid, pedido.precio)}>Borrar</IonItemOption>
+                        </IonItemOptions>
 
-                <IonItemOptions side="end">
-                    <IonItemOption onClick={() => alert('seguro?')}>Borrar</IonItemOption>
-                </IonItemOptions>
+                    </IonItemSliding>
+                    
+                </>)
+                }):
+                    <IonItemSliding>
 
-            </IonItemSliding>
+                        <IonItem>
+                            <IonIcon size="large" slot="end" icon={searchCircle}></IonIcon>
+                            <IonText>Tu carrito esta vacío</IonText>
+                        </IonItem>
 
-            <IonItemSliding>
+                    </IonItemSliding>
+            }
 
-                <IonItem>
-                    <IonBadge slot="start">x3</IonBadge>
-                    <IonText>Segundo Elemento</IonText>
-                    <IonBadge slot="end">S/.75.00</IonBadge>
-                </IonItem>
-
-                <IonItemOptions side="end">
-                    <IonItemOption onClick={() => alert('seguro?')}>Borrar</IonItemOption>
-                </IonItemOptions>
-
-            </IonItemSliding>
 
             <IonItemSliding>
 
                 <IonItem>
                     <IonText slot="start" ><b>Total</b></IonText>
-                    <IonText slot="end">S/.75.00</IonText>
+                    <IonText slot="end">S/.{carrito.total}.00</IonText>
                 </IonItem>
 
             </IonItemSliding>
 
-            <IonButton href='/pedido' expand="block" fill="solid" >
+            <IonButton disabled={pedidos.length>0?false:true} expand="block" fill="solid" >
                 Hacer Pedido
             </IonButton>
+
 
         </IonList>
     )

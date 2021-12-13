@@ -1,54 +1,40 @@
-import { IonApp, IonLoading, IonRouterOutlet , IonCol, IonList, IonItemOptions, IonItemOption, IonItemSliding, IonButton, IonRow, IonInput, IonLabel, IonItem, IonCard, IonText, IonBadge } from '@ionic/react';
-import { collection, getDoc, getDocs, onSnapshot, query, where} from "firebase/firestore";
+import { IonLoading, IonRouterOutlet , IonCol,  IonButton, IonRow, IonInput, IonLabel, IonItem } from '@ionic/react';
 import React, { useContext, useState, useEffect } from 'react';
+import { collection, getDocs} from "firebase/firestore";
 import { IonReactRouter } from '@ionic/react-router';
 import { Route, Link } from 'react-router-dom'
 import { db } from '../../../firebaseConfig'
-import Collapsible from "react-collapsible";
-import Sesion from "../../../Contexto/Sesion"
-import Carrito from "../../../Contexto/Carrito"
-import ProductoList from './ProductoLista'
+import { SesionContext } from "../../../Contexto/Sesion/Context"
+import { CarritoContext } from "../../../Contexto/Carrito/Context"
+import ListaProductos from './ListaProductos'
 import PedidoInfo from './Pedido/PedidoInfo';
 import Pedido from '../../../pages/Pedido/Pedido' //para el ṕago
+import Collapsible from "react-collapsible";
 import './ContentProduct.css'
 
-interface ContainerProps {
+interface ContainerProps {}
 
-}
+const ContentProduct:React.FC<ContainerProps> = () => {
 
-const ContentProduct = () => {
+  const { sesion } = useContext(SesionContext)
+  const { carrito } = useContext(CarritoContext)
 
-  const sesion = useContext(Sesion)
-  const carrito = useContext(Carrito)
-
-  //console.log('carrito', carrito.)
-  //carrito.state.pedidos
-
-  const [busqueda, setBusqueda] = useState('')
+  const [busqueda, setBusqueda] = useState('a')
   const [arrayProductos, setArrayProductos] = useState([{}]);
   const [loading, setLoading] = useState<boolean>(true);
 
   const productosCollectionRef = collection(db, 'Producto')
-
-  async function obtenerProductos()
-  {
+  useEffect(() => {
+    async function obtenerProductos()
+    {
       const data = await getDocs(productosCollectionRef);
       setArrayProductos(data.docs.map((doc) => (
-          {...doc.data(), 
-              id: doc.id}
-      )))
+        {...doc.data(), 
+          id: doc.id}
+          )))
       setLoading(false)
-
-  }
-  /*
-  async function obtenerProductos_2()
-  {
-    const q = query(collection(db, "clientes"), where("nombre", "==", busqueda));
-    const querySnapshot = await getDocs(q);
-  }*/
-
-  useEffect(() => {
-      obtenerProductos()
+    } 
+    obtenerProductos()
   }, [loading])
 
   if (loading) {
@@ -62,12 +48,6 @@ const ContentProduct = () => {
   return (
 
     <IonRow>
-
-      <IonReactRouter>
-         <IonRouterOutlet>
-            <Route path="/pedido" component={Pedido} exact={true} />
-        </IonRouterOutlet>
-      </IonReactRouter>
 
       <IonCol sizeLg="3" sizeXs='12' className='ion-text-center'>
         <Collapsible transitionTime={100} trigger="Ordenar Por">
@@ -100,7 +80,7 @@ const ContentProduct = () => {
           </IonCol>
         </IonRow>
 
-        <ProductoList arrayProductos={arrayProductos}/>
+        <ListaProductos arrayProductos={arrayProductos}/>
 
       </IonCol >
 

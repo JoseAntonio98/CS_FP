@@ -27,7 +27,6 @@ import Admin from './pages/Admin/Admin';
 
 import UsuarioInicio from "./pages/Usuario/Inicio"
 import Pedido from './pages/Pedido/Pedido';
-import ProductosLista from './pages/Productos/ProductosLista';
 import AdminTienda from './pages/AdminTienda/AdminTienda';
 
 const App: React.FC = () => (
@@ -48,9 +47,6 @@ const App: React.FC = () => (
         </Route>
         <Route exact path="/adminTienda">
           <AdminTienda/>
-        </Route>
-        <Route exact path="/info">
-          <ProductosLista />
         </Route>
 
       </IonRouterOutlet>

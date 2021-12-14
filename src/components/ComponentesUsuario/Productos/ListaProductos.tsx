@@ -90,14 +90,14 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                     <IonCol>
                         <IonItem className="ion-margin">
                             <IonLabel position="floating">Cantidad</IonLabel>
-                            <IonInput type='number' onIonChange={(e:any)=>setCtd(e.target.value)}/>
+                            <IonInput type='number' min='1' onIonChange={(e:any)=>setCtd(e.target.value)}/>
                         </IonItem>
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>
                         <IonItem className="ion-margin">
-                            <IonText>{prc}</IonText>
+                            <IonText>S/.{prc}</IonText>
                         </IonItem>
                     </IonCol>
                 </IonRow>

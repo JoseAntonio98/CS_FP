@@ -4,7 +4,6 @@ import { CarritoReducer } from './Reducer'
 import { ProviderProps, carrito } from '../../interfaces/interfaces'
 
 const INITIAL_STATE : carrito = {
-    usuarioid : '00',
     pedidos: [
         {
             productid : '001',
@@ -13,14 +12,12 @@ const INITIAL_STATE : carrito = {
             precio : 5
         }
     ],
-    total : 5
+    total : 0
 }
 
 export const CarritoProvider = ( {children} : ProviderProps) => {
     
     const [ carrito, dispatch] = useReducer( CarritoReducer, INITIAL_STATE);
-
-    //Aqui se crean las 
     
     const addPedido = ( productid : string, nombre : string, cantidad : number, precio : number) =>
     {
@@ -33,9 +30,13 @@ export const CarritoProvider = ( {children} : ProviderProps) => {
         })
     }
 
-    const deletePedido = ( productid : string, precio : number ) =>
+    const deletePedido = ( id : string, precio : number ) =>
     {
-        dispatch({ type:'deletePedido', payload: {productid, precio}})
+        dispatch({ type:'deletePedido', payload: {
+            id,
+            precio
+            }
+        })
     }
 
     return <CarritoContext.Provider value={{

@@ -1,17 +1,17 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonBadge, IonText, IonRow, IonCol, IonLabel, IonButton, IonIcon } from "@ionic/react";
-import { SesionContext } from "../../../../Contexto/Sesion/Context"
+//import { SesionContext } from "../../../../Contexto/Sesion/Context"
 import { CarritoContext } from "../../../../Contexto/Carrito/Context";
 import { searchCircle } from 'ionicons/icons'
 
 const PedidoInfo: React.FC = () => {
 
-    const { sesion } = useContext(SesionContext)
     const { carrito, deletePedido } = useContext(CarritoContext)
     const { pedidos } = carrito
 
-    //const [id, setId] = useState('')
-    //const [prc, setPrc] = useState(0)
+    useEffect(() => {
+        deletePedido('001', 0)
+    }, [])
 
     function borrarProducto(id:string, prc:number) {
         deletePedido(id, prc)
@@ -59,7 +59,7 @@ const PedidoInfo: React.FC = () => {
 
             </IonItemSliding>
 
-            <IonButton disabled={pedidos.length>0?false:true} expand="block" fill="solid" >
+            <IonButton href='/pedido' disabled={pedidos.length>0?false:true} expand="block" fill="solid" >
                 Hacer Pedido
             </IonButton>
 

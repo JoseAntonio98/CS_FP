@@ -5,9 +5,6 @@ import { useState, useEffect, useContext } from "react";
 import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 
-import { SesionProvider } from "../../Contexto/Sesion/Provider"
-import { CarritoProvider } from "../../Contexto/Carrito/Provider"
-
 import Login from '../../components/ComponentesUsuario/Identificación/ContentUser'
 import Productos from '../../components/ComponentesUsuario/Productos/ContentProduct'
 import { SesionContext } from "../../Contexto/Sesion/Context";
@@ -17,7 +14,6 @@ const UsuarioLogin: React.FC = () => {
     const currentCliente = useCliente()
 
     const { sesion, setData } = useContext(SesionContext)
-    console.log('a', sesion)
 
     function signOutCliente() {
         logOutCliente()
@@ -33,7 +29,6 @@ const UsuarioLogin: React.FC = () => {
     useEffect ( function() {
         if (currentCliente) {
             setDataCliente(currentCliente.uid, setData)   
-            console.log('b', currentCliente.uid)
         }
     }, [currentCliente]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
 
@@ -57,14 +52,10 @@ const UsuarioLogin: React.FC = () => {
             <IonContent>
                 {
                     currentCliente ?
-                        <>
-                            <SesionProvider>
-                                <CarritoProvider>
-                                    <Productos />
-                                </CarritoProvider>
-                            </SesionProvider>
-                        </>
-                        : <Login />
+                    <>
+                    <Productos />
+                    </>
+                    : <Login />
                 }
             </IonContent>
         </IonPage >

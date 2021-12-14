@@ -20,7 +20,6 @@ export interface coordenada
 
 export interface carrito
 {
-    usuarioid : string;
     pedidos : pedido[];
     total : number;
 }

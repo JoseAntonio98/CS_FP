@@ -1,8 +1,9 @@
-import { IonCol, IonLoading, IonText, IonModal, IonButton, IonItem, IonInput, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
+import { IonAlert, IonCol, IonLoading, IonText, IonModal, IonButton, IonItem, IonInput, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
 import ProductInfo from './Producto/ProductInfo'
-import { useState, useEffect, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import { CarritoContext } from '../../../Contexto/Carrito/Context'
+import { SesionContext } from '../../../Contexto/Sesion/Context'
 import { setuid } from 'process';
 
 interface ContainerProps
@@ -13,16 +14,18 @@ interface ContainerProps
 const ListaProducto: React.FC<ContainerProps> = (props) => {
 
     const [loading, setLoading] = useState<boolean>(false)
+    const [alert, setAlert] = useState<boolean>(false)
+    const [mAdd, setMAdd] = useState<boolean>(false);
+    const [mMap, setMMap] = useState<boolean>(false);
+
     const [id, setId] = useState('')
-    const [mAdd, setMAdd] = useState(false);
-    const [mMap, setMMap] = useState(false);
     const [pnom, setPNom] = useState('')
     const [pdes, setPDes] = useState('')
     const [ctd, setCtd] = useState(0)
     const [prc, setPr] = useState(15)
 
-    const {carrito, addPedido} = useContext(CarritoContext)
-    console.log({carrito})
+    const { carrito ,addPedido } = useContext(CarritoContext)
+    const { sesion } = useContext(SesionContext)
 
     const actualizarDatos = (uid: string, nombre:string, desc:string, pr : number) => 
     {
@@ -34,9 +37,18 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
     }
 
     function addProducto() {
-        setLoading(true)
-        addPedido( id, pnom, ctd, prc*ctd)
-        setLoading(false)
+        
+        const pedido = carrito.pedidos.filter(pedido => pedido.productid == id)
+        if (pedido.length == 0)
+        {
+            setLoading(true)
+            addPedido( id, pnom, ctd, prc*ctd) 
+            setLoading(false)   
+        }
+        else {
+            setAlert(true)
+        } 
+        
         setMAdd(false)
     }
 
@@ -51,6 +63,14 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
 
     return (
         <IonRow>
+            <IonAlert
+                isOpen={alert}
+                onDidDismiss={() => setAlert(false)}
+                cssClass='my-custom-class'
+                header={'Ups'}
+                subHeader={'Ya tienes este artículo en tu carrito'}
+                buttons={['OK']}
+            />
              <IonModal isOpen={mAdd}>
                 <IonRow>
                     <IonCol>
@@ -124,10 +144,10 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                             props.arrayProductos.length > 0 ?
                             props.arrayProductos.map((i:any, index:Number) => {
                                 return (
-                                    <IonRow key={i.toString()}>
+                                    <IonRow key={index.toString()}>
                                         <IonCol 
                                         onClick={() => 
-                                        actualizarDatos(i.uid, i.nombre, i.descripcion, i.precio) }>
+                                        actualizarDatos(index.toString(), i.nombre, i.descripcion, i.precio) }>
                                             <ProductInfo productoNombre={i.nombre} productoDesc={i.descripcion} docId={i.id} productoSede='' image=""/>
                                         </IonCol>
                                     </IonRow>

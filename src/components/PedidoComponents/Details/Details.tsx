@@ -14,7 +14,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
 
     const currentClient = useCliente();
 
-    const { carrito } = useContext(CarritoContext);
+    const { carrito, emptyCarrito } = useContext(CarritoContext);
     const total = carrito.total;
     const pedidos = carrito.pedidos;
 
@@ -107,6 +107,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
                             
                             <IonButton onClick={() => {
                                 setShowModal(false);
+                                emptyCarrito();
                                 history.replace("/");
                             }} 
                                 expand="full" className="ion-margin">Entendido</IonButton>

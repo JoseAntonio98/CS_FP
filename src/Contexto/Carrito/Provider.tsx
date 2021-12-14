@@ -39,10 +39,19 @@ export const CarritoProvider = ( {children} : ProviderProps) => {
         })
     }
 
+    const emptyCarrito = () => 
+    {
+        dispatch( {
+            type: 'emptyCarrito',
+            payload: {}
+        })
+    }
+
     return <CarritoContext.Provider value={{
         carrito,
         addPedido,
-        deletePedido
+        deletePedido,
+        emptyCarrito
     }} >
         {children}
     </CarritoContext.Provider>

@@ -1,17 +1,18 @@
 import { Link } from "react-router-dom";
 import { toast } from "../../components/toast";
 import { useHistory } from "react-router";
-import { useState, useEffect, useContext } from "react";
+import { useEffect, useContext } from "react";
 import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 
 import Login from '../../components/ComponentesUsuario/Identificación/ContentUser'
 import Productos from '../../components/ComponentesUsuario/Productos/ContentProduct'
+import Tienda from '../../components/ProductsComponents/Tienda'
 import { SesionContext } from "../../Contexto/Sesion/Context";
 
 const UsuarioLogin: React.FC = () => {
     const history = useHistory()
-    const currentCliente = useCliente()
+    const CUser = useCliente()
 
     const { sesion, setData } = useContext(SesionContext)
 
@@ -27,10 +28,10 @@ const UsuarioLogin: React.FC = () => {
     }
 
     useEffect ( function() {
-        if (currentCliente) {
-            setDataCliente(currentCliente.uid, setData)   
+        if (CUser) {
+            setDataCliente(CUser.uid, setData)   
         }
-    }, [currentCliente]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
+    }, [CUser]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
 
     return (
         <IonPage>
@@ -40,7 +41,7 @@ const UsuarioLogin: React.FC = () => {
                         <Link to="/" >Aplicación</Link>
                     </IonTitle>
                     {
-                        currentCliente ?
+                        CUser ?
                             <IonButton slot='end' shape="round" color="success" onClick={signOutCliente}>
                                 {sesion.nombre}<b>_Salir</b>
                             </IonButton>
@@ -51,10 +52,10 @@ const UsuarioLogin: React.FC = () => {
             </IonHeader>
             <IonContent>
                 {
-                    currentCliente ?
-                    <>
+                    CUser? // estas logueado?
+                    sesion.tipo == 'cliente'? // es cliente ?
                     <Productos />
-                    </>
+                    : <Tienda /> //NO, enviame a Tienda
                     : <Login />
                 }
             </IonContent>

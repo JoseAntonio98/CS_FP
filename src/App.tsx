@@ -45,13 +45,10 @@ const App: React.FC = () => (
               <Pedido/>
             </Route>
           </CarritoProvider>
-        </SesionProvider>
-        {/* <Route exact path="/pedido" render={ ()=> {
-            return <Pedido/>}}>
-        </Route> */}
         <Route exact path="/adminTienda">
           <AdminTienda/>
         </Route>
+        </SesionProvider>
       </IonRouterOutlet>
     </IonReactRouter>
   </IonApp>

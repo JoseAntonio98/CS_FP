@@ -44,7 +44,8 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
                         <>
                         <IonItem>
                             <IonLabel position="floating">Número de tarjeta:</IonLabel>
-                            <IonInput type="text" maxlength={19} onIonChange={ (e) => setCard(e.detail.value)} value={card}></IonInput>
+                            <IonInput  onIonChange={ (e) => setCard(e.detail.value)} value={card}
+                                type="text" maxlength={19} placeholder="xxxx-xxxx-xxxx-xxxx"></IonInput>
                         </IonItem>
     
                         <IonItem>
@@ -54,9 +55,9 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
     
                         <IonItem>
                             <IonLabel position="floating">Código de seguridad:</IonLabel>
-                            <IonInput type="text" maxlength={6} onIonChange={ (e) => setSecurityCode(e.detail.value)} value={securityCode}></IonInput>
+                            <IonInput type="password" maxlength={6} onIonChange={ (e) => setSecurityCode(e.detail.value)} value={securityCode}></IonInput>
                         </IonItem>
-                        </> : <span></span>
+                        </> : null
                     }
                 </IonList>
             </IonList>

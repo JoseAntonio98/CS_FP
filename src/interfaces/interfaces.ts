@@ -9,13 +9,7 @@ export interface sesion
     nombre : string;
     email : string;
     disp : boolean;
-    pos : coordenada;
-    
-}
-export interface coordenada
-{
-    _lat : number;
-    _lon : number;
+    tipo : string;
 }
 
 export interface carrito

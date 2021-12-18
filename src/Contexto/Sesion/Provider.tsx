@@ -1,7 +1,7 @@
 import { useReducer } from "react";
 import { SesionContext } from './Context'
 import { SesionReducer } from './Reducer'
-import { coordenada, ProviderProps, sesion } from '../../interfaces/interfaces'
+import { ProviderProps, sesion } from '../../interfaces/interfaces'
 
 const INITIAL_STATE : sesion =
 {
@@ -9,10 +9,7 @@ const INITIAL_STATE : sesion =
     nombre: "",
     email: "",
     disp: false,
-    pos: {
-        _lat : 0,
-        _lon : 0,
-    }
+    tipo: '',
 }
 
 export const SesionProvider = ( {children} : ProviderProps) => {
@@ -21,21 +18,21 @@ export const SesionProvider = ( {children} : ProviderProps) => {
 
     // Aqui se crean las funciones
 
-    const setData = ( uid: string, nombre : string, email : string, disp : boolean, pos:coordenada ) => 
+    const setData = ( uid: string, nombre : string, email : string, disp : boolean, tipo : string) => 
     {
         dispatch({ type:'setData', payload:{
             uid: uid,
             nombre : nombre,
             email : email,
             disp : disp,
-            pos : pos,
+            tipo : tipo
             }
         })
     }
 
     return <SesionContext.Provider value={{
         sesion,
-        setData
+        setData,
     }} >
         { children }
     </SesionContext.Provider>

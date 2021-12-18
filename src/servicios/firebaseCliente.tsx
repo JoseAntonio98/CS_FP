@@ -1,5 +1,4 @@
 //Funciones de autanticacion de firebase
-import React from 'react'
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
 import { query, collection, where, getDocs, setDoc, doc, GeoPoint } from "firebase/firestore"
 
@@ -7,7 +6,6 @@ import { query, collection, where, getDocs, setDoc, doc, GeoPoint } from "fireba
 import { auth, db } from '../firebaseConfig'
 import { toast } from "../components/toast"
 import { useState, useEffect } from 'react'
-import { coordenada } from '../interfaces/interfaces';
 
 export function createCliente(nombre: string, celular: string, email: string, password: string, coord: number[]) {
     createUserWithEmailAndPassword(auth, email, password)
@@ -39,9 +37,11 @@ export async function signInCliente(email: string, password: string) {
             const q = query(collection(db, "clientes"), where("email", "==", email));
             const querySnapshot = await getDocs(q);
             exist = querySnapshot.docs.length !== 0
-        }
+        }        
+
         return exist;
     }
+
     getClientes()
         .then((exist: boolean) => {
             if (exist) {
@@ -73,15 +73,6 @@ export function useCliente() {
     return currentUser;
 }
 
-export function isClienteSigned() {
-    console.log(auth.currentUser?.uid)
-    //     console.log('auth ', auth)
-    console.log('usuer current ', auth.currentUser)
-    return auth.currentUser == null
-
-
-}
-
 // Agregar datos del pedido
 export async function addPedido(uid: string, reference: string, coord: any, names: string, card: string, expire: string, 
                                 securityCode: string, timeDelivery: number, type: string, products: any, total: number) {
@@ -110,12 +101,25 @@ export async function setDataCliente(uid: string, setUsuario: any) {
                 data.nombre, 
                 data.email,
                 data.disponible,
-                data.direccion
+                'cliente'
             )
         })
-        .catch((e) => {
-            console.log(e.message)
-            return false
+        .catch(() => {
+            const q = query(collection(db, "tiendas"), where("uid", "==", uid));
+            getDocs(q)
+            .then((doc) => {
+                const data = doc.docs[0].data()
+                setUsuario( 
+                    data.uid,
+                    data.nombre, 
+                    data.email,
+                    data.disponible,
+                    'tienda'
+                )
+            })
+            .catch((e) => {
+                console.log(e.message)
+            })
         })
 
 }

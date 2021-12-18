@@ -1,5 +1,12 @@
 import { IonImg, IonGrid, IonRow, IonCol, IonLabel,IonButton,IonContent,IonPage,useIonAlert} from "@ionic/react";
+import ProductoList from "../ListP";
+import { db } from '../../../firebaseConfig';
+import  firebaseApp  from "firebase/app";
+import 'firebase/firestore';
+import { useEffect, useState } from 'react';
 import './ProductInfo.css'
+import { deleteDoc, doc } from "firebase/firestore";
+
 
 interface ContainerProps
 {
@@ -9,8 +16,16 @@ interface ContainerProps
     image : string
 }
 
+
 const ProductEdit : React.FC<ContainerProps> = (props) => {
     const [present] = useIonAlert();
+
+    // Borrar Productos, falta refrescar
+    async function deleteProduct(){
+        await deleteDoc(doc(db, "Producto", props.docId));
+       
+    }
+
     return (
     <div className="ProductoInfo">
         <IonGrid>
@@ -36,8 +51,10 @@ const ProductEdit : React.FC<ContainerProps> = (props) => {
             present({
               cssClass: 'my-css',
               header: 'Alerta',
-              message: '¿Desea eliminar?',
-              buttons: ['Cancel', { text: 'Ok', handler: (d) => console.log('ok pressed') }],
+              message: '¿Desea eliminar el producto?',
+              buttons: ['Cancel', 
+              //Borra el producto despues del mensaje de confirmación
+              { text: 'Ok', handler: (d) => /*console.log('did dismiss')*/deleteProduct() }],
               onDidDismiss: (e) => console.log('did dismiss'),
             })
           }

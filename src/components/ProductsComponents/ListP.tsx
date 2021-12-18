@@ -1,5 +1,5 @@
 import { IonCol, IonLoading, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
-import ProductInfo from '../ProductsComponents/Product/ProductEdit'
+import ProductEdit from '../ProductsComponents/Product/ProductEdit'
 import { db } from '../../firebaseConfig'
 import { useState, useEffect } from 'react';
 import { collection, getDoc, getDocs, onSnapshot, query, } from "firebase/firestore";
@@ -49,7 +49,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
                                 return (
                                     <IonRow key={index.toString()}>
                                         <IonCol>
-                                            <ProductInfo  productoNombre={item.nombre} docId={item.id} productoSede='' image=""/>
+                                            <ProductEdit  productoNombre={item.nombre} docId={item.id} productoSede='' image=""/>
                                         </IonCol>
                                     </IonRow>
                                 )

@@ -13,6 +13,8 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
     }> = ({setCurrentTab, setDetailsDisabled, paymentMode, setPaymentMode, names, setNames, card, setCard, expire, setExpire, securityCode, setSecurityCode, timeDelivery, setTimeDelivery}) => {
     
     const [present] = useIonToast();
+    const now = new Date();
+    const min = `${now.getFullYear()}-${now.getMonth()+1}-${now.getDate()}`;
 
     return (
         <div>
@@ -50,7 +52,10 @@ const Payment: React.FC<{ setCurrentTab: any, setDetailsDisabled: any
     
                         <IonItem>
                             <IonLabel>Fecha de expiración:</IonLabel>
-                            <IonDatetime display-format="DD.MM.YYYY HH:mm" onIonChange={ (e) => setExpire(e.detail.value)} value={expire}></IonDatetime>
+                            <IonDatetime onIonChange={ (e) => setExpire(e.detail.value)} value={expire}
+                                display-format="DD.MM.YYYY" 
+                                min={min}>
+                            </IonDatetime>
                         </IonItem>
     
                         <IonItem>

@@ -14,7 +14,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
     const [loading, setLoading] = useState<boolean>(true);
 
 
-    const productosCollectionRef = collection(db, 'Producto')
+    const productosCollectionRef = collection(db, 'productos')
     useEffect(() => {
         async function obtenerProductos()
         {

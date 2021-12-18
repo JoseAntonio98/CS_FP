@@ -8,7 +8,7 @@ import { async } from "@firebase/util";
 export async function crearProducto(/*categoriaId:string,*/ descripcion:string, imagen:string, nombre: string, tienda:string) {
     console.log("Firebase crearProdcuto");
     
-    await addDoc(collection(db,"Producto"),{
+    await addDoc(collection(db,"productos"),{
         // categoriaId:categoriaId,
          descripcion:descripcion,
          imagen:imagen,

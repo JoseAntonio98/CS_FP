@@ -1,14 +1,12 @@
-import { IonLoading, IonRouterOutlet , IonCol,  IonButton, IonRow, IonInput, IonLabel, IonItem } from '@ionic/react';
+import { IonLoading, IonCol,  IonButton, IonRow, IonInput, IonLabel, IonItem } from '@ionic/react';
 import React, { useContext, useState, useEffect } from 'react';
 import { collection, getDocs} from "firebase/firestore";
-import { IonReactRouter } from '@ionic/react-router';
-import { Route, Link } from 'react-router-dom'
+import { Link } from 'react-router-dom'
 import { db } from '../../../firebaseConfig'
 import { SesionContext } from "../../../Contexto/Sesion/Context"
 import { CarritoContext } from "../../../Contexto/Carrito/Context"
 import ListaProductos from './ListaProductos'
 import PedidoInfo from './Pedido/PedidoInfo';
-import Pedido from '../../../pages/Pedido/Pedido' //para el ṕago
 import Collapsible from "react-collapsible";
 import './ContentProduct.css'
 
@@ -16,14 +14,11 @@ interface ContainerProps {}
 
 const ContentProduct:React.FC<ContainerProps> = () => {
 
-  const { sesion } = useContext(SesionContext)
-  const { carrito } = useContext(CarritoContext)
-
   const [busqueda, setBusqueda] = useState('a')
   const [arrayProductos, setArrayProductos] = useState([{}]);
   const [loading, setLoading] = useState<boolean>(true);
 
-  const productosCollectionRef = collection(db, 'Producto')
+  const productosCollectionRef = collection(db, 'productos')
   useEffect(() => {
     async function obtenerProductos()
     {

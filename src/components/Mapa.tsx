@@ -24,7 +24,7 @@ const Mapa: React.FC<ContainerProps> = (props) => {
   return (
     flag?
     <iframe width="600" height="450" loading="lazy" src={`https://www.google.com/maps/embed/v1/search?q=${props.o_lat}${props.o_lon}&key=AIzaSyD1TBUdvLxAsChqd_ruQSjvQ1FkHLVdjG0&maptype=satellite`}></iframe>
-    : <iframe width="600" height="450" loading="lazy" src={`https://www.google.com/maps/embed/v1/directions?origin=${props.o_lat}${props.o_lon}&destination=${props.d_lat}${props.d_lon}&key=AIzaSyD1TBUdvLxAsChqd_ruQSjvQ1FkHLVdjG0&maptype=satellite`}></iframe>
+    : <iframe allowFullScreen width="600" height="450" style={{border:0}} loading="lazy" src={`https://www.google.com/maps/embed/v1/directions?origin=${props.o_lat}${props.o_lon}&destination=${props.d_lat}${props.d_lon}&key=AIzaSyD1TBUdvLxAsChqd_ruQSjvQ1FkHLVdjG0&maptype=satellite`}></iframe>
   )
 }
 

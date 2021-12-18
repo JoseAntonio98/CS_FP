@@ -1,10 +1,9 @@
 import { IonAlert, IonCol, IonLoading, IonText, IonModal, IonButton, IonItem, IonInput, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
 import ProductInfo from './Producto/ProductInfo'
 import { useState, useContext } from 'react';
-
 import { CarritoContext } from '../../../Contexto/Carrito/Context'
 import { SesionContext } from '../../../Contexto/Sesion/Context'
-import { setuid } from 'process';
+import Mapa from '../../Mapa';
 
 interface ContainerProps
 {
@@ -113,25 +112,11 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
 
             <IonModal isOpen={mMap}>
                 <IonRow>
-                    <IonCol>
-                        <IonItem className="ion-margin ion-text-center">
-                            <IonText></IonText>
-                        </IonItem>
-                    </IonCol>
+                    <Mapa tipo='directions' o_lat={-16.3479552} o_lon={-71.5522048} d_lat={-16.3479552} d_lon={-71.5622048} />
                 </IonRow>
                 <IonRow>
                     <IonCol>
-                        <IonItem className="ion-margin">
-                            <IonText>{}</IonText>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonButton expand='block' fill="solid" onClick={() => setMMap(false)}>Cancelar</IonButton>
-                    </IonCol>
-                    <IonCol>
-                        <IonButton expand='block' >Registrar</IonButton>
+                        <IonButton expand='block' fill="solid" onClick={() => setMMap(false)}>salir</IonButton>
                     </IonCol>
                 </IonRow>
             </IonModal>
@@ -144,13 +129,20 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                             props.arrayProductos.length > 0 ?
                             props.arrayProductos.map((i:any, index:Number) => {
                                 return (
+                                    <>
                                     <IonRow key={index.toString()}>
                                         <IonCol 
-                                        onClick={() => 
-                                        actualizarDatos(index.toString(), i.nombre, i.descripcion, i.precio) }>
-                                            <ProductInfo productoNombre={i.nombre} productoDesc={i.descripcion} docId={i.id} productoSede='' image=""/>
+                                            onClick={() => 
+                                            actualizarDatos(index.toString(), i.nombre, i.descripcion, i.precio) }>
+                                            <ProductInfo id={i.id} nombre={i.nombre} descripcion={i.descripcion} sede='' imagen={i.imagen}/>
                                         </IonCol>
                                     </IonRow>
+                                    <IonRow >
+                                        <IonCol className="ion-text-right">
+                                        <IonButton fill='outline' size='small' onClick={() => setMMap(true)} >Como llegar</IonButton>
+                                        </IonCol>
+                                    </IonRow>
+                                </>
                                 )
                             }) : null
                         }

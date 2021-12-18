@@ -1,33 +1,33 @@
 import { IonImg, IonGrid, IonRow, IonCol, IonLabel} from "@ionic/react";
 import './ProductInfo.css'
 
-interface ContainerProps
+interface ProductoProps
 {
-    productoNombre : string
-    productoDesc : string
-    docId : string
-    productoSede : string
-    image : string
+    id : string
+    nombre : string
+    descripcion : string
+    sede : string
+    imagen : string
 }
 
-const ProductInfo : React.FC<ContainerProps> = (props) => {
+const ProductInfo : React.FC<ProductoProps> = (props) => {
     return (
     <div className="ProductoInfo">
         <IonGrid>
         <IonRow>
             <IonCol size="9">
                 <div>
-                    <strong>{props.productoNombre}</strong>
+                    <strong>{props.nombre}</strong>
                 </div>
                 <div>
-                    <IonLabel>{props.productoDesc}</IonLabel>
+                    <IonLabel>{props.descripcion}</IonLabel>
                 </div>
                 <div>
                     <IonLabel>Nombre Sede</IonLabel>
                 </div>
             </IonCol>
             <IonCol offsetLg="1" sizeLg="2">
-                <IonImg src={`{props.image}`} />
+                <IonImg src={props.imagen} />
             </IonCol>
         </IonRow>  
         </IonGrid>

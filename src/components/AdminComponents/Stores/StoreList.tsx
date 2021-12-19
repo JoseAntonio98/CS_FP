@@ -7,6 +7,7 @@ import { toast } from '../../toast';
 import StoreInfo from './Store/StoreInfo';
 import './StoreList.css';
 
+//Interfaz de datos del componente
 interface ContainerProps { }
 
 //Componente para renderizar la lista de tiendas

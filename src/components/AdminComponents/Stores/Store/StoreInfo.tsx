@@ -1,10 +1,7 @@
-import { IonButton, IonCol, IonGrid, IonIcon, IonLabel, IonRow } from '@ionic/react';
-import { deleteDoc, doc, setDoc } from 'firebase/firestore';
-import {closeCircleOutline, storefrontOutline, trashOutline} from 'ionicons/icons'
-import { db } from '../../../../firebaseConfig';
-import { toast } from '../../../toast';
+import { IonCol, IonLabel } from '@ionic/react';
 import './StoreInfo.css';
 
+//Interfaz de datos del componente
 interface ContainerProps { 
     docId:string
     email:string
@@ -14,9 +11,8 @@ interface ContainerProps {
     uid: string
     disponible:boolean
 }
-
+//Componente para renderizar los datos de una tienda
 const StoreInfo: React.FC<ContainerProps> = (props) => {
-    
     return (
         <IonCol size="10">
             <div>

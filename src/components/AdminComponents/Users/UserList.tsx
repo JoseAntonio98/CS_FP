@@ -7,6 +7,7 @@ import { toast } from '../../toast';
 import UserInfo from './User/UserInfo';
 import './UserList.css';
 
+//Interfaz de datos del componente
 interface ContainerProps { }
 
 const UserList: React.FC<ContainerProps> = () => {

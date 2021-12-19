@@ -1,8 +1,4 @@
-import { IonButton, IonCol, IonGrid, IonIcon, IonLabel, IonRow } from '@ionic/react';
-import { deleteDoc, doc, setDoc } from 'firebase/firestore';
-import {closeCircleOutline, personOutline, trashOutline} from 'ionicons/icons'
-import { db } from '../../../../firebaseConfig';
-import { toast } from '../../../toast';
+import { IonCol, IonLabel } from '@ionic/react';
 import './UserInfo.css';
 
 //Interfaz de datos del componente

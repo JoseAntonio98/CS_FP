@@ -71,17 +71,24 @@ const HeadingList: React.FC<ContainerProps> = () => {
     return (
     <div className="HeadingList">
         <IonFab vertical="bottom" horizontal="start">
-            <IonModal isOpen={showModal}>
-                <IonItem className="ion-margin">
-                    <IonLabel position="floating">Rubros</IonLabel>
-                    <IonInput onIonChange={(e:any)=>setHeadingName(e.target.value)}></IonInput>
-                </IonItem>
-                <IonItem className="ion-margin">
-                    <IonLabel position="floating">Descripcion</IonLabel>
-                    <IonInput onIonChange={(e:any)=>setHeadingDesc(e.target.value)}/>
-                </IonItem>
-                <IonButton onClick={() => setShowModal(false)}>Cancelar</IonButton>
-                <IonButton onClick={() => registrarRubro()}>Registrar</IonButton>
+            <IonModal cssClass="Modal-category" isOpen={showModal}>
+                <div className="Category-form">
+                    <div className="text h2">
+                        Registrar Rubro
+                    </div>    
+                    <IonItem className="ion-margin">
+                        <IonLabel position="floating">Rubros</IonLabel>
+                        <IonInput onIonChange={(e:any)=>setHeadingName(e.target.value)}></IonInput>
+                    </IonItem>
+                    <IonItem className="ion-margin">
+                        <IonLabel position="floating">Descripcion</IonLabel>
+                        <IonInput onIonChange={(e:any)=>setHeadingDesc(e.target.value)}/>
+                    </IonItem>
+                    <div className="form-buttons">
+                        <IonButton color="dark" onClick={() => setShowModal(false)}>Cancelar</IonButton>
+                        <IonButton color="success" onClick={() => registrarRubro()}>Registrar</IonButton>
+                    </div>
+                </div>
             </IonModal>
             <IonFabButton color="success" onClick={() => setShowModal(true)}>
                 <IonIcon icon={add} color="dark"/>

@@ -1,10 +1,10 @@
 import React, { useContext, useState } from "react";
-import LocalizacionBoton from '../../LocalizacionBoton'
-import Mapa from '../../Mapa'
+import LocalizacionBoton from '../../../LocalizacionBoton'
+import Mapa from '../../../Mapa'
 import { Link } from 'react-router-dom';
 import { IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput, IonText } from '@ionic/react';
-import { createCliente} from '../../../servicios/firebaseCliente';
-import { toast } from '../../toast';
+import { createCliente} from '../../../../servicios/firebaseCliente';
+import { toast } from '../../../toast';
 
 const Registro: React.FC = () => {
 

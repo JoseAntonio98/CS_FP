@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
-import { IonCol, IonIcon, IonButton, IonGrid, IonRow, IonItem, IonLabel, IonInput } from '@ionic/react';
-import { signInTienda } from '../../../servicios/firebaseTienda'
+import { IonCol, IonButton, IonIcon, IonGrid, IonRow, IonTitle, IonItem, IonLabel, IonInput } from '@ionic/react';
+import { signInCliente } from '../../../../servicios/firebaseCliente';
 import './Login.css';
 
-import { business } from 'ionicons/icons'
+import { personCircle } from 'ionicons/icons';
 
 interface ContainerProps { }
 
@@ -13,22 +13,21 @@ const Login: React.FC<ContainerProps> = () => {
     const [password, setPassword] = useState('');
 
     async function login() {
-        await signInTienda(email, password)
+        await signInCliente(email, password)
     }
 
     return (
-        <div className="Login">
             <IonGrid>
                 <IonRow>
                     <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-top'>
-                        <h1>Ingresar como Tienda</h1>
+                        <h1>Ingresar como Cliente</h1>
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-top'>
                         <IonIcon
                         style={{ fontSize: "70px", color: "#0040ff" }}
-                        icon={business}
+                        icon={personCircle}
                         />
                     </IonCol>
                 </IonRow>
@@ -53,12 +52,11 @@ const Login: React.FC<ContainerProps> = () => {
                         <IonButton expand="block" fill="outline" onClick={login} >
                             Ingresar
                         </IonButton>
-                        <p><Link to="/">soy cliente</Link></p>
-                        <p> ¿Eres nuevo aquí? <Link to="/tienda/registro">Registrate</Link> </p>
+                        <p><Link to="/tienda/login">soy una tienda</Link></p>
+                        <p> ¿Eres nuevo aquí? <Link to="/cliente/registro">Registrate</Link> </p>
                     </IonCol>
                 </IonRow>
             </IonGrid>
-        </div>
     );
 };
 

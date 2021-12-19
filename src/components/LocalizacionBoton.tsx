@@ -1,7 +1,6 @@
 import { Geolocation, Geoposition } from '@awesome-cordova-plugins/geolocation';
 import { IonButton, IonLoading, IonToast } from '@ionic/react';
 import React, { useState } from 'react';
-import Mapa from './Mapa'
 
 interface LocationError {
     showError: boolean;

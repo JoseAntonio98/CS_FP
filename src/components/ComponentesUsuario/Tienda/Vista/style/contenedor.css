@@ -1,0 +1,41 @@
+.Collapsible {
+    background-color: rgba(182, 214, 204);
+    border-radius: 5px;
+  }
+  
+.Collapsible__contentInner {
+    padding: 10px;
+    border: 1px solid lightGrey;
+    border-top: 0;
+}
+
+.acd {
+    font-size: 12px;
+}
+
+.acd:hover 
+{
+    background-color: rgba(116, 164, 188);
+}
+  
+.Collapsible__trigger {
+    display: block;
+    font-weight: 400;
+    text-decoration: none;
+    position: relative;
+    border: 1px solid #3880ff;
+    padding: 10px;
+    background: #3880ff;
+    color: white;
+    border-radius: 5px;
+}
+
+.link
+{
+    color:rgb(255, 255, 255);
+    text-decoration:none;
+}
+.link:hover
+{
+    color:rgb(255, 255, 255);
+}

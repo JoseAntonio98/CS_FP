@@ -35,7 +35,7 @@ const Admin: React.FC = () =>
                     }
                 </IonToolbar>
             </IonHeader>
-                <IonContent>
+                <IonContent className="d-flex justify-content-center">
                         {currentAdmin ?<ContentManager /> : <AdminLogin />}
                 </IonContent>
         </IonPage>    

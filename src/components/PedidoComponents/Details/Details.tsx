@@ -36,7 +36,7 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
                             <h2>{card}</h2>
                         </IonLabel>
                     </IonItem>
-                    : <span></span>
+                    : null
                 }
                 
                 <IonItem>
@@ -46,12 +46,18 @@ const Details: React.FC<{reference: string, coord: any, names: string, card: str
                     </IonLabel>
                 </IonItem>
 
-                <IonItem>
-                    <IonLabel>
-                        <p>Punto de referencia</p>
-                        <h2>{reference}</h2>
-                    </IonLabel>
-                </IonItem>
+                {
+                    reference !== "" 
+                    ?
+                        <IonItem>
+                            <IonLabel>
+                                <p>Punto de referencia</p>
+                                <h2>{reference}</h2>
+                            </IonLabel>
+                        </IonItem>
+                    : null
+                }
+                
 
                 <IonItem>
                     <IonLabel>

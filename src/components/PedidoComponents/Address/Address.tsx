@@ -11,7 +11,7 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
 
     return (
         <div>
-            <h6>Datos de entrega:</h6>
+            <h6>Datos de entrega</h6>
             <IonItem>
                 <IonLabel position="fixed" >Dirección:</IonLabel>
                 <LocalizacionBoton setCoord={setCoord}/>
@@ -27,17 +27,16 @@ const Address: React.FC<{ setPaymentDisabled: any, setCurrentTab: any, reference
             <IonItem>
                 <IonLabel position="floating">Referencia:</IonLabel>
                 <IonTextarea onIonChange={ (e) => setReference(e.detail.value)} value={reference}
-                    rows={2} cols={10} placeholder="Ingrese algún punto de referencia."></IonTextarea>
+                    rows={2} cols={10} placeholder="Ingrese algún punto de referencia (Opcional)"></IonTextarea>
             </IonItem>
 
             <IonButton onClick={() => {
-                // Agregar validacion de direccion
-                if(reference.trim() !== "" && coord[0] != 0) {
+                if(coord[0] != 0) {
                     setPaymentDisabled(false);
                     setCurrentTab("payment");
                 } else {
                     present({
-                        message: "Ingrese todos los datos",
+                        message: "Su dirección es un campo obligatorio",
                         duration: 2000,
                         color: "dark"
                     });

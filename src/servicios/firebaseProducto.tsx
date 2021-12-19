@@ -1,5 +1,5 @@
 //Modulo de autenticacion de firebase
-import { query,getDocs,where,collection,addDoc,setDoc,doc,deleteDoc } from "firebase/firestore";
+import { query,getDocs,where,collection,addDoc,setDoc,doc,deleteDoc, updateDoc } from "firebase/firestore";
 import { /*auth,*/db } from "../firebaseConfig";
 import { useState,useEffect } from "react";
 import { toast } from "../components/toast";
@@ -37,7 +37,7 @@ export async function crearProducto(categoria:string, descripcion:string,idtiend
     console.log("Firebase crearProdcuto");
     
     await addDoc(collection(db,"productos"),{
-         categoriaId:categoria,
+         categoria:categoria,
          descripcion:descripcion,
          idtienda:idtienda,
          imagen:imagen,
@@ -48,10 +48,16 @@ export async function crearProducto(categoria:string, descripcion:string,idtiend
      );
 }
 
-export async function actualizarProducto(uidProduct: string,categoria:string, descripcion:string,idtienda:string,imagen:string, 
+export async function actualizarProducto(uidProduct: string,precio:number,stock:number) {
+          
+    const dataRef = doc(db,"productos",uidProduct)
+    await updateDoc(dataRef,{precio:precio,stock:stock})
+}
+
+/*export async function actualizarProducto(uidProduct: string,categoria:string, descripcion:string,idtienda:string,imagen:string, 
     nombre: string, precio:number,stock:number) {
           setDoc(doc(db,"productos",uidProduct),{
-            categoriaId:categoria,
+            categoria:categoria,
             descripcion:descripcion,
             idtienda:idtienda,
             imagen:imagen,
@@ -60,7 +66,7 @@ export async function actualizarProducto(uidProduct: string,categoria:string, de
             stock:stock
 
         });
-}
+}*/
 export async function deleteProducto(uidDoc: string) {
 
     await deleteDoc(doc(db,"productos",uidDoc));

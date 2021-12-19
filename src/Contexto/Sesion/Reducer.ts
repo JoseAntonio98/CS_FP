@@ -15,6 +15,7 @@ export const SesionReducer = ( state : sesion, action : UsuarioAction) : sesion 
                 email : action.payload.email,
                 disp : action.payload.disp,
                 tipo : action.payload.tipo,
+                pos : action.payload.pos
             }
         default:
             return state

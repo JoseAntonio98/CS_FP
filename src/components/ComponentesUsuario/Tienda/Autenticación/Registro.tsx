@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { collection, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
-import { db } from '../../../firebaseConfig';
+import { db } from '../../../../firebaseConfig';
 import { IonSelect, IonContent, IonSelectOption, IonCol, IonButton, IonGrid, IonRow, IonItem, IonLabel, IonInput } from '@ionic/react';
-import { createTienda } from '../../../servicios/firebaseTienda'
-import { toast } from '../../toast'
+import { createTienda } from '../../../../servicios/firebaseTienda'
+import { toast } from '../../../toast'
 
 interface ContainerProps { }
 
@@ -94,8 +94,8 @@ const Registro: React.FC<ContainerProps> = () => {
                                 {
                                     arrayRubros?
                                     arrayRubros.map((item:any, index:Number) => {
-                                        return <IonSelectOption value={item.rubro}>{item.rubro}</IonSelectOption>
-                                    }) : <>No hay nada</>
+                                        return <IonSelectOption key={index.toString()} value={item.rubro}> {item.rubro} </IonSelectOption>
+                                    }) : <>No hay ningún rubro actualmente</>
                                 }
                             </IonSelect>
                         </IonItem>

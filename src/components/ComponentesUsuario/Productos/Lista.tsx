@@ -1,5 +1,5 @@
 import { IonAlert, IonCol, IonLoading, IonText, IonModal, IonButton, IonItem, IonInput, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle } from '@ionic/react';
-import ProductInfo from './Producto/ProductInfo'
+import ProductInfo from './Info'
 import { useState, useContext } from 'react';
 import { CarritoContext } from '../../../Contexto/Carrito/Context'
 import { SesionContext } from '../../../Contexto/Sesion/Context'
@@ -134,7 +134,7 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                                         <IonCol 
                                             onClick={() => 
                                             actualizarDatos(index.toString(), i.nombre, i.descripcion, i.precio) }>
-                                            <ProductInfo id={i.id} nombre={i.nombre} descripcion={i.descripcion} sede='' imagen={i.imagen}/>
+                                            <ProductInfo id={i.id} nombre={i.nombre} descripcion={i.descripcion} precio = {i.precio} imagen={i.imagen}/>
                                         </IonCol>
                                     </IonRow>
                                     <IonRow >

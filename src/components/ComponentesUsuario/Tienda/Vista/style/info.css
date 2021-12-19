@@ -1,0 +1,21 @@
+.info
+{
+    border: 1px;
+    background-color: rgba(182, 214, 204);
+    padding: 10px;
+    transition: 0.1s;
+}
+.info:hover
+{
+    border-radius: 5px;
+    background-color: rgba(116, 164, 188);
+}
+.link
+{
+    color:rgb(255, 255, 255);
+    text-decoration:none;
+}
+.link:hover
+{
+    color:rgb(255, 255, 255);
+}

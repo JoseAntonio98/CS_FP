@@ -142,7 +142,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
 
                     </IonCol>
                 </IonRow>
-            </IonGrid>
+               </IonGrid>
             </IonModal>
             <IonCol>
                 <IonContent scrollY={true} fullscreen>

@@ -1,6 +1,6 @@
 //Funciones de autanticacion de firebase
 import { onAuthStateChanged, createUserWithEmailAndPassword, signInWithEmailAndPassword, signOut, User } from "firebase/auth";
-import { query, getDocs, where, collection, setDoc, doc} from "firebase/firestore"
+import { query, getDocs, where, collection, setDoc, doc, GeoPoint} from "firebase/firestore"
 
 //Modulo de autenticacion de firebase
 import { auth, db } from '../firebaseConfig'
@@ -18,7 +18,10 @@ export async function createTienda(nombre: string, ruc: string, email:string, pa
             nombre : nombre,
             ruc : ruc,
             password : password,
-            rubro : rubro
+            rubro : rubro,
+            calificacion : 0,
+            disponible : true,
+            pos : new GeoPoint(0,0)
         });
 
         toast('Registro Exitoso')

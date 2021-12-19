@@ -101,6 +101,7 @@ export async function setDataCliente(uid: string, setUsuario: any) {
                 data.nombre, 
                 data.email,
                 data.disponible,
+                data.direccion,
                 'cliente'
             )
         })
@@ -114,6 +115,7 @@ export async function setDataCliente(uid: string, setUsuario: any) {
                     data.nombre, 
                     data.email,
                     data.disponible,
+                    new GeoPoint(0,0),
                     'tienda'
                 )
             })

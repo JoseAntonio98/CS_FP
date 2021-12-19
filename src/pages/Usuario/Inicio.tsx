@@ -5,8 +5,8 @@ import { useEffect, useContext } from "react";
 import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 
-import Login from '../../components/ComponentesUsuario/Identificación/ContentUser'
-import Productos from '../../components/ComponentesUsuario/Productos/ContentProduct'
+import Login from '../../components/ComponentesUsuario/Inicio/Contenido'
+import Productos from '../../components/ComponentesUsuario/Tienda/Vista/Contenedor'
 import Tienda from '../../components/ProductsComponents/Tienda'
 import { SesionContext } from "../../Contexto/Sesion/Context";
 

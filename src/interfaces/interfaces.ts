@@ -1,3 +1,4 @@
+import { GeoPoint } from "firebase/firestore";
 
 export interface ProviderProps { // Para el error del children
     children : JSX.Element | JSX.Element[]
@@ -10,6 +11,7 @@ export interface sesion
     email : string;
     disp : boolean;
     tipo : string;
+    pos : GeoPoint;
 }
 
 export interface carrito
@@ -24,4 +26,16 @@ export interface pedido
     cantidad : number;
     nombre : string;
     precio : number;
+}
+
+export interface tienda
+{
+  calificación : number;
+  disponible : boolean;
+  email : string;
+  nombre : string;
+  pos : GeoPoint;
+  rubro : string;
+  ruc : string;
+  uid : string;
 }

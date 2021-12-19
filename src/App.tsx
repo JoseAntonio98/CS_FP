@@ -27,6 +27,7 @@ import Admin from './pages/Admin/Admin';
 import UsuarioInicio from "./pages/Usuario/Inicio"
 import Pedido from './pages/Pedido/Pedido';
 import AdminTienda from './pages/AdminTienda/AdminTienda';
+import Productos from './components/ComponentesUsuario/Productos/Contenedor'
 import { CarritoProvider } from './Contexto/Carrito/Provider';
 
 const App: React.FC = () => (
@@ -34,20 +35,17 @@ const App: React.FC = () => (
     <IonReactRouter>
       <IonRouterOutlet>
         <Route exact path="/admin">
-            <Admin/>
+          <Admin />
         </Route>
         <SesionProvider>
           <CarritoProvider>
             <Route exact path="/">
-              <UsuarioInicio/>
+              <UsuarioInicio />
             </Route>
-            <Route exact path="/pedido">
-              <Pedido/>
-            </Route>
+            <Route exact path="/pedido" component={Pedido}/>
+            <Route exact path='/productos' component={Productos}/>
           </CarritoProvider>
-        <Route exact path="/adminTienda">
-          <AdminTienda/>
-        </Route>
+          <Route exact path="/adminTienda" component={AdminTienda} /> 
         </SesionProvider>
       </IonRouterOutlet>
     </IonReactRouter>

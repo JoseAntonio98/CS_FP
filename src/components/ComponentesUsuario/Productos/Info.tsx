@@ -1,12 +1,13 @@
 import { IonImg, IonGrid, IonRow, IonCol, IonLabel} from "@ionic/react";
-import './ProductInfo.css'
+import { GeoPoint } from "firebase/firestore";
+import './style/info.css'
 
 interface ProductoProps
 {
     id : string
     nombre : string
     descripcion : string
-    sede : string
+    precio : number
     imagen : string
 }
 
@@ -23,7 +24,7 @@ const ProductInfo : React.FC<ProductoProps> = (props) => {
                     <IonLabel>{props.descripcion}</IonLabel>
                 </div>
                 <div>
-                    <IonLabel>Nombre Sede</IonLabel>
+                    <IonLabel>{props.precio}</IonLabel>
                 </div>
             </IonCol>
             <IonCol offsetLg="1" sizeLg="2">

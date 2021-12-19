@@ -1,13 +1,12 @@
 import { useContext, useEffect } from "react";
-import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonBadge, IonText, IonRow, IonCol, IonLabel, IonButton, IonIcon } from "@ionic/react";
-//import { SesionContext } from "../../../../Contexto/Sesion/Context"
+import { IonList, IonItemSliding, IonItemOptions, IonItemOption, IonItem, IonBadge, IonText, IonButton, IonIcon } from "@ionic/react";
 import { CarritoContext } from "../../../../Contexto/Carrito/Context";
 import { searchCircle } from 'ionicons/icons'
 import { Link } from "react-router-dom";
 
-import './PedidoInfo.css'
+import './info.css'
 
-const PedidoInfo: React.FC = () => {
+const Info: React.FC = () => {
 
     const { carrito, deletePedido } = useContext(CarritoContext)
     const { pedidos } = carrito
@@ -63,7 +62,7 @@ const PedidoInfo: React.FC = () => {
             </IonItemSliding>
 
             <IonButton disabled={pedidos.length>0?false:true} expand="block" fill="solid" >
-                <Link className="link" to="/pedido">Hacer Pedido</Link>
+                <Link className="link" to="/pedido" >Hacer Pedido</Link>
             </IonButton>
 
 
@@ -71,4 +70,4 @@ const PedidoInfo: React.FC = () => {
     )
 }
 
-export default PedidoInfo;
+export default Info;

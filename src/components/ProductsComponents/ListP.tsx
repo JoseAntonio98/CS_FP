@@ -49,7 +49,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
                                 return (
                                     <IonRow key={index.toString()}>
                                         <IonCol>
-                                            <ProductEdit  productoNombre={item.nombre} docId={item.id} productoSede='' image=""/>
+                                            <ProductEdit  productoNombre={item.nombre} docId={item.id} productoSede='' image="" precio={item.precio} />
                                         </IonCol>
                                     </IonRow>
                                 )

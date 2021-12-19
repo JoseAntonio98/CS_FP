@@ -49,13 +49,6 @@ const Tienda: React.FC<ContainerProps> = () => {
       <SedeList />
       </IonCol >
       <IonCol sizeXs="12" sizeLg="6">
-         <IonRow>
-              <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-top'>
-                <p><Link to="/">xd</Link></p>
-                <p><Link to="/productos/creandoproducto">PageCreandoProducto</Link></p>
-                    
-              </IonCol>
-          </IonRow>
         <IonRow>
           <IonCol className='ion-text-center'>
             <IonItem className="">

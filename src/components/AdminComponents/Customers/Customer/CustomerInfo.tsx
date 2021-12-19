@@ -1,5 +1,5 @@
 import { IonCol, IonLabel } from '@ionic/react';
-import './UserInfo.css';
+import './CustomerInfo.css';
 
 //Interfaz de datos del componente
 interface ContainerProps 
@@ -12,14 +12,11 @@ interface ContainerProps
 }
 
 //Este componente renderiza los datos de los clientes
-const UserInfo: React.FC<ContainerProps> = (props) => {
+const CustomerInfo: React.FC<ContainerProps> = (props) => {
     return (
         <IonCol size="10">
             <div>
                 <strong>{props.nombre}</strong>
-            </div>
-            <div>
-                <IonLabel>apellido</IonLabel>
             </div>
             <div>
                 <IonLabel>{props.email}</IonLabel>
@@ -31,4 +28,4 @@ const UserInfo: React.FC<ContainerProps> = (props) => {
     );
 };
 
-export default UserInfo;
+export default CustomerInfo;

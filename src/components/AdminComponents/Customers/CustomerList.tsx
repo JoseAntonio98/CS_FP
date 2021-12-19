@@ -1,16 +1,16 @@
 import { IonButton, IonCol, IonContent, IonGrid, IonIcon, IonRow, IonTitle } from '@ionic/react';
 import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
-import { closeCircleOutline, trashOutline } from 'ionicons/icons';
+import { checkmarkCircle, closeCircle, trashOutline } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { db } from '../../../firebaseConfig';
 import { toast } from '../../toast';
-import UserInfo from './User/UserInfo';
-import './UserList.css';
+import CustomerInfo from './Customer/CustomerInfo';
+import './CustomerList.css';
 
 //Interfaz de datos del componente
 interface ContainerProps { }
 
-const UserList: React.FC<ContainerProps> = () => {
+const CustomerList: React.FC<ContainerProps> = () => {
     //Lista de usuarios
     const [arrayUsuarios, SetArrayUsuarios] = useState([{}])
     
@@ -52,7 +52,7 @@ const UserList: React.FC<ContainerProps> = () => {
     }, [])
 
     return (
-        <div className="UserList">
+        <div className="CustomerList">
             <IonContent scrollY={true} fullscreen>
                 <IonTitle>Clientes</IonTitle>
                 <IonGrid>
@@ -60,8 +60,8 @@ const UserList: React.FC<ContainerProps> = () => {
                         arrayUsuarios?
                         arrayUsuarios.map((item:any, index:Number)=>{
                             return (
-                            <IonRow  className="UserInfo m-2 p-4" key={index.toString()}>
-                                <UserInfo docId={item.id} email={item.email}
+                            <IonRow  className="CustomerInfo m-2 p-4" key={index.toString()}>
+                                <CustomerInfo docId={item.id} email={item.email}
                                     nombre={item.nombre} password={item.password}
                                     disponible={item.disponible}
                                 />
@@ -70,7 +70,7 @@ const UserList: React.FC<ContainerProps> = () => {
                                         <IonIcon icon={trashOutline}/>
                                     </IonButton>
                                     <IonButton color="light" onClick={()=>disableClient(item)}>
-                                        <IonIcon icon={closeCircleOutline}/>
+                                        <IonIcon color={!!item.disponible?"danger":"success"}icon={!!item.disponible?closeCircle:checkmarkCircle}/>
                                     </IonButton>
                                 </IonCol>
                             </IonRow>
@@ -83,4 +83,4 @@ const UserList: React.FC<ContainerProps> = () => {
     );
 };
 
-export default UserList;
+export default CustomerList;

@@ -1,6 +1,6 @@
 import {IonButton, IonCol, IonContent, IonGrid, IonIcon, IonRow, IonTitle } from '@ionic/react';
 import { collection, deleteDoc, doc, getDocs, setDoc } from 'firebase/firestore';
-import { closeCircleOutline, trashOutline } from 'ionicons/icons';
+import { checkmarkCircle, closeCircle, closeCircleOutline, trashOutline } from 'ionicons/icons';
 import { useEffect, useState } from 'react';
 import { db } from '../../../firebaseConfig';
 import { toast } from '../../toast';
@@ -65,8 +65,8 @@ const StoreList: React.FC<ContainerProps> = () => {
                             <IonButton color="danger" onClick={()=>{deleteStore(item,index)}}>
                                 <IonIcon icon={trashOutline}/>
                             </IonButton>
-                            <IonButton color="light" onClick={()=>{disableStore(item)}}>
-                                <IonIcon icon={closeCircleOutline}/>
+                                <IonButton color="light" onClick={() => { disableStore(item) }}>
+                                <IonIcon color={!!item.disponible?"danger":"success"}icon={!!item.disponible?closeCircle:checkmarkCircle}/>
                             </IonButton>
                         </IonCol>
                     </IonRow>

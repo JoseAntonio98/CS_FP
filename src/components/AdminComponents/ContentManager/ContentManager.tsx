@@ -5,26 +5,26 @@ import { Redirect, Route } from 'react-router';
 import CategoryList from '../Categories/CategoryList';
 import HeadingList from '../Headings/HeadingList';
 import StoreList from '../Stores/StoreList';
-import UserList from '../Users/UserList';
+import CustomerList from '../Customers/CustomerList';
 import './ContentManager.css';
 
-interface ContainerProps { 
+//Interfaz para datos del componente
+interface ContainerProps { }
 
-}
-
+//Componente para mostrar los Tabs de administracion
 const ContentManager: React.FC<ContainerProps> = () => {
     return (
     <IonReactRouter>
         <IonTabs>
             <IonRouterOutlet>
-                <Route path="/admin/users" component={UserList} exact={true} />
+                <Route path="/admin/customers" component={CustomerList} exact={true} />
                 <Route path="/admin/stores" component={StoreList} exact={true} />
                 <Route path="/admin/categories" component={CategoryList} exact={true}/>
                 <Route path="/admin/heading" component={HeadingList} exact={true}/>
-                <Route path="/admin" render={() => <Redirect to="/admin/users" />} exact={true} />
+                <Route path="/admin" render={() => <Redirect to="/admin/customers" />} exact={true} />
             </IonRouterOutlet>
             <IonTabBar slot="top">
-                <IonTabButton tab="tab1" href="/admin/users">
+                <IonTabButton tab="tab1" href="/admin/customers">
                     <IonIcon icon={personOutline} color="success"/>
                     <IonLabel color="dark">Usuarios</IonLabel>
                 </IonTabButton>

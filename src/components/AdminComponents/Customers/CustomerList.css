@@ -1,14 +1,14 @@
-.UserList{
+.CustomerList{
     padding: 5%;
 }
-.UserInfo
+.CustomerInfo
 {
     border: 1px;
     background-color: rgba(120,120,120,0.1);
     padding: 10px;
     transition: 0.1s;
 }
-.UserInfo:hover
+.CustomerInfo:hover
 {
     border-radius: 5px;    
     background-color: rgba(120,120,120,0.2);

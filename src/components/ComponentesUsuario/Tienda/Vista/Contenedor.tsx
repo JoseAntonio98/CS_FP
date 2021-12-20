@@ -17,7 +17,7 @@ const Contenedor: React.FC = () => {
   const [ tipoB, setTipoB ] = useState('all')
   const [ rubro, setRubro ] = useState ('')
 
-  const { carrito, emptyCarrito } = useContext(CarritoContext)
+  const { emptyCarrito } = useContext(CarritoContext)
 
   const tiendasCollectionRef = collection(db, 'tiendas')
 
@@ -140,6 +140,10 @@ const Contenedor: React.FC = () => {
         <IonRow>
           <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-bottom'>
             <IonButton expand="block" fill="outline" onClick={buscar}> Buscar
+            </IonButton>
+          </IonCol>
+          <IonCol sizeLg="1" className='ion-text-center ion-margin-bottom'>
+            <IonButton size='small' fill="outline" onClick={() => setTipoB('all')}> Reiniciar
             </IonButton>
           </IonCol>
         </IonRow>

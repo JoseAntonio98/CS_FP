@@ -3,12 +3,12 @@ import { collection, getDocs } from 'firebase/firestore';
 import { Link } from 'react-router-dom';
 import { db } from '../../../../firebaseConfig';
 import { IonSelect, IonContent, IonSelectOption, IonCol, IonButton, IonGrid, IonRow, IonItem, IonLabel, IonInput } from '@ionic/react';
-import { createTienda } from '../../../../servicios/firebaseTienda'
+import { createTienda } from '../../../../servicios/firebaseUsuario'
 import { toast } from '../../../toast'
+import LocalizacionBoton from "../../../LocalizacionBoton";
+import Mapa from "../../../Mapa";
 
-interface ContainerProps { }
-
-const Registro: React.FC<ContainerProps> = () => {
+const Registro: React.FC = () => {
 
     const [nombre, setNombre] = useState('')
     const [ruc, setRuc] = useState('')
@@ -16,6 +16,7 @@ const Registro: React.FC<ContainerProps> = () => {
     const [email, setemail] = useState('');
     const [password, setpassword] = useState('');
     const [cpassword, setcpassword] = useState('');
+    const [coord, setCoord] = useState([0,0])
 
     const [arrayRubros, setArrayRubros] = useState([{}])
 
@@ -24,7 +25,7 @@ const Registro: React.FC<ContainerProps> = () => {
             toast('contraseñas diferentes')
         }
         else {
-            await createTienda(nombre, ruc, email, password, rubro)
+            await createTienda(nombre, ruc, email, password, rubro, coord)
         } 
     }
 
@@ -101,6 +102,21 @@ const Registro: React.FC<ContainerProps> = () => {
                         </IonItem>
                     </IonCol>
                 </IonRow>
+                <IonRow>
+                        <IonCol offsetLg="4" sizeLg="4" >
+                            <IonItem>
+                                <IonLabel position="fixed" >Dirección</IonLabel>
+                                <LocalizacionBoton setCoord={setCoord}/>
+                            </IonItem>
+                            {
+                                coord[0] != 0?
+                                <IonRow>
+                                    <Mapa tipo='search' o_lat={coord[0]} o_lon={coord[1]} d_lat={0} d_lon={0} />
+                                </IonRow>
+                                : null
+                            }
+                        </IonCol>
+                    </IonRow>
                 <IonRow>
                     <IonCol offsetLg="4" sizeLg="4" className='ion-text-center ion-margin-top'>
                         <IonButton expand="block" fill="outline" onClick={Registro} >

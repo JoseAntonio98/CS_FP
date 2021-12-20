@@ -1,0 +1,14 @@
+.admin-login-container
+{
+    text-align: center;
+}
+.admin-login-box
+{
+    border-radius: 15px;
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    width: 90%;
+    transform: translate(-50%,-80%);
+    box-shadow: 5px 5px 8px gainsboro;
+}

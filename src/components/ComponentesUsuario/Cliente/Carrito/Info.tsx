@@ -23,9 +23,9 @@ const Info: React.FC = () => {
         <IonList>
             {
                 pedidos.length > 0?
-                pedidos.map((pedido) => {
-                    return ( <>
-                    <IonItemSliding key={pedido.productid}>
+                pedidos.map((pedido, index:Number) => {
+                    return ( 
+                    <IonItemSliding key={index.toString()}>
 
                         <IonItem>
                             <IonBadge slot="start">X {pedido.cantidad}</IonBadge>
@@ -39,7 +39,7 @@ const Info: React.FC = () => {
 
                     </IonItemSliding>
                     
-                </>)
+                )
                 }):
                     <IonItemSliding>
 

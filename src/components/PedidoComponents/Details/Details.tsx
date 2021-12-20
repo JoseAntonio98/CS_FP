@@ -3,7 +3,7 @@ import { useHistory } from "react-router-dom";
 import { IonButton, IonContent, IonHeader, IonIcon, IonItem, IonLabel, IonList, IonModal, IonPage, IonTitle, IonToolbar } from "@ionic/react";
 import { storefrontOutline } from 'ionicons/icons';
 import './Details.css';
-import { addPedido, useCliente } from "../../../servicios/firebaseCliente";
+import { addPedido, useCliente } from "../../../servicios/firebaseUsuario";
 import { CarritoContext } from "../../../Contexto/Carrito/Context";
 
 const Details: React.FC<{reference: string, coord: any, names: string, card: string, expire: string, securityCode: string, timeDelivery: number}> = ({reference, coord, names, card, expire, securityCode, timeDelivery}) => {

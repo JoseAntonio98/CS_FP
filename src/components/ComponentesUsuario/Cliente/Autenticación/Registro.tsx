@@ -3,7 +3,7 @@ import LocalizacionBoton from '../../../LocalizacionBoton'
 import Mapa from '../../../Mapa'
 import { Link } from 'react-router-dom';
 import { IonCol, IonButton, IonContent, IonGrid, IonRow,IonItem, IonLabel, IonInput, IonText } from '@ionic/react';
-import { createCliente} from '../../../../servicios/firebaseCliente';
+import { createCliente} from '../../../../servicios/firebaseUsuario';
 import { toast } from '../../../toast';
 
 const Registro: React.FC = () => {

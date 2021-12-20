@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from 'react-router-dom';
 import { IonCol, IonIcon, IonButton, IonGrid, IonRow, IonItem, IonLabel, IonInput } from '@ionic/react';
-import { signInTienda } from '../../../../servicios/firebaseTienda'
+import { signInTienda } from '../../../../servicios/firebaseUsuario'
 import './style/login.css';
 
 import { business } from 'ionicons/icons'

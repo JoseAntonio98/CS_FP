@@ -65,44 +65,46 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                 subHeader={'Ya tienes este artículo en tu carrito'}
                 buttons={['OK']}
             />
-            <IonModal isOpen={mAdd}>
-                <IonRow>
-                    <IonCol>
-                        <IonItem className="ion-margin ion-text-center">
-                            <IonText><strong>{pnom}</strong></IonText>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonItem className="ion-margin">
-                            <IonText>Descripción <br></br>{pdes}</IonText>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonItem className="ion-margin">
-                            <IonLabel >Cantidad</IonLabel>
-                            <IonInput slot='end' type='number' min='1' placeholder='5' onIonChange={(e: any) => setCtd(e.target.value)} />
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonItem className="ion-margin">
-                            <IonText slot='end'>Precio: <strong>S/.{prc}</strong> c/u</IonText>
-                        </IonItem>
-                    </IonCol>
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonButton expand='block' fill="solid" onClick={() => setMAdd(false)}>Cancelar</IonButton>
-                    </IonCol>
-                    <IonCol>
-                        <IonButton onClick={addProducto} expand='block'>Añadir</IonButton>
-                    </IonCol>
-                </IonRow>
+            <IonModal cssClass="Modal-productos" isOpen={mAdd}>
+                <div className='form'>
+                    <IonRow>
+                        <IonCol>
+                            <IonItem className="ion-margin ion-text-center">
+                                <IonText><strong>{pnom}</strong></IonText>
+                            </IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            <IonItem className="ion-margin">
+                                <IonText>Descripción <br></br>{pdes}</IonText>
+                            </IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            <IonItem className="ion-margin">
+                                <IonLabel >Cantidad</IonLabel>
+                                <IonInput slot='end' type='number' min='1' placeholder='5' onIonChange={(e: any) => setCtd(e.target.value)} />
+                            </IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            <IonItem className="ion-margin">
+                                <IonText slot='end'>Precio: <strong>S/.{prc}</strong> c/u</IonText>
+                            </IonItem>
+                        </IonCol>
+                    </IonRow>
+                    <IonRow>
+                        <IonCol>
+                            <IonButton expand='block' fill="solid" onClick={() => setMAdd(false)}>Cancelar</IonButton>
+                        </IonCol>
+                        <IonCol>
+                            <IonButton onClick={addProducto} expand='block'>Añadir</IonButton>
+                        </IonCol>
+                    </IonRow>
+                </div>
             </IonModal>
 
             <IonCol>

@@ -31,8 +31,8 @@ const Contenedor: React.FC<{ location: any }> = (location) => {
     setLoading(true)
   }
 
-  async function calificar () {
-    actualizarCalificación(props.uid, props.cal[0] + cal, props.cal[1]+1)
+  async function calificar() {
+    actualizarCalificación(props.uid, props.cal[0] + cal, props.cal[1] + 1)
     setMCal(false)
   }
 
@@ -123,32 +123,34 @@ const Contenedor: React.FC<{ location: any }> = (location) => {
         </IonRow>
       </IonModal>
 
-      <IonModal isOpen={mCal}>
-        <IonRow>
-          <IonCol className="ion-text-center">
-            <IonTitle>Califica la tienda</IonTitle>
-            <IonLabel>Elige un múmero del 1 al 5</IonLabel>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol sizeLg='4' offsetLg='4' className="ion-text-center">
-            <IonSelect placeholder="Elige un número" interface="popover" onIonChange={(e: any) => setCal(e.detail.value)}>
-              <IonSelectOption key={1} value={1}> 1 </IonSelectOption>
-              <IonSelectOption key={2} value={2}> 2 </IonSelectOption>
-              <IonSelectOption key={3} value={3}> 3 </IonSelectOption>
-              <IonSelectOption key={4} value={4}> 4 </IonSelectOption>
-              <IonSelectOption key={5} value={5}> 5 </IonSelectOption>
-            </IonSelect>
-          </IonCol>
-        </IonRow>
-        <IonRow>
-          <IonCol>
-            <IonButton expand='block' fill="solid" onClick={() => setMCal(false)}>salir</IonButton>
-          </IonCol>
-          <IonCol>
-            <IonButton expand='block' fill="solid" onClick={calificar}>Calificar</IonButton>
-          </IonCol>
-        </IonRow>
+      <IonModal cssClass="Modal-productos" isOpen={mCal}>
+        <div className='form'>
+          <IonRow>
+            <IonCol className="ion-text-center">
+              <IonTitle>Califica la tienda</IonTitle>
+              <IonLabel>Elige un múmero del 1 al 5</IonLabel>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol sizeLg='4' offsetLg='4' className="ion-text-center">
+              <IonSelect placeholder="Elige un número" interface="popover" onIonChange={(e: any) => setCal(e.detail.value)}>
+                <IonSelectOption key={1} value={1}> 1 </IonSelectOption>
+                <IonSelectOption key={2} value={2}> 2 </IonSelectOption>
+                <IonSelectOption key={3} value={3}> 3 </IonSelectOption>
+                <IonSelectOption key={4} value={4}> 4 </IonSelectOption>
+                <IonSelectOption key={5} value={5}> 5 </IonSelectOption>
+              </IonSelect>
+            </IonCol>
+          </IonRow>
+          <IonRow>
+            <IonCol>
+              <IonButton expand='block' fill="solid" onClick={() => setMCal(false)}>salir</IonButton>
+            </IonCol>
+            <IonCol>
+              <IonButton expand='block' fill="solid" onClick={calificar}>Calificar</IonButton>
+            </IonCol>
+          </IonRow>
+        </div>
 
       </IonModal>
 

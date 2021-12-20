@@ -76,7 +76,7 @@ export async function createTienda(nombre: string, ruc: string, email: string, p
                 ruc: ruc,
                 password: password,
                 rubro: rubro,
-                calificacion: 0,
+                calificacion: [0,0],
                 disponible: true,
                 pos: new GeoPoint(coord[0], coord[1])
             });

@@ -98,7 +98,7 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                     </IonRow>
                     <IonRow>
                         <IonCol>
-                            <IonButton expand='block' fill="solid" onClick={() => setMAdd(false)}>Cancelar</IonButton>
+                            <IonButton color="dark" expand='block' fill="solid" onClick={() => setMAdd(false)}>Cancelar</IonButton>
                         </IonCol>
                         <IonCol>
                             <IonButton onClick={addProducto} expand='block'>Añadir</IonButton>

@@ -144,7 +144,7 @@ const Contenedor: React.FC<{ location: any }> = (location) => {
           </IonRow>
           <IonRow>
             <IonCol>
-              <IonButton expand='block' fill="solid" onClick={() => setMCal(false)}>salir</IonButton>
+              <IonButton color="dark" expand='block' fill="solid" onClick={() => setMCal(false)}>salir</IonButton>
             </IonCol>
             <IonCol>
               <IonButton expand='block' fill="solid" onClick={calificar}>Calificar</IonButton>

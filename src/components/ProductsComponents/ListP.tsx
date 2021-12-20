@@ -57,11 +57,12 @@ const ProductoList: React.FC<ContainerProps> = () => {
     }
 
 
-
     const productosCollectionRef = collection(db, 'productos')
+    
     useEffect(() => {
         async function obtenerProductos()
         {
+            
             const p = query(productosCollectionRef, where('idtienda', '==', idsesion))
             const d = await getDocs(p);
             setArrayProductos(d.docs.map((doc) => (
@@ -73,9 +74,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
         setLoading(false)                 
         }
         obtenerProductos()
-    }, [loading])
-
-
+    }, [])
 
     if (loading) {
         return <IonLoading
@@ -87,6 +86,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
     return (
         <IonRow>
             <IonModal isOpen={mActualizarDatos} >
+            <IonContent scrollY={true} fullscreen>
             <IonGrid>
                 <IonRow>
                     <IonCol className='ion-text-center'>
@@ -143,6 +143,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
                     </IonCol>
                 </IonRow>
                </IonGrid>
+            </IonContent>
             </IonModal>
             <IonCol>
                 <IonContent scrollY={true} fullscreen>
@@ -177,7 +178,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
 
                                     </IonRow>
                                 )
-                            }) : <p>No Existen Productos</p>
+                            }) : <p>No Existen Productos{console.log(arrayProductos)}</p>
                         }
                     </IonGrid>
                 </IonContent>

@@ -80,6 +80,7 @@ const Tienda: React.FC<ContainerProps> = () => {
     
     <IonRow>
       <IonModal isOpen={modalCrearProductos} >
+      <IonContent scrollY={true} fullscreen>
                 <IonGrid>
                 <IonRow>
                     <IonCol className='ion-text-center'>
@@ -143,18 +144,19 @@ const Tienda: React.FC<ContainerProps> = () => {
                         </IonItem>
                     </IonCol>
                 </IonRow>
-                <IonCol className='ion-text-center ion-margin-top'>
+                </IonRow>
+                <IonRow>
+                   <IonCol className='ion-text-center ion-margin-top'>
                         <IonButton expand="block" fill="outline" onClick={()=>setmodalCrearProductos(false)} >
                             Cerrar
                         </IonButton>
                         <IonButton expand="block" fill="outline" onClick={()=>{creandoProducto()}} >
                             Crear
                         </IonButton>
-
                      </IonCol>
-
-                </IonRow>
+                   </IonRow>
             </IonGrid>
+            </IonContent>
                 </IonModal>
       <IonCol sizeXs="12" sizeLg="12">
         <IonRow>

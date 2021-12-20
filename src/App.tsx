@@ -30,6 +30,8 @@ import AdminTienda from './pages/AdminTienda/AdminTienda';
 import Productos from './components/ComponentesUsuario/Productos/Contenedor'
 import { CarritoProvider } from './Contexto/Carrito/Provider';
 
+import ClienteLogin from './components/ComponentesUsuario/Cliente/Autenticación/Login';
+
 const App: React.FC = () => (
   <IonApp>
     <IonReactRouter>
@@ -44,6 +46,7 @@ const App: React.FC = () => (
             </Route>
             <Route exact path="/pedido" component={Pedido}/>
             <Route exact path='/productos' component={Productos}/>
+            <Route path="/" component={ClienteLogin} exact={true} />                    
           </CarritoProvider>
           <Route exact path="/adminTienda" component={AdminTienda} /> 
         </SesionProvider>

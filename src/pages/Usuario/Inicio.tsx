@@ -2,7 +2,7 @@ import { Link } from "react-router-dom";
 import { toast } from "../../components/toast";
 import { useHistory } from "react-router";
 import { useEffect, useContext } from "react";
-import { setDataCliente, logOutCliente, useCliente } from '../../servicios/firebaseCliente';
+import { setDataCliente, logOutUsuario, useCliente, useSesion } from '../../servicios/firebaseUsuario';
 import { IonButton, IonContent, IonHeader, IonPage, IonTitle, IonToolbar } from '@ionic/react'
 
 import Login from '../../components/ComponentesUsuario/Inicio/Contenido'
@@ -17,7 +17,7 @@ const UsuarioLogin: React.FC = () => {
     const { sesion, setData } = useContext(SesionContext)
 
     function signOutCliente() {
-        logOutCliente()
+        logOutUsuario()
             .then(() => {
                 toast('Se ha cerrado sesión')
                 history.push('/')
@@ -27,40 +27,45 @@ const UsuarioLogin: React.FC = () => {
             })
     }
 
-    useEffect ( function() {
+    async function setDatos() {
         if (CUser) {
-            setDataCliente(CUser.uid, setData)   
+            await setDataCliente(CUser.uid, setData)
         }
+        console.log('sesion', sesion)
+    }
+
+    useEffect( () => {
+        setDatos()
     }, [CUser]) // MUY IMPORTANTE -> si no esta, puede crear bucles infinitos
 
-    return (
-        <IonPage>
-            <IonHeader>
-                <IonToolbar>
-                    <IonTitle >
-                        <Link to="/" >Aplicación</Link>
-                    </IonTitle>
-                    {
-                        CUser ?
-                            <IonButton slot='end' shape="round" color="success" onClick={signOutCliente}>
-                                {sesion.nombre}<b>_Salir</b>
-                            </IonButton>
-
-                            : null
-                    }
-                </IonToolbar>
-            </IonHeader>
-            <IonContent>
+return (
+    <IonPage>
+        <IonHeader>
+            <IonToolbar>
+                <IonTitle >
+                    <Link to="/" >Aplicación</Link>
+                </IonTitle>
                 {
-                    CUser? // estas logueado?
-                    sesion.tipo == 'cliente'? // es cliente ?
-                    <Productos />
-                    : <Tienda /> //NO, enviame a Tienda
-                    : <Login />
+                    CUser ?
+                        <IonButton slot='end' shape="round" color="success" onClick={signOutCliente}>
+                            {sesion.nombre}<b>_Salir</b>
+                        </IonButton>
+
+                        : null
                 }
-            </IonContent>
-        </IonPage >
-    );
+            </IonToolbar>
+        </IonHeader>
+        <IonContent>
+            {
+                CUser ? // estas logueado?
+                    sesion.tipo == 'cliente' ? // es cliente ?
+                        <Productos />
+                        : <Tienda /> //NO, enviame a Tienda
+                    : <Login />
+            }
+        </IonContent>
+    </IonPage >
+);
 
 }
 

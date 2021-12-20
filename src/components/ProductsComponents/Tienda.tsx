@@ -8,41 +8,32 @@ import TiendaLogin from '../ComponentesUsuario/Tienda/Autenticación/Login'
 import { Link } from 'react-router-dom';
 import { actualizarProducto,crearProducto} from '../../servicios/firebaseProducto';
 import { SesionContext } from '../../Contexto/Sesion/Context';
-import {Redirect, Route} from 'react-router'
+import {Redirect, Route, useHistory} from 'react-router'
 import { IonReactRouter } from '@ionic/react-router';
 import CreandoProducto from'../ComponentesUsuario/Productos/CreandoProducto';
 import { collection, getDocs } from 'firebase/firestore';
 import { db } from '../../firebaseConfig';
+import ListP from '../ProductsComponents/ListP'
 
 interface ContainerProps { }
 
 const Tienda: React.FC<ContainerProps> = () => {
-  
+ 
   const {sesion}=useContext(SesionContext)
   var idsesion = sesion.uid
-  //funcion crearProducto(descripcion:string, idcategoria:string, idtienda:string, imagen:string, nombre:string, precio:number)
+  
   const [arrayProductos, setArrayProductos] = useState([{}]);
 
   const [modalCrearProductos,setmodalCrearProductos] = useState(false);
-    //variables a usar 
+  //variables a usar 
   const [descripcion, setDescripcion] = useState('')
   const [categoria, setCategoria] = useState('')
- // const [idtienda, setIdtienda] = useState(idsesion)
+
   const [imagen, setImagen] = useState('')
   const [nombre, setNombre] = useState('')
   const [precio, setPrecio] = useState(0)
   const [stock,setStock]=useState(0)
- // const [uid,setuidDoc] = useState('')
-
- //En implementacion .... 
-  async function nuevoProducto()
-  {
-   // await crearProducto(descripcion,categoria,idsesion,imagen,nombre,precio,stock)
-    
-    console.log('Estas en Tienda.tsx llamando a nuevoProdcuto->CrearProducto ')
-    console.log(idsesion)
-
-  }
+ 
 
   const obtenerDatosProductos=()=>
   {   
@@ -57,12 +48,13 @@ const Tienda: React.FC<ContainerProps> = () => {
   
   
   const [arrayCategorias, setArrayCategorias] = useState([{}])
-  //const [arrayTiendas, setArrayTiendas] = useState([{}])
+ 
 
   async function creandoProducto () {
           obtenerDatosProductos()
-          console.log("estamos por entrar a la BD")
           await crearProducto(descripcion,categoria,idsesion,imagen,nombre,precio,stock)
+          setmodalCrearProductos(false)
+   
   }
 
   const categoriasCollectionRef = collection(db,'categorias')

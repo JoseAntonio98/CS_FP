@@ -15,6 +15,9 @@ interface ContainerProps
     productoSede : string
     image : string
     precio: number
+    categoria:string
+    descripcion:string
+    stock:number
 }
 
 
@@ -39,17 +42,19 @@ const ProductEdit : React.FC<ContainerProps> = (props) => {
         <IonRow>
             <IonCol size="9">
                 <div>
-                    <strong>{props.productoNombre}</strong>
+                    <strong>Nombre: {props.productoNombre}</strong>
                 </div>
                 <div>
-                    <IonLabel>{props.docId}</IonLabel>
+                    <IonLabel>Categoria: {props.categoria}</IonLabel>
                 </div>
                 <div>
-                    <IonLabel>Nombre Sede</IonLabel>
+                    <IonLabel>Descripcion: {props.descripcion}</IonLabel>
                 </div>
                 <div>
-                    <strong>{props.precio}
-                    </strong>
+                    <IonLabel>Stock: {props.stock}</IonLabel>
+                </div>
+                <div>
+                    <strong>Precio: {props.precio}</strong>
                 </div>
             </IonCol>
             <IonCol size="3">

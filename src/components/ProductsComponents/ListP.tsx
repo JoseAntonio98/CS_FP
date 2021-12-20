@@ -1,8 +1,8 @@
-import { IonCol, IonLoading, IonContent, IonGrid, IonHeader, IonIcon, IonLabel, IonNav, IonRow, IonTitle, IonModal, IonItem, IonInput, IonButton, IonAlert, useIonAlert } from '@ionic/react';
+import { IonCol, IonLoading, IonContent, IonGrid, IonLabel,IonRow, IonModal, IonItem, IonInput, IonButton, useIonAlert } from '@ionic/react';
 import ProductEdit from './Product/ProductInfo'
 import { db } from '../../firebaseConfig'
 import { useState, useEffect, useContext } from 'react';
-import { collection, getDoc, getDocs, onSnapshot, query,where } from "firebase/firestore";
+import { collection, getDocs, query,where } from "firebase/firestore";
 import { SesionContext } from '../../Contexto/Sesion/Context';
 import { actualizarProducto,deleteProducto } from '../../servicios/firebaseProducto';
 
@@ -28,12 +28,25 @@ const ProductoList: React.FC<ContainerProps> = () => {
     //variables a usar 
     const [descripcion, setDescripcion] = useState('')
     const [categoria, setCategoria] = useState('')
-   // const [idtienda, setIdtienda] = useState(idsesion)
-   // const [imagen, setImagen] = useState('')
+
     const [nombre, setNombre] = useState('')
     const [precio, setPrecio] = useState(0)
     const [stock,setStock]=useState(0)
     const [uid,setuidDoc] = useState('')
+
+    async function obtenerProductos()
+        {
+            
+            const p = query(productosCollectionRef, where('idtienda', '==', idsesion))
+            const d = await getDocs(p);
+            setArrayProductos(d.docs.map((doc) => (
+          {
+            ...doc.data(),
+            uid: doc.id
+          }
+        )))
+        setLoading(false)                 
+        }
 
     async function guardarActualizarDatos() {
         
@@ -44,6 +57,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
     async function deleteProduct(uid:string) {
         
         await deleteProducto(uid)
+        obtenerProductos()
      }
 
     const actualizarDatos=(categoria:string, descripcion:string,nombre: string, precio:number,stock:number,uid:string)=>
@@ -60,19 +74,6 @@ const ProductoList: React.FC<ContainerProps> = () => {
     const productosCollectionRef = collection(db, 'productos')
     
     useEffect(() => {
-        async function obtenerProductos()
-        {
-            
-            const p = query(productosCollectionRef, where('idtienda', '==', idsesion))
-            const d = await getDocs(p);
-            setArrayProductos(d.docs.map((doc) => (
-          {
-            ...doc.data(),
-            uid: doc.id
-          }
-        )))
-        setLoading(false)                 
-        }
         obtenerProductos()
     }, [])
 
@@ -145,8 +146,14 @@ const ProductoList: React.FC<ContainerProps> = () => {
                </IonGrid>
             </IonContent>
             </IonModal>
+
             <IonCol>
                 <IonContent scrollY={true} fullscreen>
+                <IonRow>
+            <IonButton
+                 onClick={obtenerProductos}>Actualizar
+            </IonButton>
+            </IonRow>
                     <IonGrid>
                         {
                             arrayProductos.length > 0 ?
@@ -154,7 +161,7 @@ const ProductoList: React.FC<ContainerProps> = () => {
                                 return (
                                     <IonRow key={index.toString()}>
                                         <IonCol onClick={()=>actualizarDatos(item.categoria,item.descripcion,item.nombre,item.precio,item.stock,item.uid)} >
-                                            <ProductEdit  productoNombre={item.nombre} docId={item.uid} productoSede='' image="" precio={item.precio} />
+                                            <ProductEdit  categoria = {item.categoria} descripcion = {item.descripcion} productoNombre={item.nombre} docId={item.uid} productoSede='' image="" precio={item.precio} stock={item.stock} />
                                         </IonCol>
 
                                         <IonButton

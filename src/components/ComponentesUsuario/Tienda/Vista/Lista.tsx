@@ -32,7 +32,7 @@ const Lista: React.FC<Props> = (props) => {
                                 return (
                                     <IonRow key={index.toString()}>
                                         <IonCol >
-                                            <Info uid={i.uid} nombre={i.nombre} calificacion={i.calificacion} rubro={i.rubro}/>
+                                            <Info uid={i.uid} nombre={i.nombre} calificacion={i.calificacion} rubro={i.rubro} pos={i.pos}/>
                                         </IonCol>
                                     </IonRow>
                                 )

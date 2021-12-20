@@ -3,19 +3,16 @@ import ProductInfo from './Info'
 import { useState, useContext } from 'react';
 import { CarritoContext } from '../../../Contexto/Carrito/Context'
 import { SesionContext } from '../../../Contexto/Sesion/Context'
-import Mapa from '../../Mapa';
 
-interface ContainerProps
-{
-    arrayProductos : {}[]
+interface ContainerProps {
+    arrayProductos: {}[]
 }
 
 const ListaProducto: React.FC<ContainerProps> = (props) => {
 
     const [loading, setLoading] = useState<boolean>(false)
     const [alert, setAlert] = useState<boolean>(false)
-    const [mAdd, setMAdd] = useState<boolean>(false);
-    const [mMap, setMMap] = useState<boolean>(false);
+    const [mAdd, setMAdd] = useState<boolean>(false)
 
     const [id, setId] = useState('')
     const [pnom, setPNom] = useState('')
@@ -23,40 +20,38 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
     const [ctd, setCtd] = useState(0)
     const [prc, setPr] = useState(15)
 
-    const { carrito ,addPedido } = useContext(CarritoContext)
+    const { carrito, addPedido } = useContext(CarritoContext)
     const { sesion } = useContext(SesionContext)
 
-    const actualizarDatos = (uid: string, nombre:string, desc:string, pr : number) => 
-    {
+    const actualizarDatos = (uid: string, nombre: string, desc: string, pr: number) => {
         setId(uid)
         setMAdd(true)
         setPNom(nombre)
         setPDes(desc)
-        //setPr(pr)
+        setPr(pr)
     }
 
     function addProducto() {
-        
+
         const pedido = carrito.pedidos.filter(pedido => pedido.productid == id)
-        if (pedido.length == 0)
-        {
+        if (pedido.length == 0) {
             setLoading(true)
-            addPedido( id, pnom, ctd, prc*ctd) 
-            setLoading(false)   
+            addPedido(id, pnom, ctd, prc * ctd)
+            setLoading(false)
         }
         else {
             setAlert(true)
-        } 
-        
+        }
+
         setMAdd(false)
     }
 
     if (loading) {
         return <IonLoading
-        isOpen={loading}
-        onDidDismiss={() => setLoading(false)}
-        message={'Obteniendo Tiendas Cercanas'}
-      />
+            isOpen={loading}
+            onDidDismiss={() => setLoading(false)}
+            message={'Obteniendo Tiendas Cercanas'}
+        />
     }
 
 
@@ -70,33 +65,33 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                 subHeader={'Ya tienes este artículo en tu carrito'}
                 buttons={['OK']}
             />
-             <IonModal isOpen={mAdd}>
+            <IonModal isOpen={mAdd}>
                 <IonRow>
                     <IonCol>
                         <IonItem className="ion-margin ion-text-center">
-                            <IonText>{pnom}</IonText>
+                            <IonText><strong>{pnom}</strong></IonText>
                         </IonItem>
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>
                         <IonItem className="ion-margin">
-                            <IonText>{pdes}</IonText>
+                            <IonText>Descripción <br></br>{pdes}</IonText>
                         </IonItem>
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>
                         <IonItem className="ion-margin">
-                            <IonLabel position="floating">Cantidad</IonLabel>
-                            <IonInput type='number' min='1' onIonChange={(e:any)=>setCtd(e.target.value)}/>
+                            <IonLabel >Cantidad</IonLabel>
+                            <IonInput slot='end' type='number' min='1' placeholder='5' onIonChange={(e: any) => setCtd(e.target.value)} />
                         </IonItem>
                     </IonCol>
                 </IonRow>
                 <IonRow>
                     <IonCol>
                         <IonItem className="ion-margin">
-                            <IonText>S/.{prc}</IonText>
+                            <IonText slot='end'>Precio: <strong>S/.{prc}</strong> c/u</IonText>
                         </IonItem>
                     </IonCol>
                 </IonRow>
@@ -110,41 +105,29 @@ const ListaProducto: React.FC<ContainerProps> = (props) => {
                 </IonRow>
             </IonModal>
 
-            <IonModal isOpen={mMap}>
-                <IonRow>
-                    <Mapa tipo='directions' o_lat={-16.3479552} o_lon={-71.5522048} d_lat={-16.3479552} d_lon={-71.5622048} />
-                </IonRow>
-                <IonRow>
-                    <IonCol>
-                        <IonButton expand='block' fill="solid" onClick={() => setMMap(false)}>salir</IonButton>
-                    </IonCol>
-                </IonRow>
-            </IonModal>
-
             <IonCol>
                 <IonContent scrollY={true} fullscreen>
-                    <IonTitle>Tiendas Cercanas</IonTitle>
+                    <IonTitle>Productos</IonTitle>
                     <IonGrid>
                         {
                             props.arrayProductos.length > 0 ?
-                            props.arrayProductos.map((i:any, index:Number) => {
-                                return (
-                                    <>
-                                    <IonRow key={index.toString()}>
-                                        <IonCol 
-                                            onClick={() => 
-                                            actualizarDatos(index.toString(), i.nombre, i.descripcion, i.precio) }>
-                                            <ProductInfo id={i.id} nombre={i.nombre} descripcion={i.descripcion} precio = {i.precio} imagen={i.imagen}/>
-                                        </IonCol>
-                                    </IonRow>
-                                    <IonRow >
-                                        <IonCol className="ion-text-right">
-                                        <IonButton fill='outline' size='small' onClick={() => setMMap(true)} >Como llegar</IonButton>
-                                        </IonCol>
-                                    </IonRow>
-                                </>
-                                )
-                            }) : null
+                                props.arrayProductos.map((i: any, index: Number) => {
+                                    return (
+
+                                        <IonRow key={index.toString()}>
+                                            <IonCol
+                                                onClick={() =>
+                                                    actualizarDatos(index.toString(), i.nombre, i.descripcion, i.precio)}>
+                                                <ProductInfo id={i.id} nombre={i.nombre} descripcion={i.descripcion} precio={i.precio} imagen={i.imagen} categoria={i.categoria} />
+                                            </IonCol>
+                                        </IonRow>
+
+                                    )
+                                }) : <IonRow>
+                                    <IonCol>
+                                        <IonTitle className='ion-text-center' style={{ padding: 14 }}>No se han encontrado productos que cumplan tales requisitos</IonTitle>
+                                    </IonCol>
+                                </IonRow>
                         }
                     </IonGrid>
                 </IonContent>
